@@ -64,6 +64,7 @@ export function LogInBox(): JSX.Element {
 
   return (
     <div>
+      <h2>Connectez-vous ...</h2>
       <EntryString
         name={"Nom"}
         defaultValue={logBody.name}
