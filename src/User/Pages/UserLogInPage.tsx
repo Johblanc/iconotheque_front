@@ -1,3 +1,5 @@
+import { AppHeader } from "../../App/Components/AppHeader";
+import { Entry } from "../../Utilities/Components/Entry";
 
 
 /**
@@ -7,5 +9,23 @@
  */
 export function UserLogInPage() : JSX.Element
 {
-  return <>User Login Page</>
+  return (
+    <div>
+      <AppHeader/>
+      <div>
+      <div>
+        <Entry/>
+        <Entry/>
+        <button>Log In</button>
+      </div>
+      <div>
+        <Entry/>
+        <Entry/>
+        <Entry/>
+        <Entry/>
+        <button>Sign In</button>
+      </div>
+      </div>
+    </div>
+  )
 }
