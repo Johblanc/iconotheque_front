@@ -1,31 +1,45 @@
-
 /**
  * Une entrée utilisateur textuelle en une ligne
- * 
+ *
+ * @param name          Nom de l'entry
+ * @param defaultValue  Valeur par défaut
+ * @param setter        CallBack de réglage
+ * @param isPass        *option* — L'entry contient-elle un mot de passe
+ *
  * @version v1
  */
 export function EntryString(props: {
+
+  /** Nom de l'entry */
   name: string;
+
+  /** Valeur par défaut */
   defaultValue: string;
+
+  /** CallBack de réglage */
   setter: (value: string) => void;
-}) : JSX.Element
-{{
-  const { name, defaultValue, setter } = props;
+
+  /** L'entry contient-elle un mot de passe */
+  isPass?: boolean;
+
+}): JSX.Element {
+
+  const { name, defaultValue, setter, isPass } = props;
+
   return (
-    <div className="form-floating ">
+    <div className="">
+
+      <label className="">{name}</label>
+
       <input
-        type="text"
-        className="form-control height-form "
+        type={isPass ? "password" : "text"}
+        className=""
         placeholder={name}
         aria-label="search"
         onChange={(e) => setter(e.target.value)}
         defaultValue={defaultValue}
-        
       />
-      <label htmlFor="floatingInput" className="padding-label">
-        {name}
-      </label>
+      
     </div>
   );
-}
 }
