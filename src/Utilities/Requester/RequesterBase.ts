@@ -24,14 +24,14 @@ export class RequesterBase {
    * 
    * @version v1
    */
-  static async base<Data>(
+  static async base<Data = any, Message = string | string[]>(
     url: string,
     method: RequestMethods = RequestMethods.GET,
     params: (string | number)[] = [],
     body: any = undefined,
     token: string | undefined = undefined
   )
-  : Promise<TResponse<Data>> 
+  : Promise<TResponse<Data,Message>> 
   {
     const data = await fetch(
       `${BASE_URL}/${url}${params.map((item) => "/" + String(item))}`,
@@ -44,7 +44,7 @@ export class RequesterBase {
         body: JSON.stringify(body),
       }
     );
-    const result: TResponse<Data> = await data.json();
+    const result: TResponse<Data,Message> = await data.json();
     console.log(result.message);
 
     return result;

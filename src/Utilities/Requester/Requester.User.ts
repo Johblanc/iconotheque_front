@@ -21,14 +21,15 @@ export class UserRequester extends RequesterBase {
    * 
    * @version v1
    */
-  static async logIn(body : { name: string, password: string}) : Promise<TResponse<TUser>>
+  static async logIn(body : { name: string, password: string}) : Promise<TResponse<TUser,string>>
   {
-    const responce = await UserRequester.base<TUser>(
+    const response = await UserRequester.base<TUser,string>(
       "users/login",
       RequestMethods.POST,
       [],
       body
     )
-    return responce
+    
+    return response
   }
 }
