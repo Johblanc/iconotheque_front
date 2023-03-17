@@ -6,5 +6,9 @@
  */
 export function AppHeader() : JSX.Element
 {
-  return (<>Iconothèque</>)
+  return (
+    <div>
+      Iconothèque
+    </div>
+  )
 }
