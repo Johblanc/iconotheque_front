@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
  * @param defaultValue  Valeur par défaut
  * @param setValue      CallBack de réglage de la valeur
  * @param validators    Conditions de validations
- * @param setValidity   CallBack de réglage de la validité
  * @param isPass        L'entry contient-elle un mot de passe
  *
  * @version v1
@@ -20,18 +19,15 @@ export function EntryString(props: {
   defaultValue?: string;
 
   /** CallBack de réglage de la valeur */
-  setValue?: (value: string) => void;
+  setValue?: (value ?: string , valid ? : boolean) => void;
 
   /** Conditions de validations */
   validators?: { validator: (value: string) => boolean; message?: string }[];
 
-  /** CallBack de réglage de la validité */
-  setValidity?: (value: boolean) => void;
-
   /** L'entry contient-elle un mot de passe */
   isPass?: boolean;
 }): JSX.Element {
-  const { name, defaultValue, setValue, validators, setValidity, isPass } =
+  const { name, defaultValue, setValue, validators, isPass } =
     props;
 
   /**
@@ -61,9 +57,13 @@ export function EntryString(props: {
       return "";
     };
     const newMessage = validate(defaultValue || "");
-    setMessage(newMessage);
-    setValidity && setValidity(newMessage === "");
-  }, [validators, defaultValue, setValidity]);
+    
+    if (message !== newMessage){
+      setValue && setValue(defaultValue || "",newMessage === "");
+      setMessage(newMessage);
+    }
+
+  }, [validators, defaultValue]);
 
   /**
    * Losrque l'utilisateur change la valeur de l'Entry
@@ -73,9 +73,9 @@ export function EntryString(props: {
   const handleVerificator = (value: string) => {
     const newMessage = validate(value);
     setMessage(newMessage);
-    setValidity && setValidity(newMessage === "");
-    setValue && setValue(value);
+    setValue && setValue(value,newMessage === "");
   };
+
 
   return (
     <div className="">
