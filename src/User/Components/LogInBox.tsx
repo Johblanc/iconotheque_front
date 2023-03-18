@@ -70,9 +70,6 @@ export function LogInBox(): JSX.Element {
   }
   const isValid = logValid.name && logValid.password
 
-  console.log(isValid ,logValid.name ,logValid.password);
-  
-
   return (
     <div>
       <h2>Connectez-vous ...</h2>

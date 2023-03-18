@@ -53,8 +53,6 @@ export function SignInBox(): JSX.Element {
   const handleRequest = async () => {
 
     const responseSign = await Requester.user.SignIn(signBody) ;
-
-    console.log(responseSign);
     
     if (responseSign.statusCode === 201) 
     {
