@@ -10,5 +10,6 @@ export type TPath = {
   name : string ,
   status : "private" | "public" ,
   d : string ,
+  viewbox : string ,
   user : TUser
 }
