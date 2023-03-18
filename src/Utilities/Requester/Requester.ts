@@ -1,3 +1,4 @@
+import { PathRequester } from "./Requester.Path"
 import { UserRequester } from "./Requester.User"
 
 /**
@@ -8,5 +9,6 @@ import { UserRequester } from "./Requester.User"
 export class Requester {
 
   static user = UserRequester
+  static path = PathRequester
 
 }
