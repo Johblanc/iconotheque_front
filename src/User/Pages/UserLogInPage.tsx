@@ -1,5 +1,7 @@
 import { AppHeader } from "../../App/Components/AppHeader";
-import { Entry } from "../../Utilities/Components/Entry";
+import { LogInBox } from "../Components/LogInBox";
+import { SignInBox } from "../Components/SignInBox";
+
 
 
 /**
@@ -13,18 +15,8 @@ export function UserLogInPage() : JSX.Element
     <div>
       <AppHeader/>
       <div>
-      <div>
-        <Entry/>
-        <Entry/>
-        <button>Log In</button>
-      </div>
-      <div>
-        <Entry/>
-        <Entry/>
-        <Entry/>
-        <Entry/>
-        <button>Sign In</button>
-      </div>
+        <LogInBox/>
+        <SignInBox/>
       </div>
     </div>
   )
