@@ -8,7 +8,7 @@ export function AppHeader() : JSX.Element
 {
   return (
     <div>
-      Iconothèque
+      <h1>Iconothèque</h1>
     </div>
   )
 }
