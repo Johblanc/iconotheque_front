@@ -36,6 +36,7 @@ export function SignInBox(): JSX.Element {
    * 
    * @param key     Nom du paramères à modifier
    * @param value   Nouvelle valeur du parametre
+   * @param valid   validité de l'Entry
    */
 
   const handleLogBody = (key: "name" | "password" | "verifpass" | "mail", value ? : string , valid ? : boolean ) => {
