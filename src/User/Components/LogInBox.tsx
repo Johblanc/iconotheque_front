@@ -4,6 +4,7 @@ import { EntryString } from "../../Utilities/Components/EntryString";
 import { PageContext } from "../../Utilities/Contexts/Page.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
+import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 
 /**
  * Composant permetant le Log In d'un utilisateur
@@ -23,6 +24,7 @@ export function LogInBox(): JSX.Element {
   /** Préparation du body pour la requête LogIn */
 
   const [logBody, setLogBody] = useState({ name: "", password: "" });
+  const [logValid, setLogValid] = useState({ name: false, password: false });
 
   /** Prépartion du message d'alerte */
   
@@ -34,13 +36,18 @@ export function LogInBox(): JSX.Element {
    * 
    * @param key     Nom du paramères à modifier
    * @param value   Nouvelle valeur du parametre
+   * @param valid   validité de l'Entry
    */
 
-  const handleLogBody = (key: "name" | "password", value: string) => {
+  const handleLogBody = (key: "name" | "password", value ? : string , valid ? : boolean ) => {
     const newLogBody = { ...logBody };
-    newLogBody[key] = value;
+    if ( value !== undefined ) newLogBody[key] = value;
     setLogBody(newLogBody);
+    const newLogValid = { ...logValid };
+    if ( valid !== undefined ) newLogValid[key] = valid ;
+    setLogValid(newLogValid);
   };
+
 
   /** Déclenchement d'une tentative de Log In */
 
@@ -61,23 +68,29 @@ export function LogInBox(): JSX.Element {
     }
     
   }
+  const isValid = logValid.name && logValid.password
+
+  console.log(isValid ,logValid.name ,logValid.password);
+  
 
   return (
     <div>
       <h2>Connectez-vous ...</h2>
       <EntryString
-        name={"Nom"}
+        name={"Pseudo"}
         defaultValue={logBody.name}
-        setter={(value) => handleLogBody("name", value)}
+        setValue={(value, valid) => handleLogBody("name", value, valid)}
+        validators={[EntryValidators.minLenght(4)]}
       />
       <EntryString
         name={"Mot de passe"}
         defaultValue={logBody.password}
-        setter={(value) => handleLogBody("password", value)}
+        setValue={(value, valid) => handleLogBody("password", value, valid)}
+        validators={[EntryValidators.minLenght(4)]}
         isPass
       />
       <div>{message}</div>
-      <button onClick={handleRequest}>Log In</button>
+      <button onClick={handleRequest} disabled={!isValid} >Log In</button>
     </div>
   );
 }
