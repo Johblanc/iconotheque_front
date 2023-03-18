@@ -52,18 +52,28 @@ export function SignInBox(): JSX.Element {
 
   const handleRequest = async () => {
 
-    const response = await Requester.user.SignIn(signBody) ;
+    const responseSign = await Requester.user.SignIn(signBody) ;
 
-
-    if (response.statusCode === 201) 
+    console.log(responseSign);
+    
+    if (responseSign.statusCode === 201) 
     {
       setMessage('');
-      setUser(response.data)
-      setPage(<IconSelectPage/>)
+      const responseLog = await Requester.user.logIn(signBody) ;
+      
+      if (responseLog.statusCode === 201) 
+      {
+        setUser(responseLog.data)
+        setPage(<IconSelectPage/>)
+      }
+      else
+      {
+        setMessage(responseLog.message);
+      }
     }
     else
     {
-      setMessage("Nom ou Mot de passe invalides");
+      setMessage(responseSign.message);
     }
     
   }
