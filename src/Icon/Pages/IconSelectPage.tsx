@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { AppNav } from "../../App/Components/AppNav";
+import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
+import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
 
 
 /**
@@ -9,6 +12,13 @@ import { AppNav } from "../../App/Components/AppNav";
 export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Element
 {
   const {actif} = props
+
+  const {pathPublic } = useContext(PathPublicContext)
+  const {pathPrivate } = useContext(PathPrivateContext)
+
+  console.log(pathPublic);
+  console.log(pathPrivate);
+  
 
   return (
     <div>

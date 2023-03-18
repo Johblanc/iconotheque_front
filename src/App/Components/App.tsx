@@ -30,26 +30,37 @@ export function App() : JSX.Element
   /** liste des paths privés */
   const [pathPrivate, setPathPrivate] = useState<TPath[]>([]);
 
-  /** Récupération des paths publiques */
+
+  /** Récupération des paths */
   useEffect(()=>{
+    
     const fetchPublics = async () => {
-      const response = await Requester.path.getPublics()
+      const response = await Requester.path.getPublics(user.token)
       if (response.data){
         setPathPublic(response.data)
       }
     }
-    fetchPublics()
-  },[])
 
-  /** Récupération des paths privés */
-  useEffect(()=>{
     const fetchPrivates = async () => {
       const response = await Requester.path.getPrivates(user.token)
       if (response.data){
         setPathPrivate(response.data)
       }
     }
-    fetchPrivates()
+    if (user.access > 0) {
+      fetchPublics()
+    }
+    else 
+    {
+      setPathPublic([])
+    }
+    if (user.access > 1) {
+      fetchPrivates()
+    }
+    else 
+    {
+      setPathPrivate([])
+    }
   },[user])
   
 
