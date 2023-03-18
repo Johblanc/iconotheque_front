@@ -60,7 +60,7 @@ export function LogInBox(): JSX.Element {
     {
       setMessage('');
       setUser(response.data)
-      setPage(<IconSelectPage/>)
+      setPage(<IconSelectPage actif={"public"}/>)
     }
     else
     {

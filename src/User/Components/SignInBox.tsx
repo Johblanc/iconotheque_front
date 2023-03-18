@@ -64,7 +64,7 @@ export function SignInBox(): JSX.Element {
       if (responseLog.statusCode === 201) 
       {
         setUser(responseLog.data)
-        setPage(<IconSelectPage/>)
+        setPage(<IconSelectPage actif={"public"}/>)
       }
       else
       {

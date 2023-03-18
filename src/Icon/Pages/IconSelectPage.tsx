@@ -1,3 +1,4 @@
+import { AppNav } from "../../App/Components/AppNav";
 
 
 /**
@@ -5,7 +6,14 @@
  * 
  * @version v1
  */
-export function IconSelectPage() : JSX.Element
+export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Element
 {
-  return <>Icon Select Page</>
+  const {actif} = props
+
+  return (
+    <div>
+      <AppNav actif={actif}/>
+      <h2>{actif === "public" ? "Icônes publiques" : "Mes icônes"}</h2>
+    </div>
+  )
 }
