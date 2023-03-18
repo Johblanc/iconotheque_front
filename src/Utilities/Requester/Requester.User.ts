@@ -6,7 +6,8 @@ import { RequesterBase } from "./RequesterBase";
 /**
  * Permet les requêtes pour la route users
  * 
- * * **logIn** : Requête pour log in un utilisateur
+ * * **logIn**  : Requête pour log in un utilisateur
+ * * **SignIn** : Requête pour enregistrer un utilisateur
  * 
  * @version v1
  */
@@ -34,7 +35,7 @@ export class UserRequester extends RequesterBase {
   }
 
   /**
-   * Requête pour log in un utilisateur
+   * Requête pour enregistrer un utilisateur
    * 
    * @param body.name       Le nom de l'utilisateur
    * @param body.mail       Le mail de l'utilisateur
