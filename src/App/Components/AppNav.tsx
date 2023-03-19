@@ -1,8 +1,4 @@
 import { useContext } from "react";
-import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
-import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
-import { UserViewPage } from "../../User/Pages/UserViewPage";
-import { PageContext } from "../../Utilities/Contexts/Page.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Link } from "react-router-dom";
 
@@ -20,7 +16,6 @@ export function AppNav(props : {actif : "profil" | "new" | "public" | "private" 
   
   const {actif} = props ;
   
-  const {setPage} = useContext(PageContext) ;
   const {user} = useContext(UserContext)
 
   return (

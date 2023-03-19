@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { AppNav } from "../../App/Components/AppNav";
-import { PageContext } from "../../Utilities/Contexts/Page.context";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
@@ -26,7 +25,6 @@ export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Ele
   const {pathPublic } = useContext(PathPublicContext)
   const {pathPrivate } = useContext(PathPrivateContext)
   const {user } = useContext(UserContext)
-  const {setPage } = useContext(PageContext)
 
   let path = [] ;
   if (actif === "public"){
@@ -38,7 +36,7 @@ export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Ele
   }
   const icons = path.map(
     (item,i) => (
-      <div key={i} onClick={()=> setPage(<IconViewPage/>)}>
+      <div key={i} /* onClick={()=> setPage(<IconViewPage/>)} */>
         <IconItem path={item}/>
       </div>
     )

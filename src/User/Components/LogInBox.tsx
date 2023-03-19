@@ -1,8 +1,6 @@
 import { useContext, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
-import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
 import { EntryString } from "../../Utilities/Components/EntryString";
-import { PageContext } from "../../Utilities/Contexts/Page.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
@@ -21,12 +19,6 @@ export function LogInBox(props : { setTransitionTo : React.Dispatch<React.SetSta
 
   /** Récupération du réglage de l'utilisateur dans le context */
   const {setUser} = useContext(UserContext)
-
-  /** Récupération du réglage de la page dans le context */
-  const {setPage} = useContext(PageContext)
-
-
-  const navigate = useNavigate();
 
   /** Préparation du body pour la requête LogIn */
   const [logBody, setLogBody] = useState({ name: "", password: "" });
@@ -67,7 +59,6 @@ export function LogInBox(props : { setTransitionTo : React.Dispatch<React.SetSta
     {
       setMessage('');
       setUser(response.data)
-      //navigate("/paths/publics")
       props.setTransitionTo("/paths/publics") ;
     }
     else

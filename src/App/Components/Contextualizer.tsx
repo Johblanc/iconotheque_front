@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { DEFAULT_USER } from "../../Utilities/Constants/User.defaut";
-import { PageContext } from "../../Utilities/Contexts/Page.context";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
@@ -21,10 +20,7 @@ import "../Style/App.style.css";
  * @version v1
  */
 export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | null }){
-  /** la page en cours d'affichage (lié au PageContext) */
-  const [nextPage, setNextPage] = useState(<></>);
-
-
+  
   /** l'utilisateur en cours d'utilisation */
   const [user, setUser] = useState(DEFAULT_USER);
 
@@ -63,7 +59,6 @@ export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | n
 
   return (
     <div className="App">
-      <PageContext.Provider value={{ page: nextPage, setPage: setNextPage }}>
         <UserContext.Provider value={{ user, setUser }}>
           <PathPublicContext.Provider value={{ pathPublic, setPathPublic }}>
             <PathPrivateContext.Provider value={{ pathPrivate, setPathPrivate }} >
@@ -72,7 +67,6 @@ export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | n
             </PathPrivateContext.Provider>
           </PathPublicContext.Provider>
         </UserContext.Provider>
-      </PageContext.Provider>
     </div>
   );
 }
