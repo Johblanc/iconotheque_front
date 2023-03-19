@@ -1,7 +1,5 @@
 import React from "react";
-import { DEFAULT_USER } from "../Constants/User.defaut";
 import { TPath } from "../Types/Path.type";
-import { TUser } from "../Types/User.type";
 
 
 /**
