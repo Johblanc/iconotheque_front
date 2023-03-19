@@ -4,7 +4,7 @@ import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
 import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { PageContext } from "../../Utilities/Contexts/Page.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
-
+import { Link } from "react-router-dom";
 
 /**
  * La Navigation du site
@@ -42,33 +42,25 @@ export function AppNav(props : {actif : "profil" | "new" | "public" | "private" 
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <button 
-              onClick={(actif === "profil") ? undefined : ()=> setPage(<UserViewPage/>) }
-              className={`nav-link${(actif === "profil") ? " active" : "" }`}
-            >
+            <Link 
+              className={`nav-link${(actif === "profil") ? " active" : ""}`} to={"/user/view"} >
               Profil
-            </button>
+            </Link>
             { user.access > 1 &&
-              <button 
-                onClick={(actif === "new") ? undefined : ()=> setPage(<IconUpdatePage/>) }
-                className={`nav-link${(actif === "new") ? " active" : "" }`}
-              >
+              <Link 
+                className={`nav-link${(actif === "new") ? " active" : ""}`} to={"/paths/new"} >
                 Nouvelle icône
-              </button>
+              </Link >
             }
-            <button 
-              onClick={(actif === "public") ? undefined : ()=> setPage(<IconSelectPage actif={"public"} />) }
-              className={`nav-link${(actif === "public") ? " active" : "" }`}
-            >
+            <Link 
+              className={`nav-link${(actif === "public") ? " active" : ""}`} to={"/paths/publics"} >
               Icônes publiques
-            </button>
+            </Link>
             { user.access > 1 &&
-              <button 
-                onClick={(actif === "private") ? undefined : ()=> setPage(<IconSelectPage actif={"private"} />) }
-                className={`nav-link${(actif === "private") ? " active" : "" }`}
-              >
+              <Link 
+                className={`nav-link${(actif === "private") ? " active" : ""}`} to={"/paths/privates"}>
                 Mes icônes
-              </button>
+              </Link>
             }
           </div>
         </div>

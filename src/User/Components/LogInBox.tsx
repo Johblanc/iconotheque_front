@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Form, useNavigate } from "react-router-dom";
 import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
 import { EntryString } from "../../Utilities/Components/EntryString";
 import { PageContext } from "../../Utilities/Contexts/Page.context";
@@ -6,6 +7,9 @@ import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 
+import {
+  redirect,
+} from "react-router-dom";
 /**
  * Composant permetant le Log In d'un utilisateur
  *
@@ -21,8 +25,10 @@ export function LogInBox(): JSX.Element {
   /** Récupération du réglage de la page dans le context */
   const {setPage} = useContext(PageContext)
 
-  /** Préparation du body pour la requête LogIn */
 
+  const navigate = useNavigate();
+
+  /** Préparation du body pour la requête LogIn */
   const [logBody, setLogBody] = useState({ name: "", password: "" });
   const [logValid, setLogValid] = useState({ name: false, password: false });
 
@@ -51,27 +57,28 @@ export function LogInBox(): JSX.Element {
 
   /** Déclenchement d'une tentative de Log In */
 
-  const handleRequest = async () => {
+  const handleRequest = async (event : React.FormEvent<HTMLFormElement>) => {
 
     const response = await Requester.user.logIn(logBody) ;
 
+    
 
     if (response.statusCode === 201) 
     {
       setMessage('');
       setUser(response.data)
-      setPage(<IconSelectPage actif={"public"}/>)
+      navigate("/paths/publics")
+      
     }
     else
     {
       setMessage("Nom ou Mot de passe invalides");
     }
-    
   }
   const isValid = logValid.name && logValid.password
 
   return (
-    <div>
+    <Form method="post"  onSubmit={handleRequest} >
       <h2>Connectez-vous ...</h2>
       <EntryString
         name={"Pseudo"}
@@ -87,7 +94,7 @@ export function LogInBox(): JSX.Element {
         isPass
       />
       <div>{message}</div>
-      <button onClick={handleRequest} disabled={!isValid} >Log In</button>
-    </div>
+      <button type="submit"  disabled={!isValid} >Log In</button>
+    </Form>
   );
 }

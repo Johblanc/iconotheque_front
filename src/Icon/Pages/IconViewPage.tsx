@@ -1,3 +1,5 @@
+import { AppHeader } from "../../App/Components/AppHeader";
+import { AppNav } from "../../App/Components/AppNav";
 
 
 /**
@@ -7,5 +9,13 @@
  */
 export function IconViewPage() : JSX.Element
 {
-  return <>Icon View Page</>
+  return (
+    <div>
+      <AppHeader/>
+      <AppNav actif={""}/>
+      <h2>IconViewPage</h2>
+      <div>
+      </div>
+    </div>
+    )
 }
