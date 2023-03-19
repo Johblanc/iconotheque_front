@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
-import { ROUTER_CONFIG } from "../../App/Routes/router"
-import { useNavigate } from "react-router-dom";
+
+import { TransitionMessage } from "./TransitionMessage";
+import { TransitionSlide } from "./TransitionSlide";
 
 
 
@@ -12,49 +12,32 @@ import { useNavigate } from "react-router-dom";
 export function Transition(props:{
   to : string ,
   children : JSX.Element | JSX.Element[] | null ,
+  message? : string ,
+  isBad? : boolean ,
   delay? : number ,
 }) : JSX.Element
 {
 
-  const { children , to } = props
-  let { delay } = props
-  if (delay === undefined ) delay = 800
-
-  const navigate = useNavigate();
-
-  const [nextOpacity , setNextOpacity] = useState(0)
-  const [nextPage , setNextPage] = useState(<></>)
-
-  useEffect(()=>{
-    setNextOpacity(0)
-    const nextRoute = ROUTER_CONFIG.filter(item => item.path === to)[0]
-    if (nextRoute) {
-      setNextPage(nextRoute.element)
-      setTimeout(() => setNextOpacity(1), 1); 
-      setTimeout(() => navigate(1), delay); 
+  const { children , to ,message, isBad} = props
+  const delay  = (props.delay !== undefined ) ? props.delay : 800 ;
+  const transitionElement = ()=> {
+    if (message === undefined){
+      return (
+        <TransitionSlide to={to} delay={delay}>
+          {children}
+        </TransitionSlide>
+      )
     }
-    else {
-      setNextPage(<></>)
-    }
-  },[to])
 
-
+    return (
+      <TransitionMessage to={to} message={message} delay={delay} isBad={isBad} >
+      {children}
+      </TransitionMessage>
+    )
+  }
   return (
     <div>
-      { to !== "" &&
-        <div 
-          className="transition"
-          style={{opacity : nextOpacity , transition : `opacity ${ delay / 1000 }s`  } }
-          >
-          {nextPage}
-        </div>
-      }
-      <div 
-        className="transition"
-        style={{opacity : to !== "" ? 0 : 1 , transition : `opacity ${ delay / 1000 }s`   } }
-      >
-        {children}
-      </div>
+      {transitionElement()}
     </div>
   )
 }
