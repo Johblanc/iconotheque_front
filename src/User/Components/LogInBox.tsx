@@ -1,13 +1,11 @@
 import { useContext, useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { Form } from "react-router-dom";
 import { EntryString } from "../../Utilities/Components/EntryString";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 
-import {
-  redirect,
-} from "react-router-dom";
 /**
  * Composant permetant le Log In d'un utilisateur
  *
@@ -15,10 +13,12 @@ import {
  * 
  * @version v1
  */
-export function LogInBox(props : { setTransitionTo : React.Dispatch<React.SetStateAction<string>>}): JSX.Element {
+export function LogInBox(): JSX.Element {
 
   /** Récupération du réglage de l'utilisateur dans le context */
   const {setUser} = useContext(UserContext)
+
+  const { setTransition } = useContext(TransitionContext) 
 
   /** Préparation du body pour la requête LogIn */
   const [logBody, setLogBody] = useState({ name: "", password: "" });
@@ -59,7 +59,7 @@ export function LogInBox(props : { setTransitionTo : React.Dispatch<React.SetSta
     {
       setMessage('');
       setUser(response.data)
-      props.setTransitionTo("/paths/publics") ;
+      setTransition({to : "/paths/publics", message : `Hello ${response.data.name} !`}) ;
     }
     else
     {

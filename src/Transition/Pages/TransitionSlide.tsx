@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
-import { ROUTER_CONFIG } from "../../App/Routes/router"
+import { useContext, useEffect, useState } from "react"
+import { PAGES_CONFIG } from "../../App/Routes/router"
 import { useNavigate } from "react-router-dom";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 
 
 
@@ -10,47 +11,56 @@ import { useNavigate } from "react-router-dom";
  * @version v1
  */
 export function TransitionSlide(props:{
-  to : string ,
-  children : JSX.Element | JSX.Element[] | null ,
-  delay? : number ,
+  children : JSX.Element | JSX.Element[] | null 
 }) : JSX.Element
 {
 
-  const { children , to } = props
-  const delay  = (props.delay !== undefined ) ? props.delay : 800 ;
+  const { children } = props
+
+  const { setTransition, transition } = useContext(TransitionContext) 
+  const { to , inTransition } = transition
+  const delay  = (transition.delay !== undefined ) ? transition.delay : 800 ;
 
   const navigate = useNavigate();
 
   const [nextOpacity , setNextOpacity] = useState(0)
   const [nextPage , setNextPage] = useState(<></>)
 
+
   useEffect(()=>{
-    setNextOpacity(0)
-    const nextRoute = ROUTER_CONFIG.filter(item => item.path === to)[0]
-    if (nextRoute) {
-      setNextPage(nextRoute.element)
-      setTimeout(() => setNextOpacity(1), 1); 
-      setTimeout(() => navigate(to), delay); 
+    
+    if(to !== "" && inTransition){
+      setNextOpacity(0)
+      const nextRoute = PAGES_CONFIG.filter(item => item.path === to)[0]
+      if (nextRoute) {
+        setNextPage(nextRoute.element)
+        setTimeout(() =>   setNextOpacity(1), 1); 
+        setTimeout(() => {
+          navigate(to);
+          setNextOpacity(0)
+          setTransition({to : ""})
+        }, delay); 
+      }
+      else {
+        setNextPage(<></>)
+      } 
+      setTransition({to : "", inTransition: true})
     }
-    else {
-      setNextPage(<></>)
-    }
-  },[to])
+  },[transition])
+
 
 
   return (
     <div>
-      { to !== "" &&
-        <div 
-          className="transition"
-          style={{opacity : nextOpacity , transition : `opacity ${ delay / 1000 }s`  } }
-          >
-          {nextPage}
-        </div>
-      }
       <div 
         className="transition"
-        style={{opacity : to !== "" ? 0 : 1 , transition : `opacity ${ delay / 1000 }s`   } }
+        style={{opacity : nextOpacity , transition : `opacity ${ delay / 1000 }s`  } }
+        >
+        {nextPage}
+      </div>
+      <div 
+        className="transition"
+        style={{opacity : 1 - nextOpacity , transition : `opacity ${ delay / 1000 }s`  } }
       >
         {children}
       </div>

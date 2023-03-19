@@ -1,39 +1,51 @@
 
+import { useContext, useEffect } from "react";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { TransitionMessage } from "./TransitionMessage";
 import { TransitionSlide } from "./TransitionSlide";
 
 
 
 /**
- * Page de transition standard
+ * Gestion des transitions
  * 
  * @version v1
  */
-export function Transition(props:{
-  to : string ,
-  children : JSX.Element | JSX.Element[] | null ,
-  message? : string ,
-  isBad? : boolean ,
-  delay? : number ,
-}) : JSX.Element
+export function Transition(props:{ children : JSX.Element | JSX.Element[] | null }) : JSX.Element
 {
 
-  const { children , to ,message, isBad} = props
-  const delay  = (props.delay !== undefined ) ? props.delay : 800 ;
+  const { children}  = props
+
+  const { transition , setTransition} = useContext(TransitionContext) 
+
+  const { message , inTransition } = transition ;
+
+  useEffect(()=>{
+
+    if (transition.to !== "" && !transition.inTransition ){
+      const newItem = {...transition} ;
+      newItem.inTransition = true
+      setTransition(newItem)
+    }
+  },[transition])
+
   const transitionElement = ()=> {
-    if (message === undefined){
+    if (inTransition){
+      if (message === undefined){
+        return (
+          <TransitionSlide>
+            {children}
+          </TransitionSlide>
+        )
+      }
+      
       return (
-        <TransitionSlide to={to} delay={delay}>
-          {children}
-        </TransitionSlide>
+        <TransitionMessage >
+        {children}
+        </TransitionMessage>
       )
     }
-
-    return (
-      <TransitionMessage to={to} message={message} delay={delay} isBad={isBad} >
-      {children}
-      </TransitionMessage>
-    )
+    return <>{children}</>
   }
   return (
     <div>

@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { DEFAULT_USER } from "../../Utilities/Constants/User.defaut";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { TPath } from "../../Utilities/Types/Path.type";
+import { TTransition } from "../../Utilities/Types/TTransition";
 import "../Style/App.style.css";
 
 
@@ -13,7 +15,6 @@ import "../Style/App.style.css";
  * Un conteneur avec tous les contextes
  * 
  * * user
- * * nextPage
  * * icônes publiques
  * * icônes privés
  * 
@@ -29,6 +30,9 @@ export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | n
 
   /** liste des paths privés */
   const [pathPrivate, setPathPrivate] = useState<TPath[]>([]);
+
+  /** La transition en cours */
+  const [transition,setTransition] = useState<TTransition>( { to : "" });
 
   /** Récupération des paths */
   useEffect(() => {
@@ -58,15 +62,14 @@ export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | n
   }, [user]);
 
   return (
-    <div className="App">
         <UserContext.Provider value={{ user, setUser }}>
           <PathPublicContext.Provider value={{ pathPublic, setPathPublic }}>
             <PathPrivateContext.Provider value={{ pathPrivate, setPathPrivate }} >
+              <TransitionContext.Provider value={{transition,setTransition}}>
               {props.children}
-
+              </TransitionContext.Provider>
             </PathPrivateContext.Provider>
           </PathPublicContext.Provider>
         </UserContext.Provider>
-    </div>
   );
 }

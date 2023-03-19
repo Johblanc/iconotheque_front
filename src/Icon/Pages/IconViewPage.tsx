@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { AppNav } from "../../App/Components/AppNav";
+import { Transition } from "../../Transition/Pages/Transition";
 
 
 /**
@@ -9,13 +11,12 @@ import { AppNav } from "../../App/Components/AppNav";
  */
 export function IconViewPage() : JSX.Element
 {
+  const [transitionTo,setTransitionTo] = useState("")
   return (
-    <div>
+    <>
       <AppHeader/>
-      <AppNav actif={""}/>
+      <AppNav actif={""} />
       <h2>IconViewPage</h2>
-      <div>
-      </div>
-    </div>
+    </>
     )
 }

@@ -3,15 +3,23 @@ import { UserLogInPage } from "../../User/Pages/UserLogInPage";
 
 import {
   createBrowserRouter,
-  RouterProvider,
   redirect,
 } from "react-router-dom";
 import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
 import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
 import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
+import { Transition } from "../../Transition/Pages/Transition";
 
-export const ROUTER_CONFIG = [
+
+
+
+/** 
+ * Les routes du sites sans les transitions 
+ * 
+ * @version v1
+ * */
+export const PAGES_CONFIG = [
   {
     path: "/",
     element: <UserLogInPage />,
@@ -26,27 +34,47 @@ export const ROUTER_CONFIG = [
   },
   {
     path: "/user/view",
-    element: <UserViewPage />,
+    element: <UserViewPage />
   },
   {
     path: "/user/update",
-    element: <UserUpdatePage />,
+    element: <UserUpdatePage />
   },
   {
     path: "/paths/publics",
-    element: <IconSelectPage actif={"public"} />,
+    element: <IconSelectPage actif={"public"} />
   },
   {
     path: "/paths/privates",
-    element: <IconSelectPage actif={"private"} />,
+    element: <IconSelectPage actif={"private"} />
   },
   {
     path: "/paths/new",
-    element: <IconUpdatePage/>,
+    element: <IconUpdatePage/>
   },
   {
     path: "/paths/update",
-    element: <IconUpdatePage />,
+    element: <IconUpdatePage />
   },
 ]
+
+
+/** 
+ * Les routes du sites avec les transitions 
+ * 
+ * @version v1
+ * */
+export const ROUTER_CONFIG = PAGES_CONFIG.map(item => 
+  {
+    const newItem = {...item} ;
+    newItem.element = <Transition>{newItem.element}</Transition>
+    return newItem
+  }
+  )
+  
+/**
+ * Le router du sites
+ * 
+ * @version v1
+ * */
 export const ROUTER = createBrowserRouter(ROUTER_CONFIG);

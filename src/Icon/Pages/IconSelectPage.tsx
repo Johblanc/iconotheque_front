@@ -1,11 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { AppNav } from "../../App/Components/AppNav";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { IconItem } from "../Components/IconItem";
-import { IconViewPage } from "./IconViewPage";
 
 
 /**
@@ -26,6 +25,8 @@ export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Ele
   const {pathPrivate } = useContext(PathPrivateContext)
   const {user } = useContext(UserContext)
 
+  const [transitionTo,setTransitionTo] = useState("")
+
   let path = [] ;
   if (actif === "public"){
     path = pathPublic
@@ -43,13 +44,13 @@ export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Ele
   )
 
   return (
-    <div>
+    <>
       <AppHeader/>
       <AppNav actif={actif}/>
       <h2>{actif === "public" ? "Icônes publiques" : "Mes icônes"}</h2>
       <div>
         {icons}
       </div>
-    </div>
+    </>
   )
 }

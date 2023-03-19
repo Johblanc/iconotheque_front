@@ -1,6 +1,6 @@
 import { useContext } from "react";
+import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { UserContext } from "../../Utilities/Contexts/User.context";
-import { Link } from "react-router-dom";
 
 /**
  * La Navigation du site
@@ -37,25 +37,16 @@ export function AppNav(props : {actif : "profil" | "new" | "public" | "private" 
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <Link 
-              className={`nav-link${(actif === "profil") ? " active" : ""}`} to={"/user/view"} >
-              Profil
-            </Link>
+            <LinkCustom
+              className={`nav-link${(actif === "profil") ? " active" : ""}`} to={"/user/view"} name="Profile" />
             { user.access > 1 &&
-              <Link 
-                className={`nav-link${(actif === "new") ? " active" : ""}`} to={"/paths/new"} >
-                Nouvelle icône
-              </Link >
+              <LinkCustom 
+                className={`nav-link${(actif === "new") ? " active" : ""}`} to={"/paths/new"} name="Nouvelle icône" />
             }
-            <Link 
-              className={`nav-link${(actif === "public") ? " active" : ""}`} to={"/paths/publics"} >
-              Icônes publiques
-            </Link>
+            <LinkCustom 
+              className={`nav-link${(actif === "public") ? " active" : ""}`} to={"/paths/publics"} name="Icônes publiques"/>
             { user.access > 1 &&
-              <Link 
-                className={`nav-link${(actif === "private") ? " active" : ""}`} to={"/paths/privates"}>
-                Mes icônes
-              </Link>
+              <LinkCustom className={`nav-link${(actif === "private") ? " active" : ""}`} to={"/paths/privates"} name="Mes icônes" />
             }
           </div>
         </div>
