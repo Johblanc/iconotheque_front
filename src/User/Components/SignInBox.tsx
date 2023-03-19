@@ -13,7 +13,7 @@ import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
  * 
  * @version v1
  */
-export function SignInBox(): JSX.Element {
+export function SignInBox(props : { setTransitionTo : React.Dispatch<React.SetStateAction<string>>}): JSX.Element {
 
   /** Récupération du réglage de l'utilisateur dans le context */
   const {setUser} = useContext(UserContext)

@@ -17,7 +17,7 @@ import {
  * 
  * @version v1
  */
-export function LogInBox(): JSX.Element {
+export function LogInBox(props : { setTransitionTo : React.Dispatch<React.SetStateAction<string>>}): JSX.Element {
 
   /** Récupération du réglage de l'utilisateur dans le context */
   const {setUser} = useContext(UserContext)
@@ -67,8 +67,8 @@ export function LogInBox(): JSX.Element {
     {
       setMessage('');
       setUser(response.data)
-      navigate("/paths/publics")
-      
+      //navigate("/paths/publics")
+      props.setTransitionTo("/paths/publics") ;
     }
     else
     {

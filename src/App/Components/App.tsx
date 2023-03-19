@@ -10,7 +10,7 @@ import "../Style/App.style.css";
 
 import { RouterProvider } from "react-router-dom";
 import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
-import { router } from "../Routes/router";
+import { ROUTER } from "../Routes/router";
 import { Contextualizer } from "./Contextualizer";
 
 /**
@@ -24,7 +24,7 @@ export function App(): JSX.Element {
   return (
     <div className="App">
       <Contextualizer>
-        <RouterProvider router={router} />
+        <RouterProvider router={ROUTER} />
       </Contextualizer>
     </div>
   );

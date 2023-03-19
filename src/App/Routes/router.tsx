@@ -11,7 +11,7 @@ import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
 import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
 
-export const router = createBrowserRouter([
+export const ROUTER_CONFIG = [
   {
     path: "/",
     element: <UserLogInPage />,
@@ -48,4 +48,5 @@ export const router = createBrowserRouter([
     path: "/paths/update",
     element: <IconUpdatePage />,
   },
-]);
+]
+export const ROUTER = createBrowserRouter(ROUTER_CONFIG);
