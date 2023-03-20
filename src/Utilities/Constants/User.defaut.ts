@@ -8,6 +8,7 @@ import { TUser } from "../Types/User.type";
 export const DEFAULT_USER : TUser = {
   id : -1 ,
   name : "",
+  mail : "",
   access : 0,
   token : ""
 }

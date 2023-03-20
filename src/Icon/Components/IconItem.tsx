@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { TPath } from "../../Utilities/Types/Path.type";
 
 /**
@@ -9,8 +11,10 @@ import { TPath } from "../../Utilities/Types/Path.type";
  */
 export function IconItem(props: { path: TPath }) {
 
+  const {setTransition} = useContext(TransitionContext)
   return (
     <svg
+      onClick={()=> setTransition({to : "/paths/view"})}
       className=""
       width="10mm"
       viewBox={props.path.viewbox}

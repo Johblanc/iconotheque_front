@@ -1,3 +1,4 @@
+import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 
 
 /**
@@ -7,5 +8,13 @@
  */
 export function UserUpdatePage() : JSX.Element
 {
-  return <>User Update Page</>
+  return <>
+  
+  <div>
+    <LinkCustom name={"Enregistrer les modifications"} to={"/user/view"}/>
+    </div>
+  <div>
+    <LinkCustom name={"Annuler les modifications"} to={"/user/view"}/>
+    </div>
+  </>
 }

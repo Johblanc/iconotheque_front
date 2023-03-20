@@ -10,6 +10,7 @@ import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
 import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
 import { Transition } from "../../Transition/Pages/Transition";
+import { IconViewPage } from "../../Icon/Pages/IconViewPage";
 
 
 
@@ -55,6 +56,10 @@ export const PAGES_CONFIG = [
   {
     path: "/paths/update",
     element: <IconUpdatePage />
+  },
+  {
+    path: "/paths/view",
+    element: <IconViewPage />
   },
 ]
 
