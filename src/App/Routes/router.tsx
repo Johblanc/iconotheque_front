@@ -11,6 +11,7 @@ import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
 import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
 import { Transition } from "../../Transition/Pages/Transition";
 import { IconViewPage } from "../../Icon/Pages/IconViewPage";
+import { UserPassUpdatePage } from "../../User/Pages/UserPassUpdatePage";
 
 
 
@@ -40,6 +41,10 @@ export const PAGES_CONFIG = [
   {
     path: "/user/update",
     element: <UserUpdatePage />
+  },
+  {
+    path: "/user/passupdate",
+    element: <UserPassUpdatePage />
   },
   {
     path: "/paths/publics",

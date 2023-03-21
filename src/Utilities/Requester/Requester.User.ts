@@ -19,6 +19,7 @@ export class UserRequester extends RequesterBase {
    * 
    * @param body.name       Le nom de l'utilisateur
    * @param body.password   Le mot de passe de l'utilisateur
+   * 
    * @returns               la réponse compléte de la requête
    * 
    * @version v1
@@ -40,17 +41,42 @@ export class UserRequester extends RequesterBase {
    * @param body.name       Le nom de l'utilisateur
    * @param body.mail       Le mail de l'utilisateur
    * @param body.password   Le mot de passe de l'utilisateur
+   * 
    * @returns               la réponse compléte de la requête
    * 
    * @version v1
    */
-  static async SignIn(body : { name: string, mail : string, password: string}) : Promise<TResponse<TUser,string>>
+  static async signIn(body : { name: string, mail : string, password: string}) : Promise<TResponse<TUser,string>>
   {
     const response = await UserRequester.base<TUser,string>(
       "users/register",
       RequestMethods.POST,
       [],
       body
+    )
+    return response
+  }
+
+  /**
+   * Requête pour Modifier un profile utilisateur
+   * 
+   * @param body.name       Le nom de l'utilisateur
+   * @param body.mail       Le mail de l'utilisateur
+   * @param body.password   Le mot de passe de l'utilisateur
+   * @param token           le token de l'utilisateur
+   * 
+   * @returns               la réponse compléte de la requête
+   * 
+   * @version v1
+   */
+  static async update(body : { name?: string, mail?: string, password?: string}, token : string) : Promise<TResponse<TUser,string>>
+  {
+    const response = await UserRequester.base<TUser,string>(
+      "users",
+      RequestMethods.PATCH,
+      [],
+      body,
+      token
     )
     return response
   }

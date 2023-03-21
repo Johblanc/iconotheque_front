@@ -35,7 +35,7 @@ export class PathRequester extends RequesterBase {
 
   /**
    * Requête de récupération de paths privés
-   * 
+   * @param token le token de l'utilisateur
    * @returns Liste des paths privés
    * 
    * @version v1

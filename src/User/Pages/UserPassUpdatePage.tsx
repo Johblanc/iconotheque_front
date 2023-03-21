@@ -12,7 +12,7 @@ import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
  *
  * @version v1
  */
-export function UserUpdatePage(): JSX.Element {
+export function UserPassUpdatePage(): JSX.Element {
 
   /** Récupération du réglage de l'utilisateur dans le context */
   const {user, setUser} = useContext(UserContext)
@@ -21,8 +21,8 @@ export function UserUpdatePage(): JSX.Element {
 
   /** Préparation du body pour la requête SignIn */
 
-  const [updateBody, setSignBody] = useState({ name: user.name , mail : user.mail });
-  const [signValid, setSignValid] = useState({ name: true , mail : true });
+  const [updateBody, setSignBody] = useState({ password: "" , verifpass : ""});
+  const [signValid, setSignValid] = useState({ password: false , verifpass : false });
 
   /** Prépartion du message d'alerte */
   
@@ -37,7 +37,7 @@ export function UserUpdatePage(): JSX.Element {
    * @param valid   validité de l'Entry
    */
 
-  const handleUpdateBody = (key: "name" | "mail", value ? : string , valid ? : boolean ) => {
+  const handleUpdateBody = (key: "password" | "verifpass" , value ? : string , valid ? : boolean ) => {
     const newSignBody = { ...updateBody };
     if ( value !== undefined ) newSignBody[key] = value;
     setSignBody(newSignBody);
@@ -63,22 +63,27 @@ export function UserUpdatePage(): JSX.Element {
     }
   }
 
-  const isValid = signValid.name && signValid.mail
+  const isValid = signValid.password && signValid.verifpass
 
   return (
     <Form method="post" onSubmit={handleRequest}>
-      <h2>Modification du Profile</h2>
+      <h2>Modification du mot de passe</h2>
       <EntryString
-        name={"Pseudo"}
-        defaultValue={updateBody.name}
-        setValue={(value, valid) => handleUpdateBody("name", value, valid)}
+        name={"Mot de passe"}
+        defaultValue={updateBody.password}
+        setValue={(value, valid) => handleUpdateBody("password", value, valid)}
         validators={[EntryValidators.minLenght(4)]}
+        isPass
       />
       <EntryString
-        name={"Mail"}
-        defaultValue={updateBody.mail}
-        setValue={(value, valid) => handleUpdateBody("mail", value, valid)}
-        validators={[EntryValidators.isMail()]}
+        name={"Vérification du mot de passe"}
+        defaultValue={updateBody.verifpass}
+        setValue={(value, valid) => handleUpdateBody("verifpass", value, valid)}
+        validators={[
+          EntryValidators.minLenght(4),
+          EntryValidators.samePasswords(updateBody.password),
+        ]}
+        isPass
       />
       <div>{message}</div>
       <button type="submit" disabled={!isValid} >
