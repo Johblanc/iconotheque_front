@@ -55,17 +55,20 @@ export function UserViewPage(): JSX.Element {
         />
       </div>
       <div>
-        <LinkCustom name={"Créer un nouvelle icône"} to={"/paths/new"} />
+        <LinkCustom
+          name={"Déconnection"}
+          to={{
+            to: "/user/login",
+            message: `GoodBye ${user.name}`,
+            isBad: true,
+          }}
+        />
       </div>
       <h3>Mes Icônes</h3>
       <div>
         {icons.map((item, i) => (
           <IconItem path={item} key={i} />
         ))}
-      </div>
-
-      <div>
-        <LinkCustom name={"Déconnection"} to={"/user/login"} />
       </div>
     </div>
   );
