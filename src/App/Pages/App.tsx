@@ -2,7 +2,7 @@ import "../Style/App.style.css";
 
 import { RouterProvider } from "react-router-dom";
 import { ROUTER } from "../Routes/router";
-import { Contextualizer } from "./Contextualizer";
+import { Contextualizer } from "../Components/Contextualizer";
 
 /**
  * Iconothèque v1 :
