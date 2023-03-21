@@ -34,11 +34,34 @@ export function TransitionMessage(props: {
     if (to !== "" && inTransition) {
       setNextOpacity(0);
       setTransitionOpacity(0);
-      const nextRoute = PAGES_CONFIG.filter((item) => item.path === to)[0];
-      if (nextRoute) {
-        console.log(nextRoute.path);
+
+      let altElem : JSX.Element | undefined = undefined ;
+      const nextRoute = PAGES_CONFIG.filter(item => {
+        const [path , ...params] = item.path.split("/:")
+        if (params.length > 0) {
+          const splitedTo = to
+          .split('/')
+
+          const newTo = splitedTo
+          .filter((_,i,arr)=> i < arr.length - params.length)
+          .join('/') ;
+          if (path === newTo && item.loader) {
+            
+            altElem = item.loader({params : {id : splitedTo[splitedTo.length-1]}}) as JSX.Element
+          }
+          return path === newTo
+        }
         
-        setNextPage(nextRoute.element);
+        return path === to
+      })[0]
+      
+      if (nextRoute) {
+        if (altElem){
+          setNextPage(altElem)
+        }
+        else {
+          setNextPage(nextRoute.element)
+        }
         setTimeout(() => setTransitionOpacity(1), 1);
         setTimeout(() => setNextOpacity(1), delay * 2);
         setTimeout(() => setTransitionOpacity(0), delay * 2);
