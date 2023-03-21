@@ -25,7 +25,6 @@ export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Ele
   const {pathPrivate } = useContext(PathPrivateContext)
   const {user } = useContext(UserContext)
 
-  const [transitionTo,setTransitionTo] = useState("")
 
   let path = [] ;
   if (actif === "public"){
@@ -37,20 +36,20 @@ export function IconSelectPage(props : {actif : "public" | "private"}) : JSX.Ele
   }
   const icons = path.map(
     (item,i) => (
-      <div key={i} /* onClick={()=> setPage(<IconViewPage/>)} */>
+      <div key={i} >
         <IconItem path={item}/>
       </div>
     )
   )
 
   return (
-    <>
+    <div>
       <AppHeader/>
       <AppNav actif={actif}/>
       <h2>{actif === "public" ? "Icônes publiques" : "Mes icônes"}</h2>
       <div>
         {icons}
       </div>
-    </>
+    </div>
   )
 }

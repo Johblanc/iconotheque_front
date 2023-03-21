@@ -11,17 +11,20 @@ import { TPath } from "../../Utilities/Types/Path.type";
  */
 export function IconItem(props: { path: TPath }) {
 
+  const {path} = props
+
   const {setTransition} = useContext(TransitionContext)
+  
   return (
     <svg
-      onClick={()=> setTransition({to : "/paths/view"})}
+      onClick={()=> setTransition({to : `/paths/view/${path.id}`})}
       className=""
-      width="10mm"
+      width="min(calc((1.375rem + 1.5vw)*1.5),3.75rem)"
       viewBox={props.path.viewbox}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d={props.path.d} />
+      <path d={path.d} />
     </svg>
   );
 }
