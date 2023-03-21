@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Form } from "react-router-dom";
+import { AppHeader } from "../../App/Components/AppHeader";
 import { EntryString } from "../../Utilities/Components/EntryString";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
@@ -66,6 +67,8 @@ export function UserUpdatePage(): JSX.Element {
   const isValid = signValid.name && signValid.mail
 
   return (
+    <div>
+    <AppHeader />
     <Form method="post" onSubmit={handleRequest}>
       <h2>Modification du Profile</h2>
       <EntryString
@@ -88,5 +91,6 @@ export function UserUpdatePage(): JSX.Element {
         <LinkCustom name={"Annuler les modifications"} to={"/user/view"} />
       </div>
     </Form>
+    </div>
   );
 }
