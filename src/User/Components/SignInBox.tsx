@@ -49,9 +49,10 @@ export function SignInBox(): JSX.Element {
 
   /** Déclenchement d'une tentative de SignIn */
 
-  const handleRequest = async () => {
+  const handleRequest = async (event : React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
 
-    const responseSign = await Requester.user.SignIn(signBody) ;
+    const responseSign = await Requester.user.signIn(signBody) ;
     
     if (responseSign.statusCode === 201) 
     {

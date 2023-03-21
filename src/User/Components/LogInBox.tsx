@@ -51,6 +51,7 @@ export function LogInBox(): JSX.Element {
 
   const handleRequest = async (event : React.FormEvent<HTMLFormElement>) => {
 
+    event.preventDefault()
     const response = await Requester.user.logIn(logBody) ;
 
     
