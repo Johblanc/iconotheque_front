@@ -17,6 +17,8 @@ export class PathRequester extends RequesterBase {
   /**
    * Requête de récupération de paths publics
    * 
+   * @param token le token de l'utilisateur
+   * 
    * @returns Liste des paths publics
    * 
    * @version v1
@@ -35,7 +37,9 @@ export class PathRequester extends RequesterBase {
 
   /**
    * Requête de récupération de paths privés
+   * 
    * @param token le token de l'utilisateur
+   * 
    * @returns Liste des paths privés
    * 
    * @version v1
@@ -46,6 +50,50 @@ export class PathRequester extends RequesterBase {
       "paths/privates",
       RequestMethods.GET ,
       [],
+      undefined,
+      token
+      )
+    return response
+  }
+
+  /**
+   * Requête de publication d'un path
+   * 
+   * @param id    l'identifiant du path
+   * @param token le token de l'utilisateur
+   * 
+   * @returns le path publié
+   * 
+   * @version v1
+   */
+  static async publish(id : number,token : string) : Promise<TResponse<TPath,string>>
+  {
+    const response = await PathRequester.base<TPath,string>(
+      "paths/publish",
+      RequestMethods.PATCH ,
+      [id],
+      undefined,
+      token
+      )
+    return response
+  }
+
+  /**
+   * Requête de suppression d'un path
+   * 
+   * @param id    l'identifiant du path
+   * @param token le token de l'utilisateur
+   * 
+   * @returns le path supprimé
+   * 
+   * @version v1
+   */
+  static async delete(id : number,token : string) : Promise<TResponse<TPath,string>>
+  {
+    const response = await PathRequester.base<TPath,string>(
+      "paths",
+      RequestMethods.DELETE ,
+      [id],
       undefined,
       token
       )
