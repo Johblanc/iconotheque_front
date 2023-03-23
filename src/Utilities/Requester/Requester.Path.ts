@@ -57,6 +57,29 @@ export class PathRequester extends RequesterBase {
   }
 
   /**
+   * Requête de mise à jour d'un path
+   * 
+   * @param id    l'identifiant du path
+   * @param body  les parametres de modification du path
+   * @param token le token de l'utilisateur
+   * 
+   * @returns le path publié
+   * 
+   * @version v1
+   */
+  static async update(id : number, body: {name : string, viewbox : string, d: string} , token : string) : Promise<TResponse<TPath>>
+  {
+    const response = await PathRequester.base<TPath>(
+      "paths",
+      RequestMethods.PATCH ,
+      [id],
+      body,
+      token
+      )
+    return response
+  }
+
+  /**
    * Requête de publication d'un path
    * 
    * @param id    l'identifiant du path

@@ -1,36 +1,160 @@
+import { useContext, useState } from "react";
+import { Form } from "react-router-dom";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { EntryString } from "../../Utilities/Components/EntryString";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
+import { TextArea } from "../../Utilities/Components/TextArea";
+import { DEFAULT_PATH } from "../../Utilities/Constants/Path.defaut";
+import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
+import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
+import { UserContext } from "../../Utilities/Contexts/User.context";
+import { Requester } from "../../Utilities/Requester/Requester";
+import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 
 /**
  * Page de mise à jour d'un icône
  *
  * @version v1
  */
-export function IconUpdatePage(): JSX.Element {
+export function IconUpdatePage(props: { pathId: number }): JSX.Element {
+  /** L'identifiant du path en cours de modification */
+  const { pathId } = props;
+
+  /** Récupération des contexts */
+  const { user } = useContext(UserContext);
+
+  const { pathPublic, setPathPublic } = useContext(PathPublicContext);
+  const { pathPrivate, setPathPrivate } = useContext(PathPrivateContext);
+
+  const { setTransition } = useContext(TransitionContext);
+
+  /** Récupération du path */
+  const path =
+    [...pathPublic, ...pathPrivate].filter((item) => item.id === pathId)[0] ||
+    DEFAULT_PATH;
+
+  /** Préparation du body pour la requête LogIn */
+  const [updateBody, setUpdateBody] = useState({
+    name: path.name,
+    viewbox: path.viewbox,
+    d: path.d,
+  });
+  const [updateValid, setUpdateValid] = useState({
+    name: true,
+    viewbox: true,
+    d: true,
+  });
+
+  /** Prépartion du message d'alerte */
+
+  const [message, setMessage] = useState("");
+
+  /**
+   * Permet la modification des parametres du body :
+   *
+   * @param key     Nom du paramères à modifier
+   * @param value   Nouvelle valeur du parametre
+   * @param valid   validité de l'Entry
+   */
+
+  const handleLogBody = (
+    key: "name" | "viewbox" | "d",
+    value?: string,
+    valid?: boolean
+  ) => {
+    const newLogBody = { ...updateBody };
+    if (value !== undefined) newLogBody[key] = value;
+    setUpdateBody(newLogBody);
+    const newLogValid = { ...updateValid };
+    if (valid !== undefined) newLogValid[key] = valid;
+    setUpdateValid(newLogValid);
+  };
+
+  /** Déclenchement d'une tentative de Log In */
+
+  const handleRequest = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const response = await Requester.path.update(path.id,updateBody,user.token) ;
+
+    console.log(response);
+
+    if (response.data){
+      setPathPublic(pathPublic.map(item => {
+        if (item.id === response.data.id){
+          return response.data
+        }
+        return item
+      }))
+      setPathPrivate(pathPrivate.map(item => {
+        if (item.id === response.data.id){
+          return response.data
+        }
+        return item
+      }))
+      setMessage("")
+
+      setTransition({to : `/paths/view/${path.id}`, message : "Enregistrement réussi"})
+    }
+    else {
+      if (typeof response.message === "string"){
+        setMessage(response.message)
+      }
+      else
+      {
+        setMessage(response.message.join("\n"))
+      }
+      
+    }
+  };
+  const isValid = updateValid.name && updateValid.viewbox && updateValid.d;
+
   return (
     <div>
       <AppHeader />
-      {/* 
-    <EntryString
-      name={"Pseudo"}
-      defaultValue={logBody.name}
-      setValue={(value, valid) => handleLogBody("name", value, valid)}
-      validators={[EntryValidators.minLenght(4)]}
-    />
-    <EntryString
-      name={"Pseudo"}
-      defaultValue={logBody.name}
-      setValue={(value, valid) => handleLogBody("name", value, valid)}
-      validators={[EntryValidators.minLenght(4)]}
-    />
-     */}
-      <div>
-        <LinkCustom name={"Enregistrer les modification"} to={"/paths/view"} />
-      </div>
-      <div>
-        <LinkCustom name={"Annuler les modification"} to={"/paths/publics"} />
-      </div>
+      <Form method="post" onSubmit={handleRequest}>
+        <h2>Modication d'un path</h2>
+        <EntryString
+          name={"Nom"}
+          defaultValue={updateBody.name}
+          setValue={(value, valid) => handleLogBody("name", value, valid)}
+          validators={[EntryValidators.minLenght(4)]}
+        />
+        <EntryString
+          name={"View Box"}
+          defaultValue={updateBody.viewbox}
+          setValue={(value, valid) => handleLogBody("viewbox", value, valid)}
+          validators={[EntryValidators.minLenght(4)]}
+        />
+        <TextArea
+          name={"Drown"}
+          defaultValue={updateBody.d}
+          setValue={(value, valid) => handleLogBody("d", value, valid)}
+          validators={[EntryValidators.minLenght(4)]}
+          isPass
+        />
+        <pre>{message}</pre>
+        <svg
+          className=""
+          width="min(calc((1.375rem + 1.5vw)*6),15rem)"
+          viewBox={updateBody.viewbox}
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Path : {updateBody.name}</title>
+          <path d={updateBody.d} />
+        </svg>
+        <div>
+          <button type="submit" disabled={!isValid}>
+            Enregistrer les modification
+          </button>
+        </div>
+
+        <div>
+          <LinkCustom name={"Annuler les modification"} to={`/paths/view/${path.id}`} />
+        </div>
+      </Form>
     </div>
   );
 }
