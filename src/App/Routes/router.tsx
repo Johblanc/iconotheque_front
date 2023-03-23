@@ -6,10 +6,11 @@ import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
 import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
 import { Transition } from "../../Transition/Pages/Transition";
-import { IconViewPage } from "../../Icon/Pages/IconViewPage";
+import { IdPage } from "../Pages/IdPage";
 import { UserPassUpdatePage } from "../../User/Pages/UserPassUpdatePage";
 import { ErrorPage } from "../Pages/ErrorPage";
-import { IconView } from "../../Icon/Components/IconView";
+import { IconViewPage } from "../../Icon/Pages/IconViewPage";
+import { IconDeletePage } from "../../Icon/Pages/IconDeletePage";
 
 /**
  * Les routes du sites sans les transitions
@@ -52,19 +53,37 @@ export const PAGES_CONFIG = [
   },
   {
     path: "/paths/new",
-    element: <IconUpdatePage />,
+    element: <IconUpdatePage pathId={-1} />,
   },
   {
-    path: "/paths/update",
-    element: <IconUpdatePage />,
-  },
-  {
-    path: "/paths/view/:id",
-    element: <IconViewPage />,
+    path: "/paths/update/:id",
+    element: <IdPage />,
     loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
       if (args.params.id)
       {
-        return <IconView pathId={Number(args.params.id)}/>
+        return <IconUpdatePage pathId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+  {
+    path: "/paths/view/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <IconViewPage pathId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+  {
+    path: "/paths/delete/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <IconDeletePage pathId={Number(args.params.id)}/>
       }
       return <></>
     }
