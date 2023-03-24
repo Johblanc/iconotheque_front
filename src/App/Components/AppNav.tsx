@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { UserContext } from "../../Utilities/Contexts/User.context";
+import { APP_STYLE } from "../Style/App.bootstrap.style";
 
 /**
  * La Navigation du site
@@ -19,13 +20,12 @@ export function AppNav(props : {actif : "profil" | "new" | "public" | "private" 
   const {user} = useContext(UserContext)
 
   return (
-    <nav className="navbar navbar-expand-md bg-body-tertiary">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Navbar
-        </a>
+    <nav className={APP_STYLE.APP.NAV.CADRE}>
+        <h2 className={APP_STYLE.APP.NAV.TITLE}>
+          Navigation
+        </h2>
         <button
-          className="navbar-toggler"
+          className={APP_STYLE.APP.NAV.BUTTON}
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavAltMarkup"
@@ -33,24 +33,23 @@ export function AppNav(props : {actif : "profil" | "new" | "public" | "private" 
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className={APP_STYLE.APP.NAV.ICON}></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
+        <div className={APP_STYLE.APP.NAV.BOX_A} id="navbarNavAltMarkup">
+          <div className={APP_STYLE.APP.NAV.BOX_B}>
             <LinkCustom
-              className={`nav-link${(actif === "profil") ? " active" : ""}`} to={"/user/view"} name="Profile" />
+              className={`${APP_STYLE.APP.NAV.ITEM}${(actif === "profil") ? " active" : ""}`} to={"/user/view"} name="Profile" />
             { user.access > 1 &&
               <LinkCustom 
-                className={`nav-link${(actif === "new") ? " active" : ""}`} to={"/paths/new"} name="Nouvelle icône" />
+                className={`${APP_STYLE.APP.NAV.ITEM}${(actif === "new") ? " active" : ""}`} to={"/paths/new"} name="Nouvelle icône" />
             }
             <LinkCustom 
-              className={`nav-link${(actif === "public") ? " active" : ""}`} to={"/paths/publics"} name="Icônes publiques"/>
+              className={`${APP_STYLE.APP.NAV.ITEM}${(actif === "public") ? " active" : ""}`}  to={"/paths/publics"} name="Icônes publiques"/>
             { user.access > 1 &&
-              <LinkCustom className={`nav-link${(actif === "private") ? " active" : ""}`} to={"/paths/privates"} name="Mes icônes" />
+              <LinkCustom className={`${APP_STYLE.APP.NAV.ITEM}${(actif === "private") ? " active" : ""}`}  to={"/paths/privates"} name="Mes icônes" />
             }
           </div>
         </div>
-      </div>
     </nav>
   );
 }

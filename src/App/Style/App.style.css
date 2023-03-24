@@ -1,5 +1,70 @@
 
 
+:root{
+
+  --radius-border: 10px;
+
+  /* Surcharge Bootstrap */
+  --bs-dark-rgb: 75, 89, 67;
+  --bs-info-rgb: 135, 167, 116;
+  --bs-secondary-rgb: 183, 206, 102;
+  --bs-primary-rgb: 200, 214, 162;
+  --bs-light-rgb: 220, 223, 218;
+  
+  --bs-danger-rgb: 126, 38, 0;
+  --bs-warning-rgb: 255, 150, 105;
+
+  --bs-success-rgb: 204, 235, 194;
+
+  --dark:       rgb(var(--bs-dark-rgb));
+  --info:       rgb(var(--bs-info-rgb));
+  --secondary:  rgb(var(--bs-secondary-rgb));
+  --primary:    rgb(var(--bs-primary-rgb));
+  --light:      rgb(var(--bs-light-rgb));
+  
+  --danger:     rgb(var(--bs-danger-rgb));
+  --warning:     rgb(var(--bs-warning-rgb));
+
+  --success:    rgb(var(--bs-success-rgb));
+}
+html,body,#root {
+  background-color: var(--light);
+}
+html,body,#root,.app,.s-100 {
+
+  height: 100%;
+  width: 100%;
+}
+.s-90 {
+
+  height: 90%;
+  width: 100%;
+}
+
+.fill-dark { fill : var(--dark)}
+.fill-info { fill : var(--info)}
+.fill-secondary { fill : var(--secondary)}
+.fill-primary { fill : var(--primary)}
+.fill-light { fill : var(--light)}
+
+.fill-danger { fill : var(--danger)}
+.fill-warning { fill : var(--warning)}
+
+.fill-success { fill : var(--success)}
+
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("../../../public/fonts/lt_leap/LT\ Leap\ Medium.ttf") format("opentype")
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: var(--dark);
+  font-family: "CustomFont" ;
+}
+
 .transition {
   position: absolute;
   top: 0;
@@ -7,4 +72,162 @@
   width: 100%;
   height: 100%;
   opacity: 0;
+}
+
+.width-limited-md {
+  max-width: 550px;
+}
+
+.width-limited-sm {
+  max-width: 350px;
+}
+
+.nav-shad {
+  box-shadow: 
+    inset 0 -0.5em 0.5em var(--primary) ,
+    inset 0 0.5em 0.5em var(--info) ;
+}
+
+
+.inner-shad-neg {
+  box-shadow: 
+  inset -0.5em -0.5em 0.5em var(--primary) ,
+  inset 0.5em 0.5em 0.5em var(--info) ;
+}
+
+.inner-shad-pos {
+  box-shadow: 
+  inset -0.5em -0.5em 0.5em var(--info) ,
+  inset 0.5em 0.5em 0.5em var(--light) ;
+}
+
+.btn {
+  box-shadow: 
+    0.5em 0.5em 0.5em var(--dark) , 
+    inset -0.5em -0.5em 0.5em var(--info) ,
+    inset 0.5em 0.5em 0.5em var(--light) ;
+  border: none;
+  cursor: pointer;
+  background-color: var(--secondary);
+  color: var(--dark);
+  transition: all 0.5s;
+}
+
+.btn.active:hover,
+.btn:hover {
+  background-color: var(--secondary);
+  color: var(--dark);
+  box-shadow: 
+    0.3em 0.3em 0.3em var(--dark) , 
+    inset -0.4em -0.2em 0.5em var(--info) ,
+    inset 0.4em 0.2em 0.5em var(--light) ;
+}
+
+.btn:disabled {
+  box-shadow: 
+    0.1em 0.1em 0.1em var(--dark) ;
+  background-color: var(--primary);
+  color: var(--danger);
+}
+
+.btn.active {
+  background-color: var(--primary);
+  color: var(--dark) !important;
+  box-shadow: 
+    0.1em 0.1em 0.1em var(--dark) , 
+    inset -0.2em -0.1em 0.3em var(--info) ,
+    inset 0.2em 0.1em 0.3em var(--light) ;
+}
+
+
+
+.btn-bad {
+  box-shadow: 
+    0.5em 0.5em 0.5em var(--dark) , 
+    inset -0.5em -0.5em 0.5em var(--danger) ,
+    inset 0.5em 0.5em 0.5em var(--light) ;
+  background-color: var(--warning);
+  color: var(--danger);
+}
+
+.btn-bad.active:hover,
+.btn-bad:hover {
+  background-color: var(--warning);
+  color: var(--danger);
+  box-shadow: 
+    0.3em 0.3em 0.3em var(--dark) , 
+    inset -0.4em -0.2em 0.5em var(--danger) ,
+    inset 0.4em 0.2em 0.5em var(--light) ;
+}
+
+
+.btn-big {
+  font-size: 4em;
+}
+
+
+.icon-large {
+  box-shadow: 
+    1em 1em 1em var(--dark) , 
+    inset -1.5em -1.5em 1.5em var(--info) ,
+    inset 1.5em 1.5em 1.5em var(--light) ;
+  transition: all 0.5s;
+}
+
+.icon-large-bad {
+  box-shadow: 
+    1em 1em 1em var(--dark) , 
+    inset -1.5em -1.5em 1.5em var(--danger) ,
+    inset 1.5em 1.5em 1.5em var(--light) ;
+  transition: all 0.5s;
+}
+
+
+
+.icon-item {
+  box-shadow: 
+    0.5em 0.5em 0.5em var(--dark) , 
+    inset -0.5em -0.5em 0.5em var(--info) ,
+    inset 0.5em 0.5em 0.5em var(--light) ;
+  transition: all 0.5s;
+}
+
+.icon-item-bad {
+  box-shadow: 
+    0.5em 0.5em 0.5em var(--dark) , 
+    inset -0.5em -0.5em 0.5em var(--danger) ,
+    inset 0.5em 0.5em 0.5em var(--light) !important ;
+  transition: all 0.5s;
+}
+
+.icon-item:hover {
+  /* transform: rotate3d(-1, 0.3, 0.2, 25deg); */
+  box-shadow: 
+  0.3em 0.3em 0.3em var(--dark) , 
+  inset -0.4em -0.2em 0.5em var(--info) ,
+  inset 0.4em 0.2em 0.5em var(--light) ;
+}
+
+.icon-item-bad:hover {
+  /* transform: rotate3d(-1, 0.3, 0.2, 25deg); */
+  box-shadow: 
+  0.3em 0.3em 0.3em var(--dark) , 
+  inset -0.4em -0.2em 0.5em var(--danger) ,
+  inset 0.4em 0.2em 0.5em var(--light) !important  ;
+}
+
+.colo-auto {
+  min-width: 280px;
+  width: auto;
+}
+
+.h-min{
+  min-height: 15em !important;
+}
+
+@media (min-width: 768px) { 
+
+  .colo-auto {
+    width: calc(100vw - 370px);
+  }
 }

@@ -1,6 +1,5 @@
 
 import { useLoaderData } from "react-router-dom";
-import { IconViewPage } from "../../Icon/Pages/IconViewPage";
 
 /**
  * Affichage des page à route variable

@@ -71,7 +71,7 @@ export function TransitionSlide(props:{
       } 
       setTransition({to : "", inTransition: true})
     }
-  },[transition])
+  },[transition,delay,inTransition,navigate,setTransition,to])
 
 
 

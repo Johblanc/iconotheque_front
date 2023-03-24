@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Form } from "react-router-dom";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { EntryString } from "../../Utilities/Components/EntryString";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
@@ -79,7 +80,7 @@ export function SignInBox(): JSX.Element {
   const isValid = signValid.name && signValid.password && signValid.verifpass && signValid.mail
 
   return (
-    <Form method="post" onSubmit={handleRequest}>
+    <Form method="post" onSubmit={handleRequest} className={APP_STYLE.USER.LOGIN.BOX}>
     <h2>... ou Enregistrez-vous !</h2>
       <EntryString
         name={"Pseudo"}
@@ -103,7 +104,7 @@ export function SignInBox(): JSX.Element {
         isPass
       />
       <EntryString
-        name={"Vérification du mot de passe"}
+        name={"Vérification du mdp"}
         defaultValue={signBody.verifpass}
         setValue={(value, valid) => handleLogBody("verifpass", value, valid)}
         validators={[
@@ -112,8 +113,8 @@ export function SignInBox(): JSX.Element {
         ]}
         isPass
       />
-      <div>{message}</div>
-      <button type="submit" disabled={!isValid} >Sign In</button>
+      <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
+      <button className="btn btn-dark w-100" type="submit" disabled={!isValid} >Sign In</button>
     </Form>
   );
 }

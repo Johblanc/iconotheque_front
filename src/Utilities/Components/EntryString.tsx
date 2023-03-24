@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 
 /**
  * Une entrée utilisateur textuelle en une ligne
@@ -19,7 +20,7 @@ export function EntryString(props: {
   defaultValue?: string;
 
   /** CallBack de réglage de la valeur */
-  setValue?: (value ?: string , valid ? : boolean) => void;
+  setValue?: (value?: string, valid?: boolean) => void;
 
   /** Conditions de validations */
   validators?: { validator: (value: string) => boolean; message?: string }[];
@@ -27,8 +28,7 @@ export function EntryString(props: {
   /** L'entry contient-elle un mot de passe */
   isPass?: boolean;
 }): JSX.Element {
-  const { name, defaultValue, setValue, validators, isPass } =
-    props;
+  const { name, defaultValue, setValue, validators, isPass } = props;
 
   /**
    * Contrôle de l'Entry avec les validateurs
@@ -52,42 +52,41 @@ export function EntryString(props: {
     const validate = (value: string) => {
       if (validators)
         for (const item of validators)
-          if (!item.validator(value)) 
-            return item.message || "Erreur";
+          if (!item.validator(value)) return item.message || "Erreur";
       return "";
     };
     const newMessage = validate(defaultValue || "");
-    
-    if (message !== newMessage){
-      setValue && setValue(defaultValue || "",newMessage === "");
+
+    if (message !== newMessage) {
+      setValue && setValue(defaultValue || "", newMessage === "");
       setMessage(newMessage);
     }
-
-  }, [validators, defaultValue]);
+  }, [validators, defaultValue,message,setValue]);
 
   /**
    * Losrque l'utilisateur change la valeur de l'Entry
    *
    * @param value la nouvelle valeur
    */
-  const handleVerificator = (value: string) => {
+  const handleVerificator = (value: string) => { 
     const newMessage = validate(value);
     setMessage(newMessage);
-    setValue && setValue(value,newMessage === "");
+    setValue && setValue(value, newMessage === "");
   };
 
-
   return (
-    <div className="">
-      <label className="">{name}</label>
+    <div className={APP_STYLE.APP.ENTRY.CADRE}>
+      <div className={APP_STYLE.APP.ENTRY.BOX}>
+        <label className={APP_STYLE.APP.ENTRY.LABEL}>{name}</label>
 
-      <input
-        type={isPass ? "password" : "text"}
-        className=""
-        onChange={(e) => handleVerificator(e.target.value)}
-        defaultValue={defaultValue}
-      />
-      <p>{message}</p>
+        <input
+          type={isPass ? "password" : "text"}
+          className={APP_STYLE.APP.ENTRY.INPUT}
+          onChange={(e) => handleVerificator(e.target.value)}
+          defaultValue={defaultValue}
+        />
+      </div>
+      <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Form } from "react-router-dom";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { EntryString } from "../../Utilities/Components/EntryString";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
@@ -70,7 +71,7 @@ export function LogInBox(): JSX.Element {
   const isValid = logValid.name && logValid.password
 
   return (
-    <Form method="post"  onSubmit={handleRequest} >
+    <Form method="post"  onSubmit={handleRequest} className={APP_STYLE.USER.LOGIN.BOX}>
       <h2>Connectez-vous ...</h2>
       <EntryString
         name={"Pseudo"}
@@ -85,8 +86,8 @@ export function LogInBox(): JSX.Element {
         validators={[EntryValidators.minLenght(4)]}
         isPass
       />
-      <div>{message}</div>
-      <button type="submit"  disabled={!isValid} >Log In</button>
+      <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
+      <button type="submit" className={APP_STYLE.APP.BTN_LARGE} disabled={!isValid} >Log In</button>
     </Form>
   );
 }

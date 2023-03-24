@@ -1,6 +1,8 @@
+
 import { useContext, useState } from "react";
 import { Form } from "react-router-dom";
 import { AppHeader } from "../../App/Components/AppHeader";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { EntryString } from "../../Utilities/Components/EntryString";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { TextArea } from "../../Utilities/Components/TextArea";
@@ -130,10 +132,51 @@ export function IconUpdatePage(props: { pathId: number }): JSX.Element {
   };
   const isValid = updateValid.name && updateValid.viewbox && updateValid.d;
 
+  /*
+  console.log(updateBody.d);
+  
+  const verifPath = (val : string) => {
+    try {
+      return parsePath(updateBody.d)
+    }
+    catch (err) {
+      return err
+    }
+  }
+
+  console.log(verifPath(updateBody.d));*/
   return (
-    <div>
+    <>
       <AppHeader />
-      <Form method="post" onSubmit={handleRequest}>
+      <Form method="post" onSubmit={handleRequest} className={APP_STYLE.PATH.VIEW.CADRE}>
+        <span className={APP_STYLE.PATH.VIEW.COLO}>
+          <div className={APP_STYLE.PATH.VIEW.BOX_A}>
+            <div className={APP_STYLE.PATH.VIEW.ICON_CENTER}>
+              <div className={`${APP_STYLE.PATH.VIEW.ICON_BG} ${path.status === "public" ?  "bg-secondary icon-large" : "bg-warning icon-large-bad"}`}>
+                <svg
+                  width="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
+                  viewBox={updateBody.viewbox}
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Path : {updateBody.name}</title>
+                  <path className={APP_STYLE.PATH.VIEW.DROWN} d={updateBody.d} />
+                </svg>
+              </div>
+            </div>
+            <em>Créée par {path.user.name}</em>
+          </div>
+          <div className={APP_STYLE.PATH.VIEW.NO_CADRE}>
+        
+            <button type="submit" disabled={!isValid} className={APP_STYLE.APP.BTN_GOOD}>
+              {(path.id !== -1) ? "Enregistrer les modification" : "Enregistrer le path"}
+            </button>
+
+            <LinkCustom  className={APP_STYLE.APP.BTN_BAD} name={(path.id !== -1) ? "Annuler les modification" : "Annuler le création"} to={(path.id !== -1) ? `/paths/view/${path.id}` : `/paths/publics`} />
+          </div>
+        </span>
+        <div className={APP_STYLE.PATH.VIEW.BOX_B}>
+          
         <h2>{(path.id !== -1) ? "Modication d'un path" : "Création d'un path"}</h2>
         <EntryString
           name={"Nom"}
@@ -152,29 +195,10 @@ export function IconUpdatePage(props: { pathId: number }): JSX.Element {
           defaultValue={updateBody.d}
           setValue={(value, valid) => handleUpdateBody("d", value, valid)}
           validators={[EntryValidators.minLenght(4)]}
-          isPass
         />
-        <pre>{message}</pre>
-        <svg
-          className=""
-          width="min(calc((1.375rem + 1.5vw)*6),15rem)"
-          viewBox={updateBody.viewbox}
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <title>Path : {updateBody.name}</title>
-          <path d={updateBody.d} />
-        </svg>
-        <div>
-          <button type="submit" disabled={!isValid}>
-            {(path.id !== -1) ? "Enregistrer les modification" : "Enregistrer le path"}
-          </button>
-        </div>
-
-        <div>
-          <LinkCustom name={(path.id !== -1) ? "Annuler les modification" : "Annuler le création"} to={`/paths/view/${path.id}`} />
+        <pre className={APP_STYLE.APP.MESSAGE_BAD} >{message}</pre>
         </div>
       </Form>
-    </div>
+    </>
   );
 }

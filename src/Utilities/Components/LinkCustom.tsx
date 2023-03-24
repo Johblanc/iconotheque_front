@@ -37,7 +37,7 @@ export function LinkCustom(props : {name :string, to : string | TTransition, cla
   return (
     
     <Link 
-    className={className} to={typeof to === "string" ? to : to.to} onClick={(e)=> handleNavigation(e)}>
+    className={`${className}`} to={typeof to === "string" ? to : to.to} onClick={(e)=> handleNavigation(e)}>
     {name}
   </Link>
   )

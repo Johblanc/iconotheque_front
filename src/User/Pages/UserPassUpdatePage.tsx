@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Form } from "react-router-dom";
 import { AppHeader } from "../../App/Components/AppHeader";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { EntryString } from "../../Utilities/Components/EntryString";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
@@ -67,35 +68,40 @@ export function UserPassUpdatePage(): JSX.Element {
   const isValid = signValid.password && signValid.verifpass
 
   return (
-    <div>
+    <div className={APP_STYLE.APP.PAGE}>
     <AppHeader />
-    <Form method="post" onSubmit={handleRequest}>
-      <h2>Modification du mot de passe</h2>
-      <EntryString
-        name={"Mot de passe"}
-        defaultValue={updateBody.password}
-        setValue={(value, valid) => handleUpdateBody("password", value, valid)}
-        validators={[EntryValidators.minLenght(4)]}
-        isPass
-      />
-      <EntryString
-        name={"Vérification du mot de passe"}
-        defaultValue={updateBody.verifpass}
-        setValue={(value, valid) => handleUpdateBody("verifpass", value, valid)}
-        validators={[
-          EntryValidators.minLenght(4),
-          EntryValidators.samePasswords(updateBody.password),
-        ]}
-        isPass
-      />
-      <div>{message}</div>
-      <button type="submit" disabled={!isValid} >
+    <Form method="post" onSubmit={handleRequest} className={APP_STYLE.USER.LOGIN.CADRE_A}>
+        <div className={APP_STYLE.USER.LOGIN.CADRE_B}>
+          <div className={APP_STYLE.USER.LOGIN.BOX}>
+            <h2>Modification du mot de passe</h2>
+            <EntryString
+              name={"Mot de passe"}
+              defaultValue={updateBody.password}
+              setValue={(value, valid) => handleUpdateBody("password", value, valid)}
+              validators={[EntryValidators.minLenght(4)]}
+              isPass
+            />
+            <EntryString
+              name={"Vérification du mot de passe"}
+              defaultValue={updateBody.verifpass}
+              setValue={(value, valid) => handleUpdateBody("verifpass", value, valid)}
+              validators={[
+                EntryValidators.minLenght(4),
+                EntryValidators.samePasswords(updateBody.password),
+              ]}
+              isPass
+            />
+            <div>{message}</div>
+          </div>
+          <div className={APP_STYLE.USER.LOGIN.BOX}>
+      <button className={APP_STYLE.APP.BTN_GOOD} type="submit" disabled={!isValid} >
         Enregistrer les modifications
       </button>
-      <div>
-        <LinkCustom name={"Annuler les modifications"} to={"/user/view"} />
+        <LinkCustom 
+              className={APP_STYLE.APP.BTN_BAD} name={"Annuler les modifications"} to={"/user/view"} />
       </div>
-    </Form>
     </div>
+    </Form>
+        </div>
   );
 }

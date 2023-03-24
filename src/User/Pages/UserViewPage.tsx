@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { AppNav } from "../../App/Components/AppNav";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { IconItem } from "../../Icon/Components/IconItem";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
@@ -27,49 +28,53 @@ export function UserViewPage(): JSX.Element {
     ...pathPrivate,
   ];
   return (
-    <div>
+    <>
       <AppHeader />
       <AppNav actif={"profil"} />
-      <h2>Profile</h2>
-      <div>
-        <p>Pseudo : {user.name}</p>
-        <p>Mail : {user.mail}</p>
-        {SumCreated !== 0 && (
-          <p>
-            Icônes créée{SumCreated > 1 && "s"} : {SumCreated}{" "}
-          </p>
-        )}
-        {SumPublished !== 0 && (
-          <p>
-            Icônes publiée{SumPublished > 1 && "s"} : {SumPublished}{" "}
-          </p>
-        )}
+      <div className={APP_STYLE.USER.VIEW.CADRE}>
+        <span className={APP_STYLE.USER.VIEW.COLO}>
+          <div className={APP_STYLE.USER.VIEW.BOX}>
+            <h2>Profile</h2>
+            <p>Pseudo : {user.name}</p>
+            <p>Mail : {user.mail}</p>
+            {SumCreated !== 0 && (
+              <p>
+                Icônes créée{SumCreated > 1 && "s"} : {SumCreated}{" "}
+              </p>
+            )}
+            {SumPublished !== 0 && (
+              <p>
+                Icônes publiée{SumPublished > 1 && "s"} : {SumPublished}{" "}
+              </p>
+            )}
+          </div>
+          <div className={APP_STYLE.USER.VIEW.BOX_SELECT}>
+            <LinkCustom name={"Modifier mon profile"} to={"/user/update"} className={APP_STYLE.USER.VIEW.BOX_BUTTON} />
+            <LinkCustom
+              name={"Modifier mon mot de passe"}
+              to={"/user/passupdate"}
+              className={APP_STYLE.USER.VIEW.BOX_BUTTON} 
+            />
+            <LinkCustom
+              name={"Déconnection"}
+              to={{
+                to: "/user/login",
+                message: `GoodBye ${user.name}`,
+                isBad: true,
+              }}
+              className={APP_STYLE.USER.VIEW.BOX_BUTTON_BAD} 
+            />
+          </div>
+        </span>
+        <div className={APP_STYLE.PATH.SELECT.CADRE}>
+          <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Mes Icônes</h3>
+          <div className={APP_STYLE.PATH.SELECT.BOX}>
+            {icons.map((item, i) => (
+              <IconItem path={item} key={i} />
+            ))}
+          </div>
+        </div>
       </div>
-      <div>
-        <LinkCustom name={"Modifier mon profile"} to={"/user/update"} />
-      </div>
-      <div>
-        <LinkCustom
-          name={"Modifier mon mot de passe"}
-          to={"/user/passupdate"}
-        />
-      </div>
-      <div>
-        <LinkCustom
-          name={"Déconnection"}
-          to={{
-            to: "/user/login",
-            message: `GoodBye ${user.name}`,
-            isBad: true,
-          }}
-        />
-      </div>
-      <h3>Mes Icônes</h3>
-      <div>
-        {icons.map((item, i) => (
-          <IconItem path={item} key={i} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }

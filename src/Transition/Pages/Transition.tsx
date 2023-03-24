@@ -27,7 +27,7 @@ export function Transition(props:{ children : JSX.Element | JSX.Element[] | null
       newItem.inTransition = true
       setTransition(newItem)
     }
-  },[transition])
+  },[transition,setTransition])
 
   const transitionElement = ()=> {
     if (inTransition){
@@ -48,8 +48,8 @@ export function Transition(props:{ children : JSX.Element | JSX.Element[] | null
     return <>{children}</>
   }
   return (
-    <div>
+    <>
       {transitionElement()}
-    </div>
+    </>
   )
 }

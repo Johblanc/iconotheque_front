@@ -13,7 +13,7 @@ import { Contextualizer } from "../Components/Contextualizer";
  */
 export function App(): JSX.Element {
   return (
-    <div className="App">
+    <div className="app bg-light">
       <Contextualizer>
         <RouterProvider router={ROUTER} />
       </Contextualizer>

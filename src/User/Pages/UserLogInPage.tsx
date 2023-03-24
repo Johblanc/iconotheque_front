@@ -1,27 +1,25 @@
-import { useContext } from "react";
+
 import { AppHeader } from "../../App/Components/AppHeader";
-import { UserContext } from "../../Utilities/Contexts/User.context";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { LogInBox } from "../Components/LogInBox";
 import { SignInBox } from "../Components/SignInBox";
 
-
-
 /**
  * Page de Log In et du Register
- * 
+ *
  * @version v1
  */
-export function UserLogInPage() : JSX.Element
-{
-  const {user} = useContext(UserContext)
+export function UserLogInPage(): JSX.Element {
 
   return (
-    <>
-      <AppHeader/>
-      <div>
-        <LogInBox/>
-        <SignInBox/>
+    <div className={APP_STYLE.APP.PAGE}>
+      <AppHeader />
+      <div className={APP_STYLE.USER.LOGIN.CADRE_A}>
+        <div className={APP_STYLE.USER.LOGIN.CADRE_B}>
+          <LogInBox />
+          <SignInBox />
+        </div>
       </div>
-    </>
-  )
+    </div>
+  );
 }
