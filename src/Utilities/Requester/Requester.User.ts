@@ -80,4 +80,46 @@ export class UserRequester extends RequesterBase {
     )
     return response
   }
+
+  /**
+   * Requête pour récupérer la liste des utilisateurs
+   * 
+   * @param token           le token de l'utilisateur
+   * 
+   * @returns               La liste des utilisateurs
+   * 
+   * @version v1
+   */
+  static async allUser( token : string) : Promise<TUser[]>
+  {
+    const response = await UserRequester.base<TUser[],string>(
+      "users",
+      RequestMethods.GET,
+      [],
+      undefined,
+      token
+    )
+    return response.data
+  }
+
+  /**
+   * Requête pour récupérer la liste des utilisateurs
+   * 
+   * @param token           le token de l'utilisateur
+   * 
+   * @returns               La liste des utilisateurs
+   * 
+   * @version v1
+   */
+  static async promote( id :number, token : string) : Promise<TResponse<TUser,string>>
+  {
+    const response = await UserRequester.base<TUser,string>(
+      "users/promote",
+      RequestMethods.GET,
+      [id],
+      undefined,
+      token
+    )
+    return response
+  }
 }

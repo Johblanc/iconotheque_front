@@ -11,6 +11,8 @@ import { UserPassUpdatePage } from "../../User/Pages/UserPassUpdatePage";
 import { ErrorPage } from "../Pages/ErrorPage";
 import { IconViewPage } from "../../Icon/Pages/IconViewPage";
 import { IconDeletePage } from "../../Icon/Pages/IconDeletePage";
+import { UserAdminPage } from "../../User/Pages/UserAdminPage";
+import { UserPromotePage } from "../../User/Pages/UserPromotePage";
 
 /**
  * Les routes du sites sans les transitions
@@ -36,12 +38,27 @@ export const PAGES_CONFIG = [
     element: <UserViewPage />,
   },
   {
+    path: "/user/admin",
+    element: <UserAdminPage />,
+  },
+  {
     path: "/user/update",
     element: <UserUpdatePage />,
   },
   {
     path: "/user/passupdate",
     element: <UserPassUpdatePage />,
+  },
+  {
+    path: "/user/promote/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <UserPromotePage userId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
   },
   {
     path: "/paths/publics",

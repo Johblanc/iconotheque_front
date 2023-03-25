@@ -27,6 +27,8 @@ export function UserViewPage(): JSX.Element {
     ...pathPublic.filter((item) => item.user.name === user.name),
     ...pathPrivate,
   ];
+
+  const isAdmin = user.access > 1 
   return (
     <>
       <AppHeader />
@@ -55,6 +57,8 @@ export function UserViewPage(): JSX.Element {
               to={"/user/passupdate"}
               className={APP_STYLE.USER.VIEW.BOX_BUTTON} 
             />
+            
+          {isAdmin && <LinkCustom name={"Administrer"} to={`/user/admin`} className={APP_STYLE.USER.VIEW.BOX_BUTTON} />}
             <LinkCustom
               name={"Déconnection"}
               to={{
