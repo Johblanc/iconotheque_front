@@ -152,7 +152,7 @@ export function IconUpdatePage(props: { pathId: number }): JSX.Element {
         <span className={APP_STYLE.PATH.VIEW.COLO}>
           <div className={APP_STYLE.PATH.VIEW.BOX_A}>
             <div className={APP_STYLE.PATH.VIEW.ICON_CENTER}>
-              <div className={`${APP_STYLE.PATH.VIEW.ICON_BG} ${path.status === "public" ?  "bg-secondary icon-large" : "bg-warning icon-large-bad"}`}>
+              <div className={`${APP_STYLE.PATH.VIEW.ICON_BG} ${path.status === "public" ?  "bg-primary icon-large" : "bg-warning icon-large-bad"}`}>
                 <svg
                   width="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
                   viewBox={updateBody.viewbox}

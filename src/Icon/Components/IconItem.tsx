@@ -17,7 +17,9 @@ export function IconItem(props: { path: TPath }) {
   const {setTransition} = useContext(TransitionContext)
   
   return (
-    <div className={`${APP_STYLE.PATH.SELECT.ITEM} ${path.status === "public" ?  "bg-secondary" : "bg-warning icon-item-bad"}`}>
+    <div 
+      className={`${APP_STYLE.PATH.SELECT.ITEM} ${path.status === "public" ?  "bg-primary" : "bg-warning icon-item-bad"}`}
+    >
     <svg
       onClick={()=> setTransition({to : `/paths/view/${path.id}`})}
       width="min(calc((1.375rem + 1.5vw)*1.5),3.75rem)"

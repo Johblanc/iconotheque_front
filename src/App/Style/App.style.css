@@ -1,56 +1,188 @@
-
-
-:root{
+:root {
+  --base-red: 50;
+  --base-green: 150;
+  --base-blue: 50;
 
   --radius-border: 10px;
 
-  /* Surcharge Bootstrap */
-  --bs-dark-rgb: 75, 89, 67;
-  --bs-info-rgb: 135, 167, 116;
-  --bs-secondary-rgb: 183, 206, 102;
-  --bs-primary-rgb: 200, 214, 162;
-  --bs-light-rgb: 220, 223, 218;
+
+  --shad-transparency : 1 ;
+
+  --light-green : 200, 230, 190;
+  --dark-green : 0, 120, 40;
+
+  --light-red : 255, 150, 105;
+  --dark-red : 126, 38, 0;
+
   
-  --bs-danger-rgb: 126, 38, 0;
-  --bs-warning-rgb: 255, 150, 105;
-
-  --bs-success-rgb: 204, 235, 194;
-
-  --dark:       rgb(var(--bs-dark-rgb));
-  --info:       rgb(var(--bs-info-rgb));
-  --secondary:  rgb(var(--bs-secondary-rgb));
-  --primary:    rgb(var(--bs-primary-rgb));
-  --light:      rgb(var(--bs-light-rgb));
-  
-  --danger:     rgb(var(--bs-danger-rgb));
-  --warning:     rgb(var(--bs-warning-rgb));
-
-  --success:    rgb(var(--bs-success-rgb));
 }
-html,body,#root {
+
+* {
+  transition: all 0.5s;
+}
+
+
+.light {
+
+  /* Pour les ombrages */
+  --darker: rgba(0, 0, 0, var(--shad-transparency));
+  --lighter: rgba(255, 255, 255, var(--shad-transparency));
+
+  /* Surcharge Bootstrap */
+  --bs-light-rgb:
+    calc(var(--base-red) + calc(255 - var(--base-red))*0.6),
+    calc(var(--base-green) + calc(255 - var(--base-green))*0.6),
+    calc(var(--base-blue) + calc(255 - var(--base-blue))*0.6);
+
+  --bs-primary-rgb:
+    calc(var(--base-red) + calc(255 - var(--base-red))*0.4),
+    calc(var(--base-green) + calc(255 - var(--base-green))*0.4),
+    calc(var(--base-blue) + calc(255 - var(--base-blue))*0.4);
+
+  --bs-secondary-rgb:
+    var(--base-red),
+    var(--base-green),
+    var(--base-blue);
+
+  --bs-info-rgb:
+    calc(var(--base-red)*0.6),
+    calc(var(--base-green)*0.6),
+    calc(var(--base-blue)*0.6);
+
+  --bs-dark-rgb:
+    calc(var(--base-red)*0.2),
+    calc(var(--base-green)*0.2),
+    calc(var(--base-blue)*0.2);
+
+
+  --bs-warning-rgb: var(--light-red);
+  --bs-danger-rgb: var(--dark-red);
+
+  --bs-success-rgb: var(--dark-green);
+
+  --dark: rgb(var(--bs-dark-rgb));
+  --info: rgb(var(--bs-info-rgb));
+  --secondary: rgb(var(--bs-secondary-rgb));
+  --primary: rgb(var(--bs-primary-rgb));
+  --light: rgb(var(--bs-light-rgb));
+
+  --danger: rgb(var(--bs-danger-rgb));
+  --warning: rgb(var(--bs-warning-rgb));
+
+  --success: rgb(var(--bs-success-rgb));
+
+  background-color: var(--primary) !important;
+}
+
+
+
+.dark {
+
+  /* Pour les ombrages */
+  --darker: rgba(0, 0, 0, var(--shad-transparency));
+  --lighter: rgba(255, 255, 255, var(--shad-transparency));
+
+  /* Surcharge Bootstrap */
+  --bs-light-rgb:
+    calc(var(--base-red) * 0.2),
+    calc(var(--base-green) * 0.2),
+    calc(var(--base-blue) * 0.2);
+
+  --bs-primary-rgb:
+    calc(var(--base-red)*0.6),
+    calc(var(--base-green)*0.6),
+    calc(var(--base-blue)*0.6);
+
+  --bs-secondary-rgb:
+    var(--base-red),
+    var(--base-green),
+    var(--base-blue);
+
+  --bs-info-rgb:
+    calc(255 - var(--base-red)*0.6),
+    calc(255 - var(--base-green)*0.6),
+    calc(255 - var(--base-blue)*0.6);
+
+  --bs-dark-rgb:
+    calc(255 - var(--base-red)*0.2),
+    calc(255 - var(--base-green)*0.2),
+    calc(255 - var(--base-blue)*0.2);
+
+
+  --bs-warning-rgb: var(--dark-red);
+  --bs-danger-rgb: var(--light-red);
+
+  --bs-success-rgb: var(--light-green);
+
+  --dark: rgb(var(--bs-dark-rgb));
+  --info: rgb(var(--bs-info-rgb));
+  --secondary: rgb(var(--bs-secondary-rgb));
+  --primary: rgb(var(--bs-primary-rgb));
+  --light: rgb(var(--bs-light-rgb));
+
+  --danger: rgb(var(--bs-danger-rgb));
+  --warning: rgb(var(--bs-warning-rgb));
+
+  --success: rgb(var(--bs-success-rgb));
+
+  background-color: var(--light) !important;
+}
+
+
+
+html,
+body,
+#root {
   background-color: var(--light);
 }
-html,body,#root,.app,.s-100 {
+
+html,
+body,
+#root,
+.app,
+.s-100 {
 
   height: 100%;
   width: 100%;
 }
+
 .s-90 {
 
   height: 90%;
   width: 100%;
 }
 
-.fill-dark { fill : var(--dark)}
-.fill-info { fill : var(--info)}
-.fill-secondary { fill : var(--secondary)}
-.fill-primary { fill : var(--primary)}
-.fill-light { fill : var(--light)}
+.fill-dark {
+  fill: var(--dark)
+}
 
-.fill-danger { fill : var(--danger)}
-.fill-warning { fill : var(--warning)}
+.fill-info {
+  fill: var(--info)
+}
 
-.fill-success { fill : var(--success)}
+.fill-secondary {
+  fill: var(--secondary)
+}
+
+.fill-primary {
+  fill: var(--primary)
+}
+
+.fill-light {
+  fill: var(--light)
+}
+
+.fill-danger {
+  fill: var(--danger)
+}
+
+.fill-warning {
+  fill: var(--warning)
+}
+
+.fill-success {
+  fill: var(--success)
+}
 
 
 @font-face {
@@ -62,7 +194,7 @@ html,body,#root,.app,.s-100 {
   margin: 0;
   padding: 0;
   color: var(--dark);
-  font-family: "CustomFont" ;
+  font-family: "CustomFont";
 }
 
 .transition {
@@ -83,29 +215,29 @@ html,body,#root,.app,.s-100 {
 }
 
 .nav-shad {
-  box-shadow: 
-    inset 0 -0.5em 0.5em var(--primary) ,
-    inset 0 0.5em 0.5em var(--info) ;
+  box-shadow:
+    inset 0 -0.5em 0.5em var(--lighter),
+    inset 0 0.5em 0.5em var(--darker);
 }
 
 
 .inner-shad-neg {
-  box-shadow: 
-  inset -0.5em -0.5em 0.5em var(--primary) ,
-  inset 0.5em 0.5em 0.5em var(--info) ;
+  box-shadow:
+    inset -0.5em -0.5em 0.5em var(--lighter),
+    inset 0.5em 0.5em 0.5em var(--darker);
 }
 
 .inner-shad-pos {
-  box-shadow: 
-  inset -0.5em -0.5em 0.5em var(--info) ,
-  inset 0.5em 0.5em 0.5em var(--light) ;
+  box-shadow:
+    inset -0.5em -0.5em 0.5em var(--darker),
+    inset 0.5em 0.5em 0.5em var(--lighter);
 }
 
 .btn {
-  box-shadow: 
-    0.5em 0.5em 0.5em var(--dark) , 
-    inset -0.5em -0.5em 0.5em var(--info) ,
-    inset 0.5em 0.5em 0.5em var(--light) ;
+  box-shadow:
+    0.5em 0.5em 0.5em var(--darker),
+    inset -0.5em -0.5em 0.5em var(--darker),
+    inset 0.5em 0.5em 0.5em var(--lighter);
   border: none;
   cursor: pointer;
   background-color: var(--secondary);
@@ -117,15 +249,15 @@ html,body,#root,.app,.s-100 {
 .btn:hover {
   background-color: var(--secondary);
   color: var(--dark);
-  box-shadow: 
-    0.3em 0.3em 0.3em var(--dark) , 
-    inset -0.4em -0.2em 0.5em var(--info) ,
-    inset 0.4em 0.2em 0.5em var(--light) ;
+  box-shadow:
+    0.3em 0.3em 0.3em var(--darker),
+    inset -0.4em -0.2em 0.5em var(--darker),
+    inset 0.4em 0.2em 0.5em var(--lighter);
 }
 
 .btn:disabled {
-  box-shadow: 
-    0.1em 0.1em 0.1em var(--dark) ;
+  box-shadow:
+    0.1em 0.1em 0.1em var(--darker);
   background-color: var(--primary);
   color: var(--danger);
 }
@@ -133,19 +265,19 @@ html,body,#root,.app,.s-100 {
 .btn.active {
   background-color: var(--primary);
   color: var(--dark) !important;
-  box-shadow: 
-    0.1em 0.1em 0.1em var(--dark) , 
-    inset -0.2em -0.1em 0.3em var(--info) ,
-    inset 0.2em 0.1em 0.3em var(--light) ;
+  box-shadow:
+    0.1em 0.1em 0.1em var(--darker),
+    inset -0.2em -0.1em 0.3em var(--darker),
+    inset 0.2em 0.1em 0.3em var(--lighter);
 }
 
 
 
 .btn-bad {
-  box-shadow: 
-    0.5em 0.5em 0.5em var(--dark) , 
-    inset -0.5em -0.5em 0.5em var(--danger) ,
-    inset 0.5em 0.5em 0.5em var(--light) ;
+  box-shadow:
+    0.5em 0.5em 0.5em var(--darker),
+    inset -0.5em -0.5em 0.5em var(--darker),
+    inset 0.5em 0.5em 0.5em var(--lighter);
   background-color: var(--warning);
   color: var(--danger);
 }
@@ -154,10 +286,10 @@ html,body,#root,.app,.s-100 {
 .btn-bad:hover {
   background-color: var(--warning);
   color: var(--danger);
-  box-shadow: 
-    0.3em 0.3em 0.3em var(--dark) , 
-    inset -0.4em -0.2em 0.5em var(--danger) ,
-    inset 0.4em 0.2em 0.5em var(--light) ;
+  box-shadow:
+    0.3em 0.3em 0.3em var(--darker),
+    inset -0.4em -0.2em 0.5em var(--darker),
+    inset 0.4em 0.2em 0.5em var(--lighter);
 }
 
 
@@ -167,53 +299,53 @@ html,body,#root,.app,.s-100 {
 
 
 .icon-large {
-  box-shadow: 
-    1em 1em 1em var(--dark) , 
-    inset -1.5em -1.5em 1.5em var(--info) ,
-    inset 1.5em 1.5em 1.5em var(--light) ;
+  box-shadow:
+    1em 1em 1em var(--darker),
+    inset -1.5em -1.5em 1.5em var(--darker),
+    inset 1.5em 1.5em 1.5em var(--lighter);
   transition: all 0.5s;
 }
 
 .icon-large-bad {
-  box-shadow: 
-    1em 1em 1em var(--dark) , 
-    inset -1.5em -1.5em 1.5em var(--danger) ,
-    inset 1.5em 1.5em 1.5em var(--light) ;
+  box-shadow:
+    1em 1em 1em var(--darker),
+    inset -1.5em -1.5em 1.5em var(--darker),
+    inset 1.5em 1.5em 1.5em var(--lighter);
   transition: all 0.5s;
 }
 
 
 
 .icon-item {
-  box-shadow: 
-    0.5em 0.5em 0.5em var(--dark) , 
-    inset -0.5em -0.5em 0.5em var(--info) ,
-    inset 0.5em 0.5em 0.5em var(--light) ;
+  box-shadow:
+    0.5em 0.5em 0.5em var(--darker),
+    inset -0.5em -0.5em 0.5em var(--darker),
+    inset 0.5em 0.5em 0.5em var(--lighter);
   transition: all 0.5s;
 }
 
 .icon-item-bad {
-  box-shadow: 
-    0.5em 0.5em 0.5em var(--dark) , 
-    inset -0.5em -0.5em 0.5em var(--danger) ,
-    inset 0.5em 0.5em 0.5em var(--light) !important ;
+  box-shadow:
+    0.5em 0.5em 0.5em var(--darker),
+    inset -0.5em -0.5em 0.5em var(--darker),
+    inset 0.5em 0.5em 0.5em var(--lighter) !important;
   transition: all 0.5s;
 }
 
 .icon-item:hover {
-  /* transform: rotate3d(-1, 0.3, 0.2, 25deg); */
-  box-shadow: 
-  0.3em 0.3em 0.3em var(--dark) , 
-  inset -0.4em -0.2em 0.5em var(--info) ,
-  inset 0.4em 0.2em 0.5em var(--light) ;
+  transform: rotate3d(-1, 0.3, 0.2, 25deg); 
+  box-shadow:
+    0.3em 0.3em 0.3em var(--darker),
+    inset -0.4em -0.2em 0.5em var(--darker),
+    inset 0.4em 0.2em 0.5em var(--lighter);
 }
 
 .icon-item-bad:hover {
-  /* transform: rotate3d(-1, 0.3, 0.2, 25deg); */
-  box-shadow: 
-  0.3em 0.3em 0.3em var(--dark) , 
-  inset -0.4em -0.2em 0.5em var(--danger) ,
-  inset 0.4em 0.2em 0.5em var(--light) !important  ;
+  transform: rotate3d(-1, 0.3, 0.2, 25deg); 
+  box-shadow:
+    0.3em 0.3em 0.3em var(--darker),
+    inset -0.4em -0.2em 0.5em var(--darker),
+    inset 0.4em 0.2em 0.5em var(--lighter) !important;
 }
 
 .colo-auto {
@@ -221,11 +353,11 @@ html,body,#root,.app,.s-100 {
   width: auto;
 }
 
-.h-min{
+.h-min {
   min-height: 15em !important;
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
 
   .colo-auto {
     width: calc(100vw - 370px);

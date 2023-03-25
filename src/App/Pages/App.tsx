@@ -3,6 +3,7 @@ import "../Style/App.style.css";
 import { RouterProvider } from "react-router-dom";
 import { ROUTER } from "../Routes/router";
 import { Contextualizer } from "../Components/Contextualizer";
+import { ChangeEvent, CSSProperties, useState } from "react";
 
 /**
  * Iconothèque v1 :
@@ -12,11 +13,12 @@ import { Contextualizer } from "../Components/Contextualizer";
  * @version v1
  */
 export function App(): JSX.Element {
+
+  
+
   return (
-    <div className="app bg-light">
       <Contextualizer>
         <RouterProvider router={ROUTER} />
       </Contextualizer>
-    </div>
   );
 }
