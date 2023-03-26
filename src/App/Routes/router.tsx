@@ -1,6 +1,6 @@
 import { UserLogInPage } from "../../User/Pages/UserLogInPage";
 
-import { createBrowserRouter, LoaderFunctionArgs, redirect } from "react-router-dom";
+import { createBrowserRouter, LoaderFunctionArgs, redirect, RouteObject } from "react-router-dom";
 import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
 import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
@@ -14,16 +14,22 @@ import { IconDeletePage } from "../../Icon/Pages/IconDeletePage";
 import { UserAdminPage } from "../../User/Pages/UserAdminPage";
 import { UserPromotePage } from "../../User/Pages/UserPromotePage";
 
+export type TPAGE_CONFIG = {
+  path: string ,
+  element: JSX.Element ,
+  loader?: (...args : any[]) => any ,
+  errorElement ? : JSX.Element 
+}
+
 /**
  * Les routes du sites sans les transitions
  *
  * @version v1
  * */
-export const PAGES_CONFIG = [
+export const PAGES_CONFIG : TPAGE_CONFIG[] = [
   {
     path: "/",
     element: <UserLogInPage />,
-    errorElement: <ErrorPage />,
     loader: () => {
       return redirect("/user/login");
     },
@@ -31,7 +37,6 @@ export const PAGES_CONFIG = [
   {
     path: "/user/login",
     element: <UserLogInPage />,
-    action: () => null,
   },
   {
     path: "/user/view",
@@ -117,9 +122,8 @@ export const ROUTER_CONFIG = PAGES_CONFIG.map((item) => {
   if (newItem.element){
     newItem.element = <Transition>{newItem.element}</Transition>;
   }
-  if (newItem.errorElement){
-    newItem.errorElement = <Transition>{newItem.errorElement}</Transition>;
-  }
+  newItem.errorElement = <Transition><ErrorPage /></Transition> ;
+  
   return newItem;
 });
 
