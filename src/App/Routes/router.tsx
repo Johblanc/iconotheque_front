@@ -1,6 +1,6 @@
 import { UserLogInPage } from "../../User/Pages/UserLogInPage";
 
-import { createBrowserRouter, LoaderFunctionArgs, redirect, RouteObject } from "react-router-dom";
+import { createBrowserRouter, LoaderFunctionArgs, redirect } from "react-router-dom";
 import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
 import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
@@ -14,6 +14,12 @@ import { IconDeletePage } from "../../Icon/Pages/IconDeletePage";
 import { UserAdminPage } from "../../User/Pages/UserAdminPage";
 import { UserPromotePage } from "../../User/Pages/UserPromotePage";
 
+
+/**
+ * Elemement de routage simplifié
+ *
+ * @version v1
+ * */
 export type TPAGE_CONFIG = {
   path: string ,
   element: JSX.Element ,

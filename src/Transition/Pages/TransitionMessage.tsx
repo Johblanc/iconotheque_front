@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { PAGES_CONFIG } from "../../App/Routes/router";
 import { useNavigate } from "react-router-dom";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 
 /**
  * Page de transition avec un message
@@ -74,7 +75,7 @@ export function TransitionMessage(props: {
   return (
     <div>
       <div
-        className="transition"
+        className={APP_STYLE.TRANSITION.PAGE}
         style={{
           opacity: nextOpacity,
           transition: `opacity ${delay / 1000}s`,
@@ -83,7 +84,7 @@ export function TransitionMessage(props: {
         {nextPage}
       </div>
       <div
-        className="transition"
+        className={APP_STYLE.TRANSITION.PAGE}
         style={{
           opacity: 1 - nextOpacity - transitionOpacity,
           transition: `opacity ${delay / 1000}s`,
@@ -92,7 +93,7 @@ export function TransitionMessage(props: {
         {children}
       </div>
       <div
-        className={`transition ${isBad ? "bg-warning" : "bg-success"} d-flex flex-wrap align-items-center justify-content-evenly`}
+        className={`${APP_STYLE.TRANSITION.CADRE} ${isBad ? "bg-warning" : "bg-success"}`}
         style={{
           opacity: transitionOpacity,
           transition: `opacity ${delay / 1000}s`,

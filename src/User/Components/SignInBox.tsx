@@ -114,7 +114,7 @@ export function SignInBox(): JSX.Element {
         isPass
       />
       <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
-      <button className="btn btn-dark w-100" type="submit" disabled={!isValid} >Sign In</button>
+      <button className={APP_STYLE.USER.LOGIN.SUBMIT} type="submit" disabled={!isValid} >Sign In</button>
     </Form>
   );
 }

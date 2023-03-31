@@ -1,149 +1,122 @@
-export enum BS_COMBO {
-  FLEX_WRAP = "d-flex flex-wrap",
-  FLEX_CENTER = "d-flex flex-wrap align-items-center justify-content-evenly",
-  FLEX_CENTER_H = "d-flex justify-content-center",
-  S_100 = "s-100",
-  S_90 = "s-90",
-  W_LIMIT_SM = "width-limited-sm",
-  W_LIMIT_MD = "width-limited-md",
-  MP = "m-2 p-2",
-  MPV = "mt-2 mb-2 pt-2 pb-2",
-  ROUNDED = "rounded-4",
-  BTN_LARGE = "btn w-100",
-  MESSAGE_BAD = "text-danger",
-  NAV_CADRE = "navbar navbar-expand-md container-fluid",
-  NAV_TITLE = "navbar-brand",
-  NAV_BUTTON = "navbar-toggler",
-  NAV_ICON = "navbar-toggler-icon",
-  NAV_BOX_A = "collapse navbar-collapse",
-  NAV_BOX_B = "navbar-nav",
-  NAV_ITEM = "nav-link",
-  BORDER = "border border-2 border-info",
-  INNER_SHAD_POS = "m-3 p-3 rounded-4 bg-primary inner-shad-pos",
-  INNER_SHAD_NEG = "m-3 p-3 rounded-4 bg-secondary inner-shad-neg"
-}
-export const APP_STYLE = {
-  APP: {
-    PAGE: BS_COMBO.S_100,
-    MESSAGE_BAD: BS_COMBO.MESSAGE_BAD,
-    BTN_LARGE: `${BS_COMBO.BTN_LARGE}`,
-    BTN_GOOD: `${BS_COMBO.BTN_LARGE} ${BS_COMBO.MPV}`,
-    BTN_BAD: `${BS_COMBO.BTN_LARGE} ${BS_COMBO.MPV} btn-bad`,
-    ENTRY: {
-      CADRE: BS_COMBO.MPV,
-      BOX: `input-group rounded`,
-      TA_BOX: `rounded`,
-      LABEL: "input-group-text bg-secondary text-dark inner-shad-pos",
-      INPUT: "form-control bg-light text-dark",
-      TA : "form-control bg-light text-dark h-min"
-    },
-    NAV: {
-      CADRE:  `${BS_COMBO.NAV_CADRE} bg-secondary nav-shad`,
-      TITLE:  `${BS_COMBO.NAV_TITLE} ${BS_COMBO.MP} text-dark`,
-      BUTTON: `${BS_COMBO.NAV_BUTTON}`,
-      ICON:   `${BS_COMBO.NAV_ICON}`,
-      BOX_A:  `${BS_COMBO.NAV_BOX_A}`,
-      BOX_B:  `${BS_COMBO.NAV_BOX_B}`,
-      ITEM:   `${BS_COMBO.NAV_ITEM} ${BS_COMBO.MP} btn`,
-    },
-  },
-  USER: {
-    LOGIN: {
-      CADRE_A: `${BS_COMBO.FLEX_CENTER} ${BS_COMBO.S_90}`,
-      CADRE_B: `${BS_COMBO.FLEX_CENTER} ${BS_COMBO.INNER_SHAD_NEG}`,
-      BOX:     `${BS_COMBO.W_LIMIT_MD} ${BS_COMBO.INNER_SHAD_POS}`,
-    },
-    VIEW : {
-      CADRE: `d-sm-inline-flex`,
-      COLO : `${BS_COMBO.W_LIMIT_SM}`,
-      BOX:   `${BS_COMBO.INNER_SHAD_NEG}`,
-      BOX_SELECT:   `${BS_COMBO.FLEX_WRAP}`,
-      BOX_BUTTON:   `${BS_COMBO.MP} ${BS_COMBO.BTN_LARGE}`,
-      BOX_BUTTON_BAD:   `${BS_COMBO.MP} ${BS_COMBO.BTN_LARGE} btn-bad`,
-    }
-  },
-  PATH: {
-    SELECT : {
-      CADRE: `${BS_COMBO.INNER_SHAD_NEG}`,
-      TITLE: `${BS_COMBO.MP}`,
-      BOX:   `${BS_COMBO.FLEX_WRAP}`,
-      ITEM:  `icon-item m-2 p-3 rounded-circle`,
-      DROWN: `fill-dark`
-    },
-    VIEW : {
-      CADRE: `d-md-inline-flex`,
-      COLO : `${BS_COMBO.W_LIMIT_SM}`,
-      BOX_A:   `${BS_COMBO.INNER_SHAD_NEG}`,
-      BOX_B:   `${BS_COMBO.INNER_SHAD_NEG} colo-auto`,
-      NO_CADRE: `${BS_COMBO.MP}`,
-      ICON_CENTER : `${BS_COMBO.FLEX_CENTER_H}`,
-      ICON_BG : `rounded-circle p-5 m-2`,
-      P :  `${BS_COMBO.MP} rounded bg-primary`,
-      DROWN: `fill-dark`
-    }
-  }
+import { BS, TBsColor } from "./easyBootstrap";
+
+/** Mes Class perso pour CSS */
+export const PERSO = {
+  S_100: `s-100`,
+  S_90: `s-90`,
+  W_LIMIT_SM: `width-limited-sm`,
+  W_LIMIT_MD: `width-limited-md`,
+  H_MIN: `h-min`,
+  COLO: `colo-auto`,
+
+  NAV_SHAD : "nav-shad",
+  IN_SHAD_P: `inner-shad-pos`,
+  IN_SHAD_N: `inner-shad-neg`,
+
+  BTN_BAD : "btn-bad",
+  BTN_BIG : "btn-big",
+
+  FILL : (color : TBsColor) => `fill-${color}`,
+  TRANSITION : `transition`,
+
+  ICON_LARGE : "icon-large" ,
+  ICON_LARGE_BAD : "icon-large-bad" ,
+  ICON_ITEM : "icon-item" ,
+  ICON_ITEM_BAD : "icon-item-bad" ,
 };
 
-/*
-export const APP_STYLE2 = {
+/** Combina */
+export const BS_COMBO = {
+  BTN_LARGE: `${BS.button()} w-100`,
+  
+  NAV_CADRE: `navbar navbar-expand-md container-fluid`,
+  NAV_TITLE: `navbar-brand`, // titre
+  NAV_BUTTON: `navbar-toggler`, // Icon
+  NAV_ICON: `navbar-toggler-icon`, // Icon-dessin
+  NAV_BOX_A: `collapse navbar-collapse`, // 
+  NAV_BOX_B: `navbar-nav`,
+
+  INNER_SHAD_POS: `${BS.spacing( "both", 3 )} ${BS.round( 4 )} ${BS.background( "primary" )} ${PERSO.IN_SHAD_P}`,
+  INNER_SHAD_NEG: `${BS.spacing( "both", 3 )} ${BS.round( 4 )} ${BS.background( "secondary" )} ${PERSO.IN_SHAD_N}`,
+};
+export const APP_STYLE = {
   APP: {
-    PAGE: BS_COMBO.S_100,
-    MESSAGE_BAD: BS_COMBO.MESSAGE_BAD,
-    BTN_LARGE: `${BS_COMBO.BTN_LARGE} ${BS_COMBO.BORDER}`,
-    BTN_GOOD: `${BS_COMBO.BTN_LARGE} ${BS_COMBO.BORDER} ${BS_COMBO.MPV}`,
-    BTN_BAD: `${BS_COMBO.BTN_LARGE} ${BS_COMBO.BORDER} ${BS_COMBO.MPV} btn-bad`,
+    PAGE: PERSO.S_100,
+    MESSAGE_BAD: BS.color('danger') ,
+    BTN_LARGE: `${BS_COMBO.BTN_LARGE}`,
+    BTN_GOOD: `${BS_COMBO.BTN_LARGE} ${BS.spacing("both", 2, "y")}`,
+    BTN_BAD: `${BS_COMBO.BTN_LARGE} ${BS.spacing("both", 2, "y")} ${PERSO.BTN_BAD}`,
     ENTRY: {
-      CADRE: BS_COMBO.MPV,
-      BOX: `input-group rounded ${BS_COMBO.BORDER}`,
-      TA_BOX: `rounded ${BS_COMBO.BORDER}`,
-      LABEL: "input-group-text bg-secondary text-dark inner-shad-pos",
-      INPUT: "form-control bg-light text-dark",
-      TA : "form-control bg-light text-dark h-min"
+      CADRE: BS.spacing("both", 2, "y"),
+      BOX: `input-group ${BS.round()}`,
+      TA_BOX: `${BS.round()}`,
+      LABEL: `w-100 ${BS.spacing( "p", 2 )} ${BS.background( "secondary" )} ${BS.color( "dark" )} ${PERSO.IN_SHAD_P} ${BS.round(1,"top")}`,
+      INPUT: `w-100 ${BS.spacing( "p", 2 )} ${BS.background( "light" )} ${BS.color( "dark" )}  ${BS.round(1,"bottom")}`,
+      TA: `w-100 ${BS.spacing( "p", 2 )}  ${BS.background( "light" )} ${BS.color( "dark" )} ${BS.round(1,"bottom")} ${PERSO.H_MIN}`,
     },
     NAV: {
-      CADRE:  `${BS_COMBO.NAV_CADRE} bg-secondary nav-shad`,
-      TITLE:  `${BS_COMBO.NAV_TITLE} ${BS_COMBO.MP} text-dark`,
+      CADRE: `${BS_COMBO.NAV_CADRE} ${BS.background( "secondary" )} ${PERSO.NAV_SHAD}`,
+      TITLE: `${BS_COMBO.NAV_TITLE} ${BS.spacing("both", 2)} ${BS.color( "dark" )}`,
       BUTTON: `${BS_COMBO.NAV_BUTTON}`,
-      ICON:   `${BS_COMBO.NAV_ICON}`,
-      BOX_A:  `${BS_COMBO.NAV_BOX_A}`,
-      BOX_B:  `${BS_COMBO.NAV_BOX_B}`,
-      ITEM:   `${BS_COMBO.NAV_ITEM} ${BS_COMBO.BORDER} ${BS_COMBO.MP} btn`,
+      ICON: `${BS_COMBO.NAV_ICON}`,
+      BOX_A: `${BS_COMBO.NAV_BOX_A}`,
+      BOX_B: `${BS_COMBO.NAV_BOX_B}`,
+      ITEM: `${BS.spacing("both", 2)} ${BS.button()}`,
     },
   },
   USER: {
     LOGIN: {
-      CADRE_A: `${BS_COMBO.FLEX_CENTER} ${BS_COMBO.S_90}`,
-      CADRE_B: `${BS_COMBO.FLEX_CENTER} ${BS_COMBO.INNER_SHAD_NEG}`,
-      BOX:     `${BS_COMBO.W_LIMIT_MD} ${BS_COMBO.INNER_SHAD_POS}`,
+      CADRE_A: `${BS.FLEX.CONTAINER.flex({justify : {name : "evenly"}, align :{name : "center"},wrap : {}})} ${PERSO.S_90}`,
+      CADRE_B: `${BS.FLEX.CONTAINER.flex({justify : {name : "evenly"}, align :{name : "center"},wrap : {}})} ${BS_COMBO.INNER_SHAD_NEG}`,
+      BOX: `${PERSO.W_LIMIT_MD} ${BS_COMBO.INNER_SHAD_POS}`,
+      SUBMIT: `${BS.button("dark")} w-100`,
+      TITLE : BS.spacing("both" , 2),
+      LINK_BOX : `${BS.FLEX.CONTAINER.flex()} ${BS.spacing("m", 3)}` ,
+      LINK : BS.button() ,
+      NAME : BS.spacing("both" , 1),
+
     },
-    VIEW : {
-      CADRE: `d-sm-inline-flex`,
-      COLO : `${BS_COMBO.W_LIMIT_SM}`,
-      BOX:   `${BS_COMBO.INNER_SHAD_NEG}`,
-      BOX_SELECT:   `${BS_COMBO.FLEX_WRAP}`,
-      BOX_BUTTON:   `${BS_COMBO.BORDER} ${BS_COMBO.MP} ${BS_COMBO.BTN_LARGE}`,
-      BOX_BUTTON_BAD:   `${BS_COMBO.BORDER} ${BS_COMBO.MP} ${BS_COMBO.BTN_LARGE} btn-bad`,
-    }
+    VIEW: {
+      CADRE: BS.FLEX.CONTAINER.flexBehavior( true , "sm" ) ,
+      COLO: `${PERSO.W_LIMIT_SM}`,
+      BOX: `${BS_COMBO.INNER_SHAD_NEG}`,
+      BOX_SELECT: BS.FLEX.CONTAINER.flex({wrap : {}}),
+      BOX_BUTTON: `${BS.spacing("both", 2)} ${BS_COMBO.BTN_LARGE}`,
+      BOX_BUTTON_BAD: `${BS.spacing("both", 2)} ${BS_COMBO.BTN_LARGE} ${PERSO.BTN_BAD}`,
+    },
   },
   PATH: {
-    SELECT : {
+    SELECT: {
       CADRE: `${BS_COMBO.INNER_SHAD_NEG}`,
-      TITLE: `${BS_COMBO.MP}`,
-      BOX:   `${BS_COMBO.FLEX_WRAP}`,
-      ITEM:  `${BS_COMBO.BORDER} icon-item m-2 p-3 rounded-circle`,
-      DROWN: `fill-dark`
+      TITLE: BS.spacing("both", 2),
+      BOX: BS.FLEX.CONTAINER.flex({wrap : {}}),
+      ITEM: `${PERSO.ICON_ITEM} ${BS.spacing("p", 3)} ${BS.spacing("m", 2)} ${BS.round("circle")}`,
+      DROWN: PERSO.FILL("dark"),
     },
-    VIEW : {
-      CADRE: `d-md-inline-flex`,
-      COLO : `${BS_COMBO.W_LIMIT_SM}`,
-      BOX_A:   `${BS_COMBO.INNER_SHAD_NEG}`,
-      BOX_B:   `${BS_COMBO.INNER_SHAD_NEG} colo-auto`,
-      NO_CADRE: `${BS_COMBO.MP}`,
-      ICON_CENTER : `${BS_COMBO.FLEX_CENTER_H}`,
-      ICON_BG : `${BS_COMBO.BORDER} rounded-circle p-5 m-2`,
-      P :  `${BS_COMBO.MP} rounded bg-primary`,
-      DROWN: `fill-dark`
+    VIEW: {
+      CADRE: BS.FLEX.CONTAINER.flexBehavior( true , "md" ),
+      COLO: `${PERSO.W_LIMIT_SM}`,
+      BOX_A: `${BS_COMBO.INNER_SHAD_NEG}`,
+      BOX_B: `${BS_COMBO.INNER_SHAD_NEG} ${PERSO.COLO}`,
+      NO_CADRE: BS.spacing("both", 2),
+      ICON_CENTER: BS.FLEX.CONTAINER.flex({align :{name : "center"}, wrap : {}}),
+      ICON_BG: `${BS.round("circle")} ${BS.spacing("p", 5)} ${BS.spacing("m", 2)}`,
+      P: `${BS.spacing("both", 2)} ${BS.round()} ${BS.background( "primary" )}`,
+      DROWN: PERSO.FILL("dark"),
     }
+  },
+  TRANSITION : {
+    PAGE : PERSO.TRANSITION ,
+    CADRE : `${PERSO.TRANSITION} ${BS.FLEX.CONTAINER.flex({wrap : {} , align : {name : "center"} , justify : {name : "evenly"}})}`,
+    MESSAGE : {
+      PAGE : `${PERSO.S_100} ${BS.FLEX.CONTAINER.flex({wrap:{},align : {name : "center"}, justify : {name : "center"}})} ${BS.background("warning")}` ,
+      CADRE : `w-100 ${BS.FLEX.CONTAINER.flex({direction:{name:"colomn"},align : {name : "center"}, justify : {name : "center"}})} ${BS.FLEX.CONTAINER.flexDirection("row", "md")}` ,
+      BTN_GOOD : `${BS.button()} ${PERSO.BTN_BIG} ${BS.spacing("m" , 5)} ${BS.spacing("p" , 3)} ${BS.round( 5 )} ${BS.border( 2 , "" , "info" )}`,
+      BTN_BAD : `${BS.button()} ${PERSO.BTN_BIG} ${PERSO.BTN_BAD} ${BS.spacing("m" , 5)} ${BS.spacing("p" , 3)} ${BS.round( 5 )} ${BS.border( 2 , "" , "warning" )}`,
+      PATH : PERSO.FILL("dark")
+    },
+  },
+  ERROR_PAGE : {
+    PAGE : `${PERSO.S_100} ${BS.FLEX.CONTAINER.flex({align : {name : "center"}, justify : {name : "center"}})} ${BS.background("warning")}`
   }
 };
-*/

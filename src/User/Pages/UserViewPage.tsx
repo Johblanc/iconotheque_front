@@ -18,7 +18,7 @@ export function UserViewPage(): JSX.Element {
   const { user } = useContext(UserContext);
   const { pathPrivate } = useContext(PathPrivateContext);
   const { pathPublic } = useContext(PathPublicContext);
-  const { theme , setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   const SumPublished = pathPublic.filter(
     (item) => item.user.name === user.name
@@ -33,7 +33,7 @@ export function UserViewPage(): JSX.Element {
   const hexToRgb = (hex: string) => {
     if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
       let c = hex.substring(1).split("");
-      if (c.length == 3) {
+      if (c.length === 3) {
         c = [c[0], c[0], c[1], c[1], c[2], c[2]];
       }
       const result = Number("0x" + c.join(""));
@@ -43,14 +43,16 @@ export function UserViewPage(): JSX.Element {
   };
 
   const handleColors = (event: ChangeEvent<HTMLInputElement>) => {
-    const newTheme = {...theme} ;
-    [newTheme.red , newTheme.green, newTheme.blue] = hexToRgb(event.target.value)
+    const newTheme = { ...theme };
+    [newTheme.red, newTheme.green, newTheme.blue] = hexToRgb(
+      event.target.value
+    );
     setTheme(newTheme);
   };
 
   const handleTransparency = (event: ChangeEvent<HTMLInputElement>) => {
-    const newTheme = {...theme} ;
-    newTheme.transparency = Number(event.target.value)
+    const newTheme = { ...theme };
+    newTheme.transparency = Number(event.target.value);
     setTheme(newTheme);
   };
   const isAdmin = user.access > 1;
@@ -107,10 +109,16 @@ export function UserViewPage(): JSX.Element {
         </span>
         <div className={APP_STYLE.PATH.SELECT.CADRE}>
           <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Theme</h3>
-            <h4>Couleur :</h4>
-      <input type='color' onChange= {handleColors}></input>
-            <h4>Ombrage :</h4>
-      <input type="range" min="0" max="1" step="0.1" onChange={handleTransparency} ></input>
+          <h4>Couleur :</h4>
+          <input type="color" onChange={handleColors}></input>
+          <h4>Ombrage :</h4>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            onChange={handleTransparency}
+          ></input>
           <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Mes Icônes</h3>
           <div className={APP_STYLE.PATH.SELECT.BOX}>
             {icons.map((item, i) => (

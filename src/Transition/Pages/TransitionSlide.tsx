@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { PAGES_CONFIG } from "../../App/Routes/router"
 import { useNavigate } from "react-router-dom";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 
 
 
@@ -78,13 +79,13 @@ export function TransitionSlide(props:{
   return (
     <div>
       <div 
-        className="transition"
+        className={APP_STYLE.TRANSITION.PAGE}
         style={{opacity : nextOpacity , transition : `opacity ${ delay / 1000 }s`  } }
         >
         {nextPage}
       </div>
       <div 
-        className="transition"
+        className={APP_STYLE.TRANSITION.PAGE}
         style={{opacity : 1 - nextOpacity , transition : `opacity ${ delay / 1000 }s`  } }
       >
         {children}

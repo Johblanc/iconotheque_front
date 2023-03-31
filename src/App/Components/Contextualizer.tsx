@@ -12,19 +12,20 @@ import { TTheme } from "../../Utilities/Types/Theme.type";
 import { TTransition } from "../../Utilities/Types/TTransition";
 import "../Style/App.style.css";
 
-
-
 /**
  * Un conteneur avec tous les contextes
- * 
+ *
  * * user
  * * icônes publiques
  * * icônes privés
- * 
+ * * transition
+ * * theme
+ *
  * @version v1
  */
-export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | null }){
-  
+export function Contextualizer(props: {
+  children: JSX.Element | JSX.Element[] | null;
+}) {
   /** l'utilisateur en cours d'utilisation */
   const [user, setUser] = useState(DEFAULT_USER);
 
@@ -35,10 +36,10 @@ export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | n
   const [pathPrivate, setPathPrivate] = useState<TPath[]>([]);
 
   /** La transition en cours */
-  const [transition,setTransition] = useState<TTransition>( { to : "" });
+  const [transition, setTransition] = useState<TTransition>({ to: "" });
 
   /** La style en cours */
-  const [theme,setTheme] = useState<TTheme>( DEFAULT_THEME);
+  const [theme, setTheme] = useState<TTheme>(DEFAULT_THEME);
 
   /** Récupération des paths */
   useEffect(() => {
@@ -69,25 +70,29 @@ export function Contextualizer(props:{children : JSX.Element | JSX.Element[] | n
 
   return (
     <div
-    className={`app ${(theme.red + theme.green + theme.blue) > 384 ? "light" : "dark" }`} 
-    style={{
-      "--base-red" : theme.red,
-      "--base-green" : theme.green,
-      "--base-blue" : theme.blue,
-      "--shad-transparency" : theme.transparency
-    } as CSSProperties}>
-        <UserContext.Provider value={{ user, setUser }}>
-          <PathPublicContext.Provider value={{ pathPublic, setPathPublic }}>
-            <PathPrivateContext.Provider value={{ pathPrivate, setPathPrivate }} >
-              <TransitionContext.Provider value={{transition,setTransition}}>
-              <ThemeContext.Provider value={{theme,setTheme}}>
-              {props.children}
+      className={`app ${
+        theme.red + theme.green + theme.blue > 280 ? "light" : "dark"
+      }`}
+      style={
+        {
+          "--base-red": theme.red,
+          "--base-green": theme.green,
+          "--base-blue": theme.blue,
+          "--shad-transparency": theme.transparency,
+        } as CSSProperties
+      }
+    >
+      <UserContext.Provider value={{ user, setUser }}>
+        <PathPublicContext.Provider value={{ pathPublic, setPathPublic }}>
+          <PathPrivateContext.Provider value={{ pathPrivate, setPathPrivate }}>
+            <TransitionContext.Provider value={{ transition, setTransition }}>
+              <ThemeContext.Provider value={{ theme, setTheme }}>
+                {props.children}
               </ThemeContext.Provider>
-              </TransitionContext.Provider>
-            </PathPrivateContext.Provider>
-          </PathPublicContext.Provider>
-        </UserContext.Provider>
-      
-      </div>
+            </TransitionContext.Provider>
+          </PathPrivateContext.Provider>
+        </PathPublicContext.Provider>
+      </UserContext.Provider>
+    </div>
   );
 }
