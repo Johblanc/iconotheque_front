@@ -155,6 +155,7 @@ export function IconUpdatePage(props: { pathId: number }): JSX.Element {
               <div className={`${APP_STYLE.PATH.VIEW.ICON_BG} ${path.status === "public" ?  "bg-primary icon-large" : "bg-warning icon-large-bad"}`}>
                 <svg
                   width="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
+                  height="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
                   viewBox={updateBody.viewbox}
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"

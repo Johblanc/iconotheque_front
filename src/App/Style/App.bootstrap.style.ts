@@ -90,7 +90,7 @@ export const APP_STYLE = {
       CADRE: `${BS_COMBO.INNER_SHAD_NEG}`,
       TITLE: BS.spacing("both", 2),
       BOX: BS.FLEX.CONTAINER.flex({wrap : {}}),
-      ITEM: `${PERSO.ICON_ITEM} ${BS.spacing("p", 3)} ${BS.spacing("m", 2)} ${BS.round("circle")}`,
+      ITEM: `${PERSO.ICON_ITEM} ${BS.spacing("p", 3)} ${BS.spacing("m", 2)} ${BS.round("pill")}`,
       DROWN: PERSO.FILL("dark"),
     },
     VIEW: {
@@ -100,7 +100,7 @@ export const APP_STYLE = {
       BOX_B: `${BS_COMBO.INNER_SHAD_NEG} ${PERSO.COLO}`,
       NO_CADRE: BS.spacing("both", 2),
       ICON_CENTER: BS.FLEX.CONTAINER.flex({align :{name : "center"}, wrap : {}}),
-      ICON_BG: `${BS.round("circle")} ${BS.spacing("p", 5)} ${BS.spacing("m", 2)}`,
+      ICON_BG: `${BS.round("pill")} ${BS.spacing("p", 5)} ${BS.spacing("m", 2)}`,
       P: `${BS.spacing("both", 2)} ${BS.round()} ${BS.background( "primary" )}`,
       DROWN: PERSO.FILL("dark"),
     }

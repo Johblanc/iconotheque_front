@@ -24,6 +24,7 @@ export function IconItem(props: { path: TPath }) {
       <svg
         onClick={() => setTransition({ to: `/paths/view/${path.id}` })}
         width="min(calc((1.375rem + 1.5vw)*1.5),3.75rem)"
+        height="min(calc((1.375rem + 1.5vw)*1.5),3.75rem)"
         viewBox={props.path.viewbox}
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

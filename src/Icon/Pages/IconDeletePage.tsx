@@ -77,6 +77,7 @@ export function IconDeletePage(props: { pathId: number }): JSX.Element {
 
           <svg
             width="min(calc((1.375rem + 1.5vw)*6),15rem)"
+            height="min(calc((1.375rem + 1.5vw)*6),15rem)"
             viewBox={path.viewbox}
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
