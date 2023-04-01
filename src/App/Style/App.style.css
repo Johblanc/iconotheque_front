@@ -177,15 +177,20 @@
 
 
 @font-face {
-  font-family: "CustomFont";
+  font-family: "lt_leap";
   src: url("../../../public/fonts/lt_leap/LT\ Leap\ Medium.ttf") format("opentype")
+}
+
+@font-face {
+  font-family: "pointfree";
+  src: url("../../../public/fonts/point/pointfree.ttf") format("opentype")
 }
 
 * {
   margin: 0;
   padding: 0;
   color: var(--dark);
-  font-family: "CustomFont";
+  font-family: "lt_leap";
   transition: all 0.5s;
 }
 
@@ -206,6 +211,9 @@
   max-width: 350px;
 }
 
+.alt-font {
+  font-family: "pointfree";
+}
 
 .nav-shad {
   box-shadow:

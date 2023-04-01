@@ -2,6 +2,7 @@ import { BS, TBsColor } from "./easyBootstrap";
 
 /** Mes Class perso pour CSS */
 export const PERSO = {
+  ALT_FONT : "alt-font",
   S_100: `s-100`,
   S_90: `s-90`,
   W_LIMIT_SM: `width-limited-sm`,
@@ -51,8 +52,8 @@ export const APP_STYLE = {
       BOX: `input-group ${BS.round()}`,
       TA_BOX: `${BS.round()}`,
       LABEL: `w-100 ${BS.spacing( "p", 2 )} ${BS.background( "secondary" )} ${BS.color( "dark" )} ${PERSO.IN_SHAD_P} ${BS.round(1,"top")}`,
-      INPUT: `w-100 ${BS.spacing( "p", 2 )} ${BS.background( "light" )} ${BS.color( "dark" )}  ${BS.round(1,"bottom")}`,
-      TA: `w-100 ${BS.spacing( "p", 2 )}  ${BS.background( "light" )} ${BS.color( "dark" )} ${BS.round(1,"bottom")} ${PERSO.H_MIN}`,
+      INPUT: `w-100 ${BS.spacing( "p", 2 )} ${BS.background( "light" )} ${BS.color( "dark" )} ${BS.round(1,"bottom")} ${PERSO.ALT_FONT}`,
+      TA: `w-100 ${BS.spacing( "p", 2 )}  ${BS.background( "light" )} ${BS.color( "dark" )} ${BS.round(1,"bottom")} ${PERSO.H_MIN} ${PERSO.ALT_FONT}`,
     },
     NAV: {
       CADRE: `${BS_COMBO.NAV_CADRE} ${BS.background( "secondary" )} ${PERSO.NAV_SHAD}`,
@@ -101,7 +102,7 @@ export const APP_STYLE = {
       NO_CADRE: BS.spacing("both", 2),
       ICON_CENTER: BS.FLEX.CONTAINER.flex({align :{name : "center"}, wrap : {}}),
       ICON_BG: `${BS.round("pill")} ${BS.spacing("p", 5)} ${BS.spacing("m", 2)}`,
-      P: `${BS.spacing("both", 2)} ${BS.round()} ${BS.background( "primary" )}`,
+      P: `${BS.spacing("both", 2)} ${BS.round()} ${BS.background( "primary" )} ${PERSO.ALT_FONT}`,
       DROWN: PERSO.FILL("dark"),
     }
   },
