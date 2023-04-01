@@ -124,7 +124,7 @@ export const APP_STYLE = {
       CADRE: `${BS_COMBO.INNER_SHAD_NEG}`,
       TITLE: BS.spacing("both", 2),
       BOX: BS.FLEX.CONTAINER.flex({wrap : {}}),
-      ITEM: `${PERSO.ICON_ITEM} ${BS.spacing("p", 3)} ${BS.spacing("m", 2)} ${BS.round("pill")} ${PERSO.SHAD_ACTIVE}`,
+      ITEM: `${PERSO.ICON_ITEM} ${BS.spacing("p", 3)} ${BS.border(0)} ${BS.spacing("m", 2)} ${BS.round("pill")} ${PERSO.SHAD_ACTIVE}`,
       DROWN: PERSO.FILL("dark"),
     },
     VIEW: {

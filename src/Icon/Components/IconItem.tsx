@@ -16,7 +16,7 @@ export function IconItem(props: { path: TPath }) {
   const { setTransition } = useContext(TransitionContext);
 
   return (
-    <div
+    <button
       className={`${APP_STYLE.PATH.SELECT.ITEM} ${
         path.status === "public" ? "bg-primary" : "bg-warning icon-item-bad"
       }`}
@@ -32,6 +32,6 @@ export function IconItem(props: { path: TPath }) {
         <title>Path : {path.name}</title>
         <path className={`${APP_STYLE.PATH.SELECT.DROWN}`} d={path.d} />
       </svg>
-    </div>
+    </button>
   );
 }

@@ -7,6 +7,8 @@
   color: var(--dark);
 }
 
+.btn.active:focus,
+.btn:focus,
 .btn.active:hover,
 .btn:hover {
   background-color: var(--secondary);
@@ -30,6 +32,8 @@
   color: var(--danger);
 }
 
+.btn-bad.active:focus,
+.btn-bad:focus,
 .btn-bad.active:hover,
 .btn-bad:hover {
   background-color: var(--warning);
