@@ -1,6 +1,10 @@
 import { BS, TBsColor } from "./easyBootstrap";
 
-/** Mes Class perso pour CSS */
+/** 
+ * Mes Class perso pour CSS 
+ * 
+ * @version v1
+ * */
 export const PERSO = {
   /** Font MonoSpace */
   ALT_FONT : "alt-font",
@@ -44,10 +48,14 @@ export const PERSO = {
   ICON_ITEM : "icon-item" ,
 };
 
-/** Combinaison et class bootstrap */
+/** 
+ * Combinaison et class bootstrap 
+ * 
+ * @version v1
+ * */
 export const BS_COMBO = {
   BTN_LARGE: `${BS.button()} w-100 ${PERSO.SHAD_ACTIVE}`,
-  
+
   /** NavBar */
   NAV_CADRE: `navbar navbar-expand-md container-fluid`,
   NAV_TITLE: `navbar-brand`, // titre
@@ -60,7 +68,11 @@ export const BS_COMBO = {
   INNER_SHAD_NEG: `${BS.spacing( "both", 3 )} ${BS.round( 4 )} ${BS.background( "secondary" )} ${PERSO.SHAD_IN_N}`,
 };
 
-/** Combinaison de class css pour l'application */
+/** 
+ * Combinaison de class css pour l'application 
+ * 
+ * @version v1
+ * */
 export const APP_STYLE = {
   APP: {
     PAGE: PERSO.S_100,
