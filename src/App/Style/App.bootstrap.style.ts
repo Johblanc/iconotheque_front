@@ -91,7 +91,7 @@ export const APP_STYLE = {
     NAV: {
       CADRE: `${BS_COMBO.NAV_CADRE} ${BS.background( "secondary" )} ${PERSO.SHAD_NAV}`,
       TITLE: `${BS_COMBO.NAV_TITLE} ${BS.spacing("both", 2)} ${BS.color( "dark" )}`,
-      BUTTON: `${BS_COMBO.NAV_BUTTON}`,
+      BUTTON: `${BS_COMBO.NAV_BUTTON} ${BS.button()} ${PERSO.SHAD_ACTIVE} ${BS.spacing("both", 2)} ${BS.spacing("p", 3,"x")}`,
       ICON: `${BS_COMBO.NAV_ICON}`,
       BOX_A: `${BS_COMBO.NAV_BOX_A}`,
       BOX_B: `${BS_COMBO.NAV_BOX_B}`,
