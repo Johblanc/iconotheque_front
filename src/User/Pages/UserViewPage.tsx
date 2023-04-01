@@ -42,6 +42,10 @@ export function UserViewPage(): JSX.Element {
     throw new Error("Bad Hex");
   };
 
+  const rgbcToHex = (r: number , g : number , b : number) => {
+    return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+  };
+
   const handleColors = (event: ChangeEvent<HTMLInputElement>) => {
     const newTheme = { ...theme };
     [newTheme.red, newTheme.green, newTheme.blue] = hexToRgb(
@@ -110,13 +114,14 @@ export function UserViewPage(): JSX.Element {
         <div className={APP_STYLE.PATH.SELECT.CADRE}>
           <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Theme</h3>
           <h4>Couleur :</h4>
-          <input type="color" onChange={handleColors}></input>
+          <input type="color" onChange={handleColors} defaultValue={rgbcToHex(theme.red,theme.green,theme.blue)}></input>
           <h4>Ombrage :</h4>
           <input
             type="range"
             min="0"
             max="1"
             step="0.1"
+            defaultValue={theme.transparency}
             onChange={handleTransparency}
           ></input>
           <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Mes Icônes</h3>
