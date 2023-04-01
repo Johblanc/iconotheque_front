@@ -133,7 +133,7 @@ export const APP_STYLE = {
       BOX_A: `${BS_COMBO.INNER_SHAD_NEG}`,
       BOX_B: `${BS_COMBO.INNER_SHAD_NEG} ${PERSO.W_EXTEND}`,
       NO_CADRE: BS.spacing("both", 2),
-      ICON_CENTER: BS.FLEX.CONTAINER.flex({align :{name : "center"}, wrap : {}}),
+      ICON_CENTER: BS.FLEX.CONTAINER.flex({justify :{name : "center"}, wrap : {}}),
       ICON_BG: `${BS.round("pill")} ${BS.spacing("p", 5)} ${BS.spacing("m", 2)} ${PERSO.SHAD_LARGE}`,
       P: `${BS.spacing("both", 2)} ${BS.round()} ${BS.background( "primary" )} ${PERSO.ALT_FONT}`,
       DROWN: PERSO.FILL("dark"),
