@@ -1,0 +1,34 @@
+
+
+
+.fill-dark {
+  fill: var(--dark)
+}
+
+.fill-info {
+  fill: var(--info)
+}
+
+.fill-secondary {
+  fill: var(--secondary)
+}
+
+.fill-primary {
+  fill: var(--primary)
+}
+
+.fill-light {
+  fill: var(--light)
+}
+
+.fill-danger {
+  fill: var(--danger)
+}
+
+.fill-warning {
+  fill: var(--warning)
+}
+
+.fill-success {
+  fill: var(--success)
+}

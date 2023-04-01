@@ -1,4 +1,9 @@
 import "../Style/App.style.css";
+import "../Style/Theme.style.css";
+import "../Style/Shade.style.css";
+import "../Style/Btn.style.css";
+import "../Style/Sizing.style.css";
+import "../Style/Svg.style.css";
 
 import { RouterProvider } from "react-router-dom";
 import { ROUTER } from "../Routes/router";

@@ -1,0 +1,57 @@
+
+
+
+.shade-nav {
+  box-shadow:
+    inset 0 -0.5em 0.5em var(--lighter),
+    inset 0 0.5em 0.5em var(--darker);
+}
+
+.shade-inner-neg {
+  box-shadow:
+    inset -0.5em -0.5em 0.5em var(--lighter),
+    inset 0.5em 0.5em 0.5em var(--darker);
+}
+
+.shade-inner-pos {
+  box-shadow:
+    inset -0.5em -0.5em 0.5em var(--darker),
+    inset 0.5em 0.5em 0.5em var(--lighter);
+}
+
+
+
+.shade-active {
+  box-shadow:
+    0.5em 0.5em 0.5em var(--darker),
+    inset -0.5em -0.5em 0.5em var(--darker),
+    inset 0.5em 0.5em 0.5em var(--lighter);
+}
+
+.shade-active:hover {
+  box-shadow:
+    0.3em 0.3em 0.3em var(--darker),
+    inset -0.4em -0.2em 0.5em var(--darker),
+    inset 0.4em 0.2em 0.5em var(--lighter);
+}
+
+.shade-active:disabled {
+  box-shadow:
+    0.1em 0.1em 0.1em var(--darker);
+}
+
+.shade-active.active {
+  box-shadow:
+    0.1em 0.1em 0.1em var(--darker),
+    inset -0.2em -0.1em 0.3em var(--darker),
+    inset 0.2em 0.1em 0.3em var(--lighter);
+}
+
+.shade-large {
+  box-shadow:
+    1em 1em 1em var(--darker),
+    inset -1.5em -1.5em 1.5em var(--darker),
+    inset 1.5em 1.5em 1.5em var(--lighter);
+}
+
+

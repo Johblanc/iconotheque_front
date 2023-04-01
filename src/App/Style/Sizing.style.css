@@ -1,0 +1,55 @@
+
+
+.app {
+  padding-bottom: 1em;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.s-100 {
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+.s-90 {
+  min-height: calc(100vh - 15em);
+  width: 100%;
+}
+
+.transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.width-limited-md {
+  max-width: 550px;
+}
+
+.width-limited-sm {
+  max-width: 350px;
+}
+
+
+.width-extend {
+  min-width: 280px;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+
+  .width-extend {
+    width: calc(100vw - 370px);
+  }
+}
+
+
+
+.h-min {
+  min-height: 15em !important;
+}
+

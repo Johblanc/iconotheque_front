@@ -1,0 +1,45 @@
+
+
+.btn {
+  border: none;
+  cursor: pointer;
+  background-color: var(--secondary);
+  color: var(--dark);
+}
+
+.btn.active:hover,
+.btn:hover {
+  background-color: var(--secondary);
+  color: var(--dark);
+}
+
+.btn:disabled {
+  background-color: var(--primary);
+  color: var(--danger);
+}
+
+.btn.active {
+  background-color: var(--primary);
+  color: var(--dark) !important;
+}
+
+
+
+.btn-bad {
+  background-color: var(--warning);
+  color: var(--danger);
+}
+
+.btn-bad.active:hover,
+.btn-bad:hover {
+  background-color: var(--warning);
+  color: var(--danger);
+}
+
+
+.btn-big {
+  font-size: 4em;
+}
+
+
+
