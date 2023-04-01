@@ -112,7 +112,7 @@ export function IconViewPage(props: { pathId: number }): JSX.Element {
           <pre style={{tabSize : "1em"}} className={APP_STYLE.PATH.VIEW.P}>
             {`<svg width="100%" viewBox="${path.viewbox}" version="1.1" xmlns="http://www.w3.org/2000/svg">\n`}
             {`\t<title>Icone ${path.name}</title>\n`}
-            {`\t<path d="${path.d}" />\n`}
+            {`\t<path d="${path.d.split("\n").join(" ")}" />\n`}
             {`</svg>`}
           </pre>
           <h3>En React</h3>
@@ -121,7 +121,7 @@ export function IconViewPage(props: { pathId: number }): JSX.Element {
             {`\treturn (\n`}
             {`\t\t<svg width="100%" viewBox="${path.viewbox}" version="1.1" xmlns="http://www.w3.org/2000/svg">\n`}
             {`\t\t\t<title>Icone ${path.name}</title>\n`}
-            {`\t\t\t<path d="${path.d}" />\n`}
+            {`\t\t\t<path d="${path.d.split("\n").join(" ")}" />\n`}
             {`\t\t</svg>\n`}
             {`\t)\n`}
             {`}`}
