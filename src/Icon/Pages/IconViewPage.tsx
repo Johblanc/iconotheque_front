@@ -64,6 +64,11 @@ export function IconViewPage(props: { pathId: number }): JSX.Element {
   const isOwner = path.user.id === user.id;
   const isPrivate = path.status === "private";
 
+  const toCamelCase = (value : string) => {
+
+    return value.toLowerCase().split(" ").map(word => word.split("").map((letter,i) => i ? letter : letter.toUpperCase()).join("")).join("")
+  }
+
   return (
     <>
       <AppHeader />
@@ -103,8 +108,27 @@ export function IconViewPage(props: { pathId: number }): JSX.Element {
           <p className={APP_STYLE.PATH.VIEW.P}>{path.viewbox}</p>
           <h3>Drown (tracé) :</h3>
           <p className={APP_STYLE.PATH.VIEW.P}>{path.d}</p>
+          <h3>En Svg</h3>
+          <pre style={{tabSize : "1em"}} className={APP_STYLE.PATH.VIEW.P}>
+            {`<svg width="100%" viewBox="${path.viewbox}" version="1.1" xmlns="http://www.w3.org/2000/svg">\n`}
+            {`\t<title>Icone ${path.name}</title>\n`}
+            {`\t<path d="${path.d}" />\n`}
+            {`</svg>`}
+          </pre>
+          <h3>En React</h3>
+          <pre style={{tabSize : "1em"}} className={APP_STYLE.PATH.VIEW.P}>
+            {`export function Icon${toCamelCase(path.name)}(): JSX.Element {\n`}
+            {`\treturn (\n`}
+            {`\t\t<svg width="100%" viewBox="${path.viewbox}" version="1.1" xmlns="http://www.w3.org/2000/svg">\n`}
+            {`\t\t\t<title>Icone ${path.name}</title>\n`}
+            {`\t\t\t<path d="${path.d}" />\n`}
+            {`\t\t</svg>\n`}
+            {`\t)\n`}
+            {`}`}
+          </pre>
         </div>
       </div>
     </>
   );
 }
+
