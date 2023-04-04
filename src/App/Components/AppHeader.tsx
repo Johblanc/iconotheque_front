@@ -1,3 +1,4 @@
+import { TitreStatic } from "./TitreStatic";
 
 /**
  * Le Titre du site
@@ -8,7 +9,7 @@ export function AppHeader() : JSX.Element
 {
   return (
     <div>
-      <h1 className="p-4">Iconothèque</h1>
+      <TitreStatic/>
     </div>
   )
 }

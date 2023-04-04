@@ -1,6 +1,6 @@
 import { UserLogInPage } from "../../User/Pages/UserLogInPage";
 
-import { createBrowserRouter, LoaderFunctionArgs, redirect } from "react-router-dom";
+import { createBrowserRouter, LoaderFunctionArgs } from "react-router-dom";
 import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
 import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
@@ -13,6 +13,7 @@ import { IconViewPage } from "../../Icon/Pages/IconViewPage";
 import { IconDeletePage } from "../../Icon/Pages/IconDeletePage";
 import { UserAdminPage } from "../../User/Pages/UserAdminPage";
 import { UserPromotePage } from "../../User/Pages/UserPromotePage";
+import { AccueilPage } from "../Pages/AccueilPage";
 
 
 /**
@@ -35,10 +36,7 @@ export type TPAGE_CONFIG = {
 export const PAGES_CONFIG : TPAGE_CONFIG[] = [
   {
     path: "/",
-    element: <UserLogInPage />,
-    loader: () => {
-      return redirect("/user/login");
-    },
+    element: <AccueilPage/>,
   },
   {
     path: "/user/login",
