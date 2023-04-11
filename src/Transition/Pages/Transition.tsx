@@ -1,8 +1,8 @@
 
 import { useContext, useEffect } from "react";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
-import { TransitionMessage } from "./TransitionMessage";
-import { TransitionSlide } from "./TransitionSlide";
+import { TransitionMessage } from "../Components/TransitionMessage";
+import { TransitionSlide } from "../Components/TransitionSlide";
 
 
 
