@@ -6,8 +6,12 @@ import { RequesterBase } from "./RequesterBase";
 /**
  * Permet les requêtes pour la route paths
  * 
- * * **getPublics**  : Requête de récupération de paths publics
- * * **getPrivates** : Requête de récupération de paths privées
+ * @v1 **getPublics**   : Requête de récupération de paths publics
+ * @v1 **getPrivates**  : Requête de récupération de paths privées
+ * @v1 **new**          : Requête de création d'un path
+ * @v1 **update**       : Requête de mise à jour d'un path
+ * @v1 **publish**      : Requête de publication d'un path
+ * @v1 **delete**       : Requête de suppression d'un path
  * 
  * @version v1
  */

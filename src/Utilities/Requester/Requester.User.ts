@@ -6,8 +6,11 @@ import { RequesterBase } from "./RequesterBase";
 /**
  * Permet les requêtes pour la route users
  * 
- * * **logIn**  : Requête pour log in un utilisateur
- * * **SignIn** : Requête pour enregistrer un utilisateur
+ * @v1 **logIn**   : Requête pour log in un utilisateur
+ * @v1 **signIn**  : Requête pour enregistrer un utilisateur
+ * @v1 **update**  : Requête pour Modifier un profile utilisateur
+ * @v1 **allUser** : Requête pour récupérer la liste des utilisateurs
+ * @v1 **promote** : Requête pour récupérer la liste des utilisateurs
  * 
  * @version v1
  */
