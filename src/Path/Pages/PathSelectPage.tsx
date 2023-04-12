@@ -5,7 +5,7 @@ import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
-import { IconItem } from "../Components/IconItem";
+import { IconItem } from "../Components/PathItem";
 
 /**
  * Permet de selectionnner un icône

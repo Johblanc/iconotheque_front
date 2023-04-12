@@ -1,16 +1,16 @@
 import { UserLogInPage } from "../../User/Pages/UserLogInPage";
 
 import { createBrowserRouter, LoaderFunctionArgs } from "react-router-dom";
-import { IconSelectPage } from "../../Icon/Pages/IconSelectPage";
+import { IconSelectPage } from "../../Path/Pages/PathSelectPage";
 import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
-import { IconUpdatePage } from "../../Icon/Pages/IconUpdatePage";
+import { IconUpdatePage } from "../../Path/Pages/PathUpdatePage";
 import { Transition } from "../../Transition/Pages/Transition";
 import { IdPage } from "../Pages/IdPage";
 import { UserPassUpdatePage } from "../../User/Pages/UserPassUpdatePage";
 import { ErrorPage } from "../Pages/ErrorPage";
-import { IconViewPage } from "../../Icon/Pages/IconViewPage";
-import { IconDeletePage } from "../../Icon/Pages/IconDeletePage";
+import { IconViewPage } from "../../Path/Pages/PathViewPage";
+import { IconDeletePage } from "../../Path/Pages/PathDeletePage";
 import { UserAdminPage } from "../../User/Pages/UserAdminPage";
 import { UserPromotePage } from "../../User/Pages/UserPromotePage";
 import { AccueilPage } from "../Pages/AccueilPage";
