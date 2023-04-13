@@ -1,0 +1,104 @@
+import { useEffect, useState } from "react";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
+
+/**
+ * Une entrée utilisateur textuelle en une ligne
+ *
+ * @param name          Nom de l'entry
+ * @param defaultValue  Valeur par défaut
+ * @param setValue      CallBack de réglage de la valeur
+ * @param min           Valeur minimale
+ * @param max           Valeur maximale
+ * @param step          Ecart entre deux valeurs
+ * @param validators    Conditions de validations
+ *
+ * @version v1
+ */
+export function EntryNumber(props: {
+  /** Nom de l'entry */
+  name?: string;
+
+  /** Valeur par défaut */
+  defaultValue?: number;
+
+  /** CallBack de réglage de la valeur */
+  setValue?: (value?: number, valid?: boolean) => void;
+
+  /** Valeur minimale */
+  min?: number;
+
+  /** Valeur maximale */
+  max?: number;
+
+  /** Ecart entre deux valeurs */
+  step?: number;
+
+  /** Conditions de validations */
+  validators?: { validator: (value: number) => boolean; message?: string }[];
+
+}): JSX.Element {
+  const { name, defaultValue, setValue, validators,min,max,step } = props;
+
+  /**
+   * Contrôle de l'Entry avec les validateurs
+   *
+   * @param value la valeur en cours
+   * @returns un string vide si OK, sinon un message d'erreur
+   */
+  const validate = (value: number) => {
+    if (validators)
+      for (const item of validators)
+        if (!item.validator(value)) return item.message || "Erreur";
+
+    return "";
+  };
+
+  /** Gestion du message d'erreur */
+  const [message, setMessage] = useState(validate(defaultValue || 0));
+
+  /** Permet le refresh du composant lorsque les validateurs changent (pour samePassword par exemple)*/
+  useEffect(() => {
+    const validate = (value: number) => {
+      if (validators)
+        for (const item of validators)
+          if (!item.validator(value)) return item.message || "Erreur";
+      return "";
+    };
+    const newMessage = validate(defaultValue || 0);
+
+    if (message !== newMessage) {
+      setValue && setValue(defaultValue || 0, newMessage === "");
+      setMessage(newMessage);
+    }
+  }, [validators, defaultValue,message,setValue]);
+
+  /**
+   * Losrque l'utilisateur change la valeur de l'Entry
+   *
+   * @param value la nouvelle valeur
+   */
+  const handleVerificator = (value: number) => { 
+    const newMessage = validate(value);
+    setMessage(newMessage);
+    setValue && setValue(value, newMessage === "");
+  };
+
+  return (
+    <div className={APP_STYLE.APP.ENTRY.CADRE}>
+      <div className={APP_STYLE.APP.ENTRY.BOX}>
+        <label className={APP_STYLE.APP.ENTRY.LABEL}>{name}</label>
+
+        <input
+          type="number"
+          className={APP_STYLE.APP.ENTRY.INPUT}
+          onChange={(e) => handleVerificator(Number(e.target.value))}
+          defaultValue={defaultValue}
+          min={min}
+          max={max}
+          step={step}
+        />
+      </div>
+      <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
+    </div>
+  );
+}
