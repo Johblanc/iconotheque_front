@@ -35,7 +35,7 @@ export function hexToRgb (hex: string) {
 export function rgbToHex (r: number, g: number, b: number) {
   const twoLetters = (value: number) => {
     let result = value.toString(16);
-    if (result.length == 1) {
+    if (result.length === 1) {
       return "0" + result;
     }
     return result;
