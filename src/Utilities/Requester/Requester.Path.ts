@@ -27,14 +27,13 @@ export class PathRequester extends RequesterBase {
    * 
    * @version v1
    */
-  static async getPublics(token : string) : Promise<TResponse<TPath[],string>>
+  static async getPublics() : Promise<TResponse<TPath[],string>>
   {
     const response = await PathRequester.base<TPath[],string>(
       "paths",
       RequestMethods.GET ,
       [],
-      undefined,
-      token
+      undefined
       )
     return response
   }

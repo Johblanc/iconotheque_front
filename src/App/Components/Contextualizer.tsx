@@ -44,7 +44,7 @@ export function Contextualizer(props: {
   /** Récupération des paths publiques */
   useEffect(() => {
     const fetchPublics = async () => {
-      const response = await Requester.path.getPublics(user.token);
+      const response = await Requester.path.getPublics();
       if (response.data) {
         setPathPublic(response.data);
       }
