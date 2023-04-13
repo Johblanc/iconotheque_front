@@ -41,7 +41,7 @@ export function Contextualizer(props: {
   /** La style en cours */
   const [theme, setTheme] = useState<TTheme>(DEFAULT_THEME);
 
-  /** Récupération des paths */
+  /** Récupération des paths publiques */
   useEffect(() => {
     const fetchPublics = async () => {
       const response = await Requester.path.getPublics(user.token);
@@ -49,6 +49,11 @@ export function Contextualizer(props: {
         setPathPublic(response.data);
       }
     };
+    fetchPublics();
+  }, []);
+
+  /** Récupération des paths privés*/
+  useEffect(() => {
 
     const fetchPrivates = async () => {
       const response = await Requester.path.getPrivates(user.token);
@@ -57,11 +62,6 @@ export function Contextualizer(props: {
       }
     };
     if (user.access > 0) {
-      fetchPublics();
-    } else {
-      setPathPublic([]);
-    }
-    if (user.access > 1) {
       fetchPrivates();
     } else {
       setPathPrivate([]);

@@ -14,7 +14,7 @@ export function AccueilPage() {
   
 
   setTimeout(() => setOpa(0), 3500);
-  setTimeout(() => navigate("/user/login"), 4000);
+  setTimeout(() => navigate("/paths/publics"), 4000);
 
   return (
     <div>

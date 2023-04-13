@@ -14,7 +14,7 @@ import { APP_STYLE } from "../Style/App.bootstrap.style";
  * @version v1
  */
 export function AppNav(props: {
-  actif: "profil" | "new" | "public" | "private" | "";
+  actif: "profil" | "new" | "public" | "private" | "logIn" | "";
 }): JSX.Element {
   const { actif } = props;
 
@@ -47,6 +47,16 @@ export function AppNav(props: {
       </button>
       <div className={APP_STYLE.APP.NAV.BOX_A} id="navbarNavAltMarkup">
         <div className={APP_STYLE.APP.NAV.BOX_B}>
+          {user.access === 0 && (
+          <LinkCustom
+            className={`${APP_STYLE.APP.NAV.ITEM}${
+              actif === "logIn" ? " active" : ""
+            }`}
+            to={"/user/login"}
+            name="Connection"
+          />
+          )}
+          {user.access > 0 && (
           <LinkCustom
             className={`${APP_STYLE.APP.NAV.ITEM}${
               actif === "profil" ? " active" : ""
@@ -54,13 +64,14 @@ export function AppNav(props: {
             to={"/user/view"}
             name="Profile"
           />
-          {user.access > 1 && (
+          )}
+          {user.access > 0 && (
             <LinkCustom
               className={`${APP_STYLE.APP.NAV.ITEM}${
                 actif === "new" ? " active" : ""
               }`}
               to={"/paths/new"}
-              name="Nouvelle icône"
+              name="Nouvelle Forme"
             />
           )}
           <LinkCustom
@@ -68,15 +79,15 @@ export function AppNav(props: {
               actif === "public" ? " active" : ""
             }`}
             to={"/paths/publics"}
-            name="Icônes publiques"
+            name="Formes publiques"
           />
-          {user.access > 1 && (
+          {user.access > 0 && (
             <LinkCustom
               className={`${APP_STYLE.APP.NAV.ITEM}${
                 actif === "private" ? " active" : ""
               }`}
               to={"/paths/privates"}
-              name="Mes icônes"
+              name="Mes Formes"
             />
           )}
         </div>
