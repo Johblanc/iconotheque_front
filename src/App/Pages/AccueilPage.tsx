@@ -1,9 +1,9 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserLogInPage } from "../../User/Pages/UserLogInPage";
 import { LogoDynamic } from "../Components/LogoDynamic";
 import { TitreDynamic } from "../Components/TitreDynamic";
+import { IconSelectPage } from "../../Path/Pages/PathSelectPage";
 
 
 export function AccueilPage() {
@@ -23,7 +23,7 @@ export function AccueilPage() {
         <LogoDynamic/>
       </div>
       <div className="transition s-100" style={{opacity : 1- opa}}>
-      <UserLogInPage/>
+      <IconSelectPage actif={"public"}/>
       </div>
     </div>
   )
