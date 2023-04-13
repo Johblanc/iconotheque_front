@@ -13,6 +13,7 @@ import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
+import { EntriesViewBox } from "../../Utilities/Components/EntriesViewBox";
 
 /**
  * Page de mise à jour d'une Forme
@@ -132,19 +133,6 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
   };
   const isValid = updateValid.name && updateValid.viewbox && updateValid.d;
 
-  /*
-  console.log(updateBody.d);
-  
-  const verifPath = (val : string) => {
-    try {
-      return parsePath(updateBody.d)
-    }
-    catch (err) {
-      return err
-    }
-  }
-
-  console.log(verifPath(updateBody.d));*/
   return (
     <>
       <AppHeader />
@@ -185,11 +173,9 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
           setValue={(value, valid) => handleUpdateBody("name", value, valid)}
           validators={[EntryValidators.minLenght(4)]}
         />
-        <EntryString
-          name={"View Box"}
+        <EntriesViewBox 
           defaultValue={updateBody.viewbox}
           setValue={(value, valid) => handleUpdateBody("viewbox", value, valid)}
-          validators={[EntryValidators.minLenght(4)]}
         />
         <TextArea
           name={"Drown"}
