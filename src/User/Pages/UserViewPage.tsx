@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { AppNav } from "../../App/Components/AppNav";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
-import { IconItem } from "../../Path/Components/PathItem";
+import { PathItem } from "../../Path/Components/PathItem";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
@@ -23,7 +23,7 @@ export function UserViewPage(): JSX.Element {
   const { pathPublic } = useContext(PathPublicContext);
   const { theme } = useContext(ThemeContext);
 
-  const icons = [
+  const paths = [
     ...pathPublic.filter((item) => item.user.name === user.name),
     ...pathPrivate,
   ];
@@ -62,12 +62,12 @@ export function UserViewPage(): JSX.Element {
             <p>Mail : {user.mail}</p>
             {SumCreated !== 0 && (
               <p>
-                Icônes créée{SumCreated > 1 && "s"} : {SumCreated}{" "}
+                Formes créée{SumCreated > 1 && "s"} : {SumCreated}{" "}
               </p>
             )}
             {SumPublished !== 0 && (
               <p>
-                Icônes publiée{SumPublished > 1 && "s"} : {SumPublished}{" "}
+                Formes publiée{SumPublished > 1 && "s"} : {SumPublished}{" "}
               </p>
             )}
           </div>
@@ -110,10 +110,10 @@ export function UserViewPage(): JSX.Element {
           >
             Définir thème par défaut
           </button>
-          <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Mes Icônes</h3>
+          <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Mes Formes</h3>
           <div className={APP_STYLE.PATH.SELECT.BOX}>
-            {icons.map((item, i) => (
-              <IconItem path={item} key={i} />
+            {paths.map((item, i) => (
+              <PathItem path={item} key={i} />
             ))}
           </div>
         </div>

@@ -12,7 +12,7 @@ import { hexToRgb } from "../Modules/HexColo";
 /**
  * Composant permetant le Log In d'un utilisateur
  *
- * @route LogIn Ok > Transition > IconSelect
+ * @route LogIn Ok > Transition > PathSelect
  * 
  * @version v2
  */

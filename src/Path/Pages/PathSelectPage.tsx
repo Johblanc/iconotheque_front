@@ -5,19 +5,19 @@ import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
-import { IconItem } from "../Components/PathItem";
+import { PathItem } from "../Components/PathItem";
 
 /**
- * Permet de selectionnner un icône
+ * Permet de selectionnner une Forme
  *
  * @param props.actif les données publiques ou privées
  *
  * @route nav > ?
- * @route selection path > IconViewPage {path}
+ * @route selection path > PathSelectPage {path}
  *
- * @version v1
+ * @version v2
  */
-export function IconSelectPage(props: {
+export function PathSelectPage(props: {
   actif: "public" | "private";
 }): JSX.Element {
   const { actif } = props;
@@ -35,8 +35,8 @@ export function IconSelectPage(props: {
       ...pathPrivate,
     ];
   }
-  const icons = path.map((item, i) => (
-      <IconItem path={item}  key={i}/>
+  const paths = path.map((item, i) => (
+      <PathItem path={item}  key={i}/>
   ));
 
   return (
@@ -45,10 +45,10 @@ export function IconSelectPage(props: {
       <AppNav actif={actif} />
       <div className={`${APP_STYLE.PATH.SELECT.CADRE}`}>
         <h2 className={`${APP_STYLE.PATH.SELECT.TITLE}`}>
-          {actif === "public" ? "Icônes publiques" : "Mes icônes"}
+          {actif === "public" ? "Formes publiques" : "Mes Formes"}
         </h2>
         <div className={`${APP_STYLE.PATH.SELECT.BOX}`}>
-          {icons}
+          {paths}
         </div>
       </div>
     </>

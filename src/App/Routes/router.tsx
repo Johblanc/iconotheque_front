@@ -1,16 +1,16 @@
 import { UserLogInPage } from "../../User/Pages/UserLogInPage";
 
 import { createBrowserRouter, LoaderFunctionArgs } from "react-router-dom";
-import { IconSelectPage } from "../../Path/Pages/PathSelectPage";
+import { PathSelectPage } from "../../Path/Pages/PathSelectPage";
 import { UserViewPage } from "../../User/Pages/UserViewPage";
 import { UserUpdatePage } from "../../User/Pages/UserUpdatePage";
-import { IconUpdatePage } from "../../Path/Pages/PathUpdatePage";
+import { PathUpdatePage } from "../../Path/Pages/PathUpdatePage";
 import { Transition } from "../../Transition/Pages/Transition";
 import { IdPage } from "../Pages/IdPage";
 import { UserPassUpdatePage } from "../../User/Pages/UserPassUpdatePage";
 import { ErrorPage } from "../Pages/ErrorPage";
-import { IconViewPage } from "../../Path/Pages/PathViewPage";
-import { IconDeletePage } from "../../Path/Pages/PathDeletePage";
+import { PathViewPage } from "../../Path/Pages/PathViewPage";
+import { PathDeletePage } from "../../Path/Pages/PathDeletePage";
 import { UserAdminPage } from "../../User/Pages/UserAdminPage";
 import { UserPromotePage } from "../../User/Pages/UserPromotePage";
 import { AccueilPage } from "../Pages/AccueilPage";
@@ -31,7 +31,7 @@ export type TPAGE_CONFIG = {
 /**
  * Les routes du sites sans les transitions
  *
- * @version v1
+ * @version v2
  * */
 export const PAGES_CONFIG : TPAGE_CONFIG[] = [
   {
@@ -71,15 +71,15 @@ export const PAGES_CONFIG : TPAGE_CONFIG[] = [
   },
   {
     path: "/paths/publics",
-    element: <IconSelectPage actif={"public"} />,
+    element: <PathSelectPage actif={"public"} />,
   },
   {
     path: "/paths/privates",
-    element: <IconSelectPage actif={"private"} />,
+    element: <PathSelectPage actif={"private"} />,
   },
   {
     path: "/paths/new",
-    element: <IconUpdatePage pathId={-1} />,
+    element: <PathUpdatePage pathId={-1} />,
   },
   {
     path: "/paths/update/:id",
@@ -87,7 +87,7 @@ export const PAGES_CONFIG : TPAGE_CONFIG[] = [
     loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
       if (args.params.id)
       {
-        return <IconUpdatePage pathId={Number(args.params.id)}/>
+        return <PathUpdatePage pathId={Number(args.params.id)}/>
       }
       return <></>
     }
@@ -98,7 +98,7 @@ export const PAGES_CONFIG : TPAGE_CONFIG[] = [
     loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
       if (args.params.id)
       {
-        return <IconViewPage pathId={Number(args.params.id)}/>
+        return <PathViewPage pathId={Number(args.params.id)}/>
       }
       return <></>
     }
@@ -109,7 +109,7 @@ export const PAGES_CONFIG : TPAGE_CONFIG[] = [
     loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
       if (args.params.id)
       {
-        return <IconDeletePage pathId={Number(args.params.id)}/>
+        return <PathDeletePage pathId={Number(args.params.id)}/>
       }
       return <></>
     }

@@ -12,11 +12,11 @@ import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 
 /**
- * Page de visualisation d'un icône
+ * Page de visualisation d'une Forme
  *
- * @version v1
+ * @version v2
  */
-export function IconViewPage(props: { pathId: number }): JSX.Element {
+export function PathViewPage(props: { pathId: number }): JSX.Element {
   /** L'identifiant du path en cours de publication */
   const { pathId } = props;
 
@@ -111,16 +111,16 @@ export function IconViewPage(props: { pathId: number }): JSX.Element {
           <h3>En Svg</h3>
           <pre style={{tabSize : "1em"}} className={APP_STYLE.PATH.VIEW.P}>
             {`<svg width="100%" viewBox="${path.viewbox}" version="1.1" xmlns="http://www.w3.org/2000/svg">\n`}
-            {`\t<title>Icone ${path.name}</title>\n`}
+            {`\t<title>Forme ${path.name}</title>\n`}
             {`\t<path d="${path.d.split("\n").join(" ")}" />\n`}
             {`</svg>`}
           </pre>
           <h3>En React</h3>
           <pre style={{tabSize : "1em"}} className={APP_STYLE.PATH.VIEW.P}>
-            {`export function Icon${toCamelCase(path.name)}(): JSX.Element {\n`}
+            {`export function Path${toCamelCase(path.name)}(): JSX.Element {\n`}
             {`\treturn (\n`}
             {`\t\t<svg width="100%" viewBox="${path.viewbox}" version="1.1" xmlns="http://www.w3.org/2000/svg">\n`}
-            {`\t\t\t<title>Icone ${path.name}</title>\n`}
+            {`\t\t\t<title>Forme ${path.name}</title>\n`}
             {`\t\t\t<path d="${path.d.split("\n").join(" ")}" />\n`}
             {`\t\t</svg>\n`}
             {`\t)\n`}

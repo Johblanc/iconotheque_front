@@ -13,7 +13,7 @@ import { rgbToHex } from "../Modules/HexColo";
 /**
  * Composant permetant le Sign In d'un utilisateur
  *
- * @route SignIn Ok > Transition > IconSelect
+ * @route SignIn Ok > Transition > PathSelect
  * 
  * @version v2
  */

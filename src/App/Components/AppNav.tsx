@@ -6,12 +6,13 @@ import { APP_STYLE } from "../Style/App.bootstrap.style";
 /**
  * La Navigation du site
  *
+ * @route Login             > UserLogIn
  * @route Profil            > UserViewPage
- * @route Nouvelle Icônes   > IconUpdatePage "DEFAULT_PATH"
- * @route Icônes publiques  > IconSelectPage "public"
- * @route Profil            > IconSelectPage "private"
+ * @route Nouvelle Forme    > PathUpdatePage "DEFAULT_PATH"
+ * @route Formes publiques  > PathSelectPage "public"
+ * @route Profil            > PathSelectPage "private"
  *
- * @version v1
+ * @version v2
  */
 export function AppNav(props: {
   actif: "profil" | "new" | "public" | "private" | "logIn" | "";

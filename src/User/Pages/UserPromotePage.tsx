@@ -6,9 +6,9 @@ import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 
 /**
- * Page de suppression d'un icône
+ * Page de suppression d'une Forme
  *
- * @version v1
+ * @version v2
  */
 export function UserPromotePage(props: { userId: number }): JSX.Element {
   /** L'identifiant du path en cours de suppression */

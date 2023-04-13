@@ -3,9 +3,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogoDynamic } from "../Components/LogoDynamic";
 import { TitreDynamic } from "../Components/TitreDynamic";
-import { IconSelectPage } from "../../Path/Pages/PathSelectPage";
+import { PathSelectPage } from "../../Path/Pages/PathSelectPage";
 
-
+/**
+ * Page d'Accueil du site
+ * 
+ * @version v2
+ */
 export function AccueilPage() {
 
   const [opa , setOpa] = useState(1)
@@ -22,8 +26,8 @@ export function AccueilPage() {
         <TitreDynamic/>
         <LogoDynamic/>
       </div>
-      <div className="transition s-100" style={{opacity : 1- opa}}>
-      <IconSelectPage actif={"public"}/>
+      <div className="transition s-100" style={{opacity : 1 - opa}}>
+      <PathSelectPage actif={"public"}/>
       </div>
     </div>
   )

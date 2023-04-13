@@ -16,12 +16,12 @@ import "../Style/App.style.css";
  * Un conteneur avec tous les contextes
  *
  * * user
- * * icônes publiques
- * * icônes privés
+ * * Formes publiques
+ * * Formes privés
  * * transition
  * * theme
  *
- * @version v1
+ * @version v2
  */
 export function Contextualizer(props: {
   children: JSX.Element | JSX.Element[] | null;

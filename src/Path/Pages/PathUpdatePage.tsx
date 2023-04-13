@@ -15,11 +15,11 @@ import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 
 /**
- * Page de mise à jour d'un icône
+ * Page de mise à jour d'une Forme
  *
- * @version v1
+ * @version v2
  */
-export function IconUpdatePage(props: { pathId: number }): JSX.Element {
+export function PathUpdatePage(props: { pathId: number }): JSX.Element {
   /** L'identifiant du path en cours de modification */
   const { pathId } = props;
 

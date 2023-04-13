@@ -8,9 +8,9 @@ import { TPath } from "../../Utilities/Types/Path.type";
  *
  * @param props.path les données sur le path
  *
- * @version v1
+ * @version v2
  */
-export function IconItem(props: { path: TPath }) {
+export function PathItem(props: { path: TPath }) {
   const { path } = props;
 
   const { setTransition } = useContext(TransitionContext);
