@@ -12,7 +12,7 @@ import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 /**
  * Page de mise à jour des données utilisateur
  *
- * @version v1
+ * @version v2
  */
 export function UserPassUpdatePage(): JSX.Element {
   /** Récupération du réglage de l'utilisateur dans le context */
@@ -57,7 +57,7 @@ export function UserPassUpdatePage(): JSX.Element {
 
   const handleRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const responseUpdate = await Requester.user.update(updateBody, user.token);
+    const responseUpdate = await Requester.user.update({password : updateBody.password}, user.token);
     if (responseUpdate.data) {
       setMessage("");
       setUser(responseUpdate.data);

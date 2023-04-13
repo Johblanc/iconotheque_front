@@ -1,11 +1,11 @@
 
 /**
- * Type Utilisateur
+ * Type Theme
  * 
- * @version v1
+ * @version v2
  */
 export type TTheme = {
-  red : number
+  red : number ,
   green : number ,
   blue : number ,
   transparency : number

@@ -6,20 +6,23 @@ import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
+import { ThemeContext } from "../../Utilities/Contexts/Theme.context";
+import { hexToRgb } from "../Modules/HexColo";
 
 /**
  * Composant permetant le Log In d'un utilisateur
  *
  * @route LogIn Ok > Transition > IconSelect
  * 
- * @version v1
+ * @version v2
  */
 export function LogInBox(): JSX.Element {
 
   /** Récupération du réglage de l'utilisateur dans le context */
   const {setUser} = useContext(UserContext)
 
-  const { setTransition } = useContext(TransitionContext) 
+  const { setTransition } = useContext(TransitionContext) ;
+  const { setTheme } = useContext(ThemeContext) ;
 
   /** Préparation du body pour la requête LogIn */
   const [logBody, setLogBody] = useState({ name: "", password: "" });
@@ -59,8 +62,20 @@ export function LogInBox(): JSX.Element {
 
     if (response.statusCode === 201) 
     {
+      console.log(response.data);
+      
       setMessage('');
       setUser(response.data)
+      const newColors = hexToRgb(response.data.theme_color)
+      setTimeout(
+        () => setTheme({
+          red : newColors[0],
+          green : newColors[1] ,
+          blue : newColors[2] ,
+          transparency : response.data.theme_relief
+        }),
+        800
+      )
       setTransition({to : "/paths/publics", message : `Hello ${response.data.name} !`}) ;
     }
     else

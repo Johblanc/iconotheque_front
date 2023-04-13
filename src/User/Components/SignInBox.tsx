@@ -6,15 +6,20 @@ import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
+import { ThemeHandler } from "./ThemeHandler";
+import { ThemeContext } from "../../Utilities/Contexts/Theme.context";
+import { rgbToHex } from "../Modules/HexColo";
 
 /**
  * Composant permetant le Sign In d'un utilisateur
  *
  * @route SignIn Ok > Transition > IconSelect
  * 
- * @version v1
+ * @version v2
  */
 export function SignInBox(): JSX.Element {
+  
+  const { theme } = useContext(ThemeContext);
 
   /** Récupération du réglage de l'utilisateur dans le context */
   const {setUser} = useContext(UserContext)
@@ -53,7 +58,11 @@ export function SignInBox(): JSX.Element {
   const handleRequest = async (event : React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const responseSign = await Requester.user.signIn(signBody) ;
+    const responseSign = await Requester.user.signIn({
+      ...signBody, 
+      theme_color : rgbToHex(theme.red, theme.green, theme.blue),
+      theme_relief : theme.transparency
+    }) ;
     
     if (responseSign.statusCode === 201) 
     {
@@ -114,6 +123,7 @@ export function SignInBox(): JSX.Element {
         isPass
       />
       <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
+      <ThemeHandler/>
       <button className={APP_STYLE.USER.LOGIN.SUBMIT} type="submit" disabled={!isValid} >Sign In</button>
     </Form>
   );

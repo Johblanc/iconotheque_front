@@ -7,12 +7,12 @@ import { RequesterBase } from "./RequesterBase";
  * Permet les requêtes pour la route users
  * 
  * @v1 **logIn**   : Requête pour log in un utilisateur
- * @v1 **signIn**  : Requête pour enregistrer un utilisateur
- * @v1 **update**  : Requête pour Modifier un profile utilisateur
+ * @v2 **signIn**  : Requête pour enregistrer un utilisateur
+ * @v2 **update**  : Requête pour Modifier un profile utilisateur
  * @v1 **allUser** : Requête pour récupérer la liste des utilisateurs
- * @v1 **promote** : Requête pour récupérer la liste des utilisateurs
+ * @v1 **promote** : Requête pour promouvoir un utilisateur
  * 
- * @version v1
+ * @version v2
  */
 export class UserRequester extends RequesterBase {
 
@@ -29,7 +29,7 @@ export class UserRequester extends RequesterBase {
    */
   static async logIn(body : { name: string, password: string}) : Promise<TResponse<TUser,string>>
   {
-    const response = await UserRequester.base<TUser,string>(
+    const response = await UserRequester.base<TUser ,string>(
       "users/login",
       RequestMethods.POST,
       [],
@@ -41,15 +41,17 @@ export class UserRequester extends RequesterBase {
   /**
    * Requête pour enregistrer un utilisateur
    * 
-   * @param body.name       Le nom de l'utilisateur
-   * @param body.mail       Le mail de l'utilisateur
-   * @param body.password   Le mot de passe de l'utilisateur
+   * @param body.name         Le nom de l'utilisateur
+   * @param body.mail         Le mail de l'utilisateur
+   * @param body.password     Le mot de passe de l'utilisateur
+   * @param body.theme_color  La couleur du theme de l'utilisateur
+   * @param body.theme_relief La relief du theme de l'utilisateur
    * 
    * @returns               la réponse compléte de la requête
    * 
-   * @version v1
+   * @version v2
    */
-  static async signIn(body : { name: string, mail : string, password: string}) : Promise<TResponse<TUser,string>>
+  static async signIn(body : { name: string, mail : string, password: string, theme_color : string, theme_relief: number}) : Promise<TResponse<TUser,string>>
   {
     const response = await UserRequester.base<TUser,string>(
       "users/register",
@@ -61,18 +63,20 @@ export class UserRequester extends RequesterBase {
   }
 
   /**
-   * Requête pour Modifier un profile utilisateur
+   * Requête pour Modifier un ou plusieurs paramètres du profile utilisateur
    * 
-   * @param body.name       Le nom de l'utilisateur
-   * @param body.mail       Le mail de l'utilisateur
-   * @param body.password   Le mot de passe de l'utilisateur
-   * @param token           le token de l'utilisateur
+   * @param body.name         ? Le nom de l'utilisateur
+   * @param body.mail         ? Le mail de l'utilisateur
+   * @param body.password     ? Le mot de passe de l'utilisateur
+   * @param body.theme_color  ? La couleur du theme de l'utilisateur
+   * @param body.theme_relief ? La relief du theme de l'utilisateur
+   * @param token             le token de l'utilisateur
    * 
    * @returns               la réponse compléte de la requête
    * 
-   * @version v1
+   * @version v2
    */
-  static async update(body : { name?: string, mail?: string, password?: string}, token : string) : Promise<TResponse<TUser,string>>
+  static async update(body : Partial<TUser & {password : string}>, token : string) : Promise<TResponse<TUser,string>>
   {
     const response = await UserRequester.base<TUser,string>(
       "users",

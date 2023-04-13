@@ -2,7 +2,7 @@
 /**
  * Type Utilisateur
  * 
- * @version v1
+ * @version v2
  */
 export type TUser = {
   id : number
@@ -10,4 +10,6 @@ export type TUser = {
   mail : string ,
   access : number ,
   token : string ,
+  theme_color : string,
+  theme_relief : number
 }

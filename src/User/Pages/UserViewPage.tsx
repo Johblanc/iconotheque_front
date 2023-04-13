@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext } from "react";
+import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { AppNav } from "../../App/Components/AppNav";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
@@ -6,59 +6,49 @@ import { IconItem } from "../../Path/Components/PathItem";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
-import { ThemeContext } from "../../Utilities/Contexts/Theme.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
+import { ThemeHandler } from "../Components/ThemeHandler";
+import { Requester } from "../../Utilities/Requester/Requester";
+import { ThemeContext } from "../../Utilities/Contexts/Theme.context";
+import { rgbToHex } from "../Modules/HexColo";
 
 /**
  * Page de Consultation de profil
  *
- * @version v1
+ * @version v2
  */
 export function UserViewPage(): JSX.Element {
   const { user } = useContext(UserContext);
   const { pathPrivate } = useContext(PathPrivateContext);
   const { pathPublic } = useContext(PathPublicContext);
-  const { theme, setTheme } = useContext(ThemeContext);
-
-  const SumPublished = pathPublic.filter(
-    (item) => item.user.name === user.name
-  ).length;
-  const SumCreated = SumPublished + pathPrivate.length;
+  const { theme } = useContext(ThemeContext);
 
   const icons = [
     ...pathPublic.filter((item) => item.user.name === user.name),
     ...pathPrivate,
   ];
 
-  const hexToRgb = (hex: string) => {
-    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-      let c = hex.substring(1).split("");
-      if (c.length === 3) {
-        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-      }
-      const result = Number("0x" + c.join(""));
-      return [(result >> 16) & 255, (result >> 8) & 255, result & 255];
-    }
-    throw new Error("Bad Hex");
-  };
+  const SumPublished = pathPublic.filter(
+    (item) => item.user.name === user.name
+  ).length;
+  const SumCreated = SumPublished + pathPrivate.length;
+  
+  /** Déclenchement d'une tentative d'Update */
 
-  const rgbcToHex = (r: number , g : number , b : number) => {
-    return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-  };
-
-  const handleColors = (event: ChangeEvent<HTMLInputElement>) => {
-    const newTheme = { ...theme };
-    [newTheme.red, newTheme.green, newTheme.blue] = hexToRgb(
-      event.target.value
+  const handleRequest = async () => 
+  {
+    await Requester.user.update({
+      theme_color : rgbToHex(
+        theme.red,
+        theme.green,
+        theme.blue
+      ) , 
+      theme_relief : theme.transparency
+    }, 
+    user.token
     );
-    setTheme(newTheme);
   };
 
-  const handleTransparency = (event: ChangeEvent<HTMLInputElement>) => {
-    const newTheme = { ...theme };
-    newTheme.transparency = Number(event.target.value);
-    setTheme(newTheme);
-  };
   const isAdmin = user.access > 1;
   return (
     <>
@@ -112,18 +102,14 @@ export function UserViewPage(): JSX.Element {
           </div>
         </span>
         <div className={APP_STYLE.PATH.SELECT.CADRE}>
-          <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Theme</h3>
-          <h4>Couleur :</h4>
-          <input type="color" onChange={handleColors} defaultValue={rgbcToHex(theme.red,theme.green,theme.blue)}></input>
-          <h4>Ombrage :</h4>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            defaultValue={theme.transparency}
-            onChange={handleTransparency}
-          ></input>
+          <ThemeHandler />
+          <button 
+          onClick={handleRequest}
+            className={APP_STYLE.APP.BTN_GOOD}
+            style={{maxWidth:"350px"}}
+          >
+            Définir thème par défaut
+          </button>
           <h3 className={APP_STYLE.PATH.SELECT.TITLE}>Mes Icônes</h3>
           <div className={APP_STYLE.PATH.SELECT.BOX}>
             {icons.map((item, i) => (
