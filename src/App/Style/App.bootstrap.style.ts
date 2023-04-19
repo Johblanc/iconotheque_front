@@ -51,7 +51,7 @@ export const PERSO = {
 /** 
  * Combinaison et class bootstrap 
  * 
- * @version v1
+ * @version v2
  * */
 export const BS_COMBO = {
   BTN_LARGE: `${BS.button()} w-100 ${PERSO.SHAD_ACTIVE}`,
@@ -64,8 +64,8 @@ export const BS_COMBO = {
   NAV_BOX_A: `collapse navbar-collapse`, // 
   NAV_BOX_B: `navbar-nav`,
 
-  INNER_SHAD_POS: `${BS.spacing( "both", 3 )} ${BS.round( 4 )} ${BS.background( "primary" )} ${PERSO.SHAD_IN_P}`,
-  INNER_SHAD_NEG: `${BS.spacing( "both", 3 )} ${BS.round( 4 )} ${BS.background( "secondary" )} ${PERSO.SHAD_IN_N}`,
+  INNER_SHAD_POS: `${BS.spacing( "m", 1, "x" )} ${BS.spacing( "m", 3, "y" )} ${BS.spacing( "p", 3 )} ${BS.round( 4 )} ${BS.background( "primary" )} ${PERSO.SHAD_IN_P}`,
+  INNER_SHAD_NEG: `${BS.spacing( "m", 1, "x" )} ${BS.spacing( "m", 3, "y" )} ${BS.spacing( "p", 3 )} ${BS.round( 4 )} ${BS.background( "secondary" )} ${PERSO.SHAD_IN_N}`,
 };
 
 /** 
