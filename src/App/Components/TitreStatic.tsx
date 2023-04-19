@@ -1,11 +1,16 @@
 
 
-
+/**
+ * Le Titre du site sans animation
+ * 
+ * @version v2
+ */
 export function TitreStatic() {
   return (
     <svg
-      className="m-2"
-      height="4em"
+      className=""
+      width={"400px"}
+      style={{maxWidth:"90vw"}}
       viewBox="-5 0 35 3.7"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
