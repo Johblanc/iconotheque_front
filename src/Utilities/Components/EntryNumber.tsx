@@ -24,6 +24,9 @@ export function EntryNumber(props: {
   /** CallBack de réglage de la valeur */
   setValue?: (value?: number, valid?: boolean) => void;
 
+  /** Les Class HTML */
+  className? : string ;
+
   /** Valeur minimale */
   min?: number;
 
@@ -36,8 +39,11 @@ export function EntryNumber(props: {
   /** Conditions de validations */
   validators?: { validator: (value: number) => boolean; message?: string }[];
 
+  /** Conditions de desactivation */
+  disabled? : boolean
+
 }): JSX.Element {
-  const { name, defaultValue, setValue, validators,min,max,step } = props;
+  const { name, defaultValue, setValue, validators,min,max,step,disabled,className } = props;
 
   /**
    * Contrôle de l'Entry avec les validateurs
@@ -84,18 +90,19 @@ export function EntryNumber(props: {
   };
 
   return (
-    <div className={APP_STYLE.APP.ENTRY.CADRE}>
+    <div className={`${APP_STYLE.APP.ENTRY.CADRE} ${className}`}>
       <div className={APP_STYLE.APP.ENTRY.BOX}>
-        <label className={APP_STYLE.APP.ENTRY.LABEL}>{name}</label>
+        <label className={`${APP_STYLE.APP.ENTRY.LABEL} ${disabled ? "visual-disabled" : "" }`} >{name}</label>
 
         <input
           type="number"
           className={APP_STYLE.APP.ENTRY.INPUT}
           onChange={(e) => handleVerificator(Number(e.target.value))}
-          defaultValue={defaultValue}
+          value={defaultValue}
           min={min}
           max={max}
           step={step}
+          disabled={disabled}
         />
       </div>
       <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
