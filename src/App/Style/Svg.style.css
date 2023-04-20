@@ -1,5 +1,3 @@
-
-
 svg * {
   transition: all 0s;
 }
@@ -37,102 +35,151 @@ svg * {
 }
 
 .stroke-dark {
-  stroke: var(--dark) ;
-  stroke-width: 1px ;
+  stroke: var(--dark);
+  stroke-width: 1px;
 }
 
 .stroke-info {
-  stroke: var(--info) ;
-  stroke-width: 1px ;
+  stroke: var(--info);
+  stroke-width: 1px;
 }
 
 .stroke-secondary {
-  stroke: var(--secondary) ;
-  stroke-width: 1px ;
+  stroke: var(--secondary);
+  stroke-width: 1px;
 }
 
 .stroke-primary {
-  stroke: var(--primary) ;
-  stroke-width: 1px ;
+  stroke: var(--primary);
+  stroke-width: 1px;
 }
 
 .stroke-light {
-  stroke: var(--light) ;
-  stroke-width: 1px ;
+  stroke: var(--light);
+  stroke-width: 1px;
 }
 
 .stroke-danger {
-  stroke: var(--danger) ;
-  stroke-width: 1px ;
+  stroke: var(--danger);
+  stroke-width: 1px;
 }
 
 .stroke-warning {
-  stroke: var(--warning) ;
-  stroke-width: 1px ;
+  stroke: var(--warning);
+  stroke-width: 1px;
 }
 
 .stroke-success {
-  stroke: var(--success) ;
-  stroke-width: 1px ;
+  stroke: var(--success);
+  stroke-width: 1px;
 }
 
 .logo-back {
-  fill: var(--light) ;
-  stroke: var(--secondary) ;
-  stroke-width: 1px ;
+  fill: var(--light);
+  stroke: var(--secondary);
+  stroke-width: 1px;
 }
 
 .logo-front {
-  fill: var(--info) ;
-  stroke: var(--dark) ;
-  stroke-width: 1px ;
+  fill: var(--info);
+  stroke: var(--dark);
+  stroke-width: 1px;
 }
 
 .title-a {
-  fill: #ffffff ;
+  fill: #ffffff;
   stop-color: #ffffff
 }
 
 .title-b {
-  fill: rgb(
-    calc(calc(var(--base-red)+255)/2),
-    calc(calc(var(--base-green)+255)/2),
-    calc(calc(var(--base-blue)+255)/2)
-  ) ;
-  stop-color: rgb(
-    calc(calc(var(--base-red)+255)/2),
-    calc(calc(var(--base-green)+255)/2),
-    calc(calc(var(--base-blue)+255)/2)
-  ) ;
+  fill: rgb(calc(calc(var(--base-red)+255)/2),
+      calc(calc(var(--base-green)+255)/2),
+      calc(calc(var(--base-blue)+255)/2));
+  stop-color: rgb(calc(calc(var(--base-red)+255)/2),
+      calc(calc(var(--base-green)+255)/2),
+      calc(calc(var(--base-blue)+255)/2));
 }
 
 .title-c {
-  fill: rgb(
-    var(--base-red),
-    var(--base-green),
-    var(--base-blue)
-  ) ;
-  stop-color: rgb(
-    var(--base-red),
-    var(--base-green),
-    var(--base-blue)
-  ) ;
+  fill: rgb(var(--base-red),
+      var(--base-green),
+      var(--base-blue));
+  stop-color: rgb(var(--base-red),
+      var(--base-green),
+      var(--base-blue));
 }
 
 .title-d {
-  fill: rgb(
-    calc(var(--base-red)/2),
-    calc(var(--base-green)/2),
-    calc(var(--base-blue)/2)
-  ) ;
-  stop-color: rgb(
-    calc(var(--base-red)/2),
-    calc(var(--base-green)/2),
-    calc(var(--base-blue)/2)
-  ) ;
+  fill: rgb(calc(var(--base-red)/2),
+      calc(var(--base-green)/2),
+      calc(var(--base-blue)/2));
+  stop-color: rgb(calc(var(--base-red)/2),
+      calc(var(--base-green)/2),
+      calc(var(--base-blue)/2));
 }
 
 .title-e {
-  fill: #000000 ;
+  fill: #000000;
   stop-color: #000000
+}
+
+
+.gp-point {
+  stroke: #88888888;
+  fill: #44444444;
+}
+
+.gp-point-include {
+  stroke: #8888FFFF;
+  fill: #66666666;
+}
+
+.gp-point-selected {
+  stroke: #FF8888FF;
+  fill: #88888888;
+}
+
+.gp-point:hover,
+.gp-point-include:hover,
+.gp-point-selected:hover {
+  stroke: #FF8888FF;
+  fill: #88888888;
+}
+
+
+.gp-line {
+  stroke: #88888888;
+  fill: none;
+}
+
+.gp-line-include {
+  stroke: #448844FF;
+  fill: none;
+}
+
+.gp-line:hover,
+.gp-line-include:hover {
+  stroke: #FF8888FF;
+  fill: none;
+}
+
+
+.gp-form {
+  stroke: #888888;
+  fill: #333333;
+}
+
+.gp-form-selected {
+  stroke: #888888;
+  fill: #00004488;
+}
+
+.gp-form:hover,
+.gp-form-selected:hover {
+  stroke: #888888;
+  fill: #44000088;
+}
+
+.svg-trans-color * {
+  transition: fill 0.5s, stroke 0.5s;
 }

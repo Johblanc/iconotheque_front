@@ -19,7 +19,10 @@
   transition: all 0.5s;
 }
 
-
+input:disabled {
+  background-color: var(--primary) !important;
+  color: var(--lighter) !important;
+}
 
 .alt-font {
   font-family: "pointfree";
@@ -37,5 +40,50 @@
   transform: rotate3d(-1, 0.3, 0.2, 25deg); 
 }
 
+
+
+/* width */
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: var(--info);
+  box-shadow:
+    inset -5px -5px 5px var(--lighter),
+    inset 5px 5px 5px var(--darker);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #888;
+  box-shadow:
+    inset -5px -5px 5px var(--darker),
+    inset 5px 5px 5px var(--lighter);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.path-group-box {
+  max-width: 100%;
+}
+
+
+.path-group-limiter {
+  overflow: scroll hidden ;
+  padding-bottom: 5px;
+  
+}
+
+.visual-disabled {
+  opacity: 0.3 !important; 
+}
 
 

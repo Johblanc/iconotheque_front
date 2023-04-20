@@ -36,7 +36,7 @@
 
 
 .width-extend {
-  min-width: 280px;
+  min-width: 250px;
   width: auto;
 }
 
@@ -51,5 +51,17 @@
 
 .h-min {
   min-height: 15em !important;
+}
+
+@media (min-width: 1400px) {
+  .path-name-width {
+    min-width: 500px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .d-xxxl-flex {
+    display: flex;
+  }
 }
 
