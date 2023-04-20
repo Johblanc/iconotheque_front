@@ -276,4 +276,58 @@ export class GraphiPoint {
   get copy() {
     return new GraphiPoint(this);
   }
+
+  static losange (xCentre: number, yCentre:number, width : number, height : number){
+
+    const x = xCentre ;
+    const y = yCentre ;
+
+    /** demi largeur */
+    const hw = width / 2 ;
+
+    /** demi hauteu */
+    const hh = height / 2 ;
+
+    return `m ${x - hw} ${y} ${ hw} ${ - hh} ${ hw} ${ hh} ${ - hw} ${ hh } z `
+  }
+
+  static circle (xCentre: number, yCentre:number, width : number, height : number){
+
+    const x = xCentre ;
+    const y = yCentre ;
+
+    /** demi largeur */
+    const hw = width / 2 ;
+
+    /** demi hauteur */
+    const hh = height / 2 ;
+
+    /** quart largeur */
+    const qw = width / 4 ;
+
+    /** quart hauteur */
+    const qh = height / 4 ;
+
+    return `m ${x - hw} ${y} c 0 0 0 ${ - hh} ${ hw} ${ - hh} c ${ hw} 0 ${ hw} ${ hh} ${ hw} ${ hh} c 0 0 0 ${ hh } ${ - hw} ${ hh } c ${ -hw} 0 ${ -hw} ${ -hh} ${ -hw} ${ -hh} z `
+  }
+
+  static doux (xCentre: number, yCentre:number, width : number, height : number){
+
+    const x = xCentre ;
+    const y = yCentre ;
+
+    /** demi largeur */
+    const hw = width / 2 ;
+
+    /** demi hauteur */
+    const hh = height / 2 ;
+
+    /** quart largeur */
+    const qw = width / 4 ;
+
+    /** quart hauteur */
+    const qh = height / 4 ;
+
+    return `m ${x - hw} ${y} c 0 0 0 ${ - hh} ${ hw} ${ - hh} c 0 0 0 ${ hh} ${ hw} ${ hh} c 0 0 0 ${ hh } ${ - hw} ${ hh } c 0 0 0 ${ -hh} ${ -hw} ${ -hh} z `
+  }
 }

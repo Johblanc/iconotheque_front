@@ -34,6 +34,10 @@ svg * {
   fill: var(--success)
 }
 
+.fill-none {
+  fill: none
+}
+
 .stroke-dark {
   stroke: var(--dark);
   stroke-width: 1px;
@@ -72,6 +76,11 @@ svg * {
 .stroke-success {
   stroke: var(--success);
   stroke-width: 1px;
+}
+
+.stroke-none {
+  stroke: none ;
+  stroke-width: 0px;
 }
 
 .logo-back {

@@ -42,8 +42,8 @@ export const PERSO = {
   BTN_BIG : "btn-big",
 
   /** Bootstrap pour svg fill*/
-  FILL : (color : TBsColor) => `fill-${color}`,
-  STROKE : (color : TBsColor) => `stroke-${color}`,
+  FILL : (color : TBsColor | "none") => `fill-${color}`,
+  STROKE : (color : TBsColor | "none") => `stroke-${color}`,
 
   /** rotation on hover */
   ICON_ITEM : "icon-item" ,
@@ -148,6 +148,12 @@ export const APP_STYLE = {
       VBACTIF : {
         VISIBLE : PERSO.STROKE( "warning" ),
         ACTIF : PERSO.STROKE( "danger" )
+      },
+      POINTVIEW : {
+        LINE : PERSO.STROKE("danger") ,
+        SIDE : `${PERSO.FILL("danger")} ${PERSO.STROKE("danger")}`,
+        POINT : `${PERSO.FILL("info")} ${PERSO.STROKE("info")}`
+
       }
     }
   },
