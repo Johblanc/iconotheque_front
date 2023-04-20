@@ -153,8 +153,14 @@ export const APP_STYLE = {
         LINE : PERSO.STROKE("danger") ,
         SIDE : `${PERSO.FILL("danger")} ${PERSO.STROKE("danger")}`,
         POINT : `${PERSO.FILL("info")} ${PERSO.STROKE("info")}`
-
-      }
+      },
+      GROUPVIEW : {
+        LINE : `${PERSO.STROKE("warning")} ${PERSO.FILL("none")}`,
+        LINESELECT : `${PERSO.STROKE("success")} ${PERSO.FILL("none")}`,
+        POINT : `${PERSO.STROKE('info')} ${PERSO.FILL("info")}` ,
+        POINTINCLUDE : `${PERSO.STROKE("warning")} ${PERSO.FILL("warning")}` ,
+        POINTSELECTED : `${PERSO.STROKE("success")} ${PERSO.FILL("success")}`
+      },
     }
   },
   TRANSITION : {
