@@ -41,8 +41,9 @@ export const PERSO = {
   /** Gros Bouton */
   BTN_BIG : "btn-big",
 
-  /** Bootstrap pour svg */
+  /** Bootstrap pour svg fill*/
   FILL : (color : TBsColor) => `fill-${color}`,
+  STROKE : (color : TBsColor) => `stroke-${color}`,
 
   /** rotation on hover */
   ICON_ITEM : "icon-item" ,
@@ -137,6 +138,17 @@ export const APP_STYLE = {
       ICON_BG: `${BS.round("pill")} ${BS.spacing("p", 5)} ${BS.spacing("m", 2)} ${PERSO.SHAD_LARGE}`,
       P: `${BS.spacing("both", 2)} ${BS.round()} ${BS.background( "primary" )} ${PERSO.ALT_FONT}`,
       DROWN: PERSO.FILL("dark"),
+    },
+    GRAPH : {
+      BG : {
+        EXTENDVIEWBOX : PERSO.FILL("primary"),
+        VIEWBOX : PERSO.FILL("light"),
+        AXE : PERSO.STROKE("secondary")
+      },
+      VBACTIF : {
+        VISIBLE : PERSO.STROKE( "warning" ),
+        ACTIF : PERSO.STROKE( "danger" )
+      }
     }
   },
   TRANSITION : {

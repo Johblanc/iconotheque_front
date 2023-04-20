@@ -1,3 +1,4 @@
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { ExtendVB } from "../class/ExtendVB";
 
 
@@ -18,6 +19,7 @@ export function PathGraphicBackGround(props : { viewbox : ExtendVB }){
           y={vb.exY}
           width={vb.exWidth}
           height={vb.exHeight}
+          className={APP_STYLE.PATH.GRAPH.BG.EXTENDVIEWBOX}
         />
         {/* Background ViewBox*/}
         <rect
@@ -25,22 +27,20 @@ export function PathGraphicBackGround(props : { viewbox : ExtendVB }){
           y={vb.y}
           width={vb.width}
           height={vb.height}
-          style={{
-            fill: "#222222",
-          }}
+          className={APP_STYLE.PATH.GRAPH.BG.VIEWBOX}
         />
         {/* Visualisation l'axe x*/}
         <path
+          className={APP_STYLE.PATH.GRAPH.BG.AXE}
           style={{
-            stroke: "#333333",
             strokeWidth: vb.sizeRef / 200,
           }}
           d={`m ${vb.exX} 0 h ${vb.exWidth}`}
         />
         {/* Visualisation l'axe y*/}
         <path
+          className={APP_STYLE.PATH.GRAPH.BG.AXE}
           style={{
-            stroke: "#333333",
             strokeWidth: vb.sizeRef / 200,
           }}
           d={`m 0 ${vb.exY} v ${vb.exHeight}`}
