@@ -19,7 +19,7 @@ export function EntryNumber(props: {
   name?: string;
 
   /** Valeur par défaut */
-  defaultValue?: number;
+  value?: number;
 
   /** CallBack de réglage de la valeur */
   setValue?: (value?: number, valid?: boolean) => void;
@@ -43,7 +43,7 @@ export function EntryNumber(props: {
   disabled? : boolean
 
 }): JSX.Element {
-  const { name, defaultValue, setValue, validators,min,max,step,disabled,className } = props;
+  const { name, value, setValue, validators,min,max,step,disabled,className } = props;
 
   /**
    * Contrôle de l'Entry avec les validateurs
@@ -60,7 +60,7 @@ export function EntryNumber(props: {
   };
 
   /** Gestion du message d'erreur */
-  const [message, setMessage] = useState(validate(defaultValue || 0));
+  const [message, setMessage] = useState(validate(value || 0));
 
   /** Permet le refresh du composant lorsque les validateurs changent (pour samePassword par exemple)*/
   useEffect(() => {
@@ -70,13 +70,13 @@ export function EntryNumber(props: {
           if (!item.validator(value)) return item.message || "Erreur";
       return "";
     };
-    const newMessage = validate(defaultValue || 0);
+    const newMessage = validate(value || 0);
 
     if (message !== newMessage) {
-      setValue && setValue(defaultValue || 0, newMessage === "");
+      setValue && setValue(value || 0, newMessage === "");
       setMessage(newMessage);
     }
-  }, [validators, defaultValue,message,setValue]);
+  }, [validators, value,message,setValue]);
 
   /**
    * Losrque l'utilisateur change la valeur de l'Entry
@@ -98,7 +98,7 @@ export function EntryNumber(props: {
           type="number"
           className={APP_STYLE.APP.ENTRY.INPUT}
           onChange={(e) => handleVerificator(Number(e.target.value))}
-          value={defaultValue}
+          value={value}
           min={min}
           max={max}
           step={step}

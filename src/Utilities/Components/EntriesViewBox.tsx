@@ -3,8 +3,10 @@ import { EntryNumber } from "./EntryNumber";
 
 
 export function EntriesViewBox( props : {
-  defaultValue : string
-  setValue?: (value?: string, valid?: boolean) => void;
+  defaultValue : string,
+  setValue?: (value?: string, valid?: boolean) => void,
+  setActive?: (value : "" | "x" | "y" | "width" | "height" ) => void
+  className? : string
 }
 ){
   const [vbValues , setVbValues] = useState(props.defaultValue.split(" "))
@@ -19,29 +21,37 @@ export function EntriesViewBox( props : {
 
 
   return (
-    <div className="d-lg-flex">
+    <div className={props.className} onMouseLeave={() => props.setActive && props.setActive("")}>
+      <div onMouseEnter={() => props.setActive && props.setActive("x")}>
       <EntryNumber 
         name="X Origine"
-        defaultValue={Number(vbValues[0])}
+        value={Number(vbValues[0])}
         setValue={(value? : number , valid? : boolean)=>handleViewBox(0,value,valid)}
       />
+      </div>
+      <div onMouseEnter={() => props.setActive && props.setActive("y")}>
       <EntryNumber 
         name="Y Origine"
-        defaultValue={Number(vbValues[1])}
+        value={Number(vbValues[1])}
         setValue={(value? : number , valid? : boolean)=>handleViewBox(1,value,valid)}
       />
+      </div>
+      <div onMouseEnter={() => props.setActive && props.setActive("width")}>
       <EntryNumber 
         name="Largeur"
-        defaultValue={Number(vbValues[2])}
+        value={Number(vbValues[2])}
         min={0}
         setValue={(value? : number , valid? : boolean)=>handleViewBox(2,value,valid)}
       />
+      </div>
+      <div onMouseEnter={() => props.setActive && props.setActive("height")}>
       <EntryNumber 
         name="Hauteur"
-        defaultValue={Number(vbValues[3])}
+        value={Number(vbValues[3])}
         min={0}
         setValue={(value? : number , valid? : boolean)=>handleViewBox(3,value,valid)}
       />
+      </div>
     </div>
   )
 }
