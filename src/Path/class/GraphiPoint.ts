@@ -302,12 +302,6 @@ export class GraphiPoint {
     /** demi hauteur */
     const hh = height / 2 ;
 
-    /** quart largeur */
-    const qw = width / 4 ;
-
-    /** quart hauteur */
-    const qh = height / 4 ;
-
     return `m ${x - hw} ${y} c 0 0 0 ${ - hh} ${ hw} ${ - hh} c ${ hw} 0 ${ hw} ${ hh} ${ hw} ${ hh} c 0 0 0 ${ hh } ${ - hw} ${ hh } c ${ -hw} 0 ${ -hw} ${ -hh} ${ -hw} ${ -hh} z `
   }
 
@@ -321,12 +315,6 @@ export class GraphiPoint {
 
     /** demi hauteur */
     const hh = height / 2 ;
-
-    /** quart largeur */
-    const qw = width / 4 ;
-
-    /** quart hauteur */
-    const qh = height / 4 ;
 
     return `m ${x - hw} ${y} c 0 0 0 ${ - hh} ${ hw} ${ - hh} c 0 0 0 ${ hh} ${ hw} ${ hh} c 0 0 0 ${ hh } ${ - hw} ${ hh } c 0 0 0 ${ -hh} ${ -hw} ${ -hh} z `
   }

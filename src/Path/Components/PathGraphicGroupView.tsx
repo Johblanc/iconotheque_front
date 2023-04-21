@@ -1,4 +1,4 @@
-import { APP_STYLE, PERSO } from "../../App/Style/App.bootstrap.style";
+import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { ExtendVB } from "../class/ExtendVB";
 import { GraphiFormOptions } from "../class/GraphiFormOptions";
 import { GraphiGroup } from "../class/GraphiGroup";

@@ -1,4 +1,4 @@
-import { TOptions, TOptionKeyBool, TOptionKeyNum, TOptionKey } from "../Types/TOptions";
+import { TOptions, TOptionKey } from "../Types/TOptions";
 
 
 export class Options {
