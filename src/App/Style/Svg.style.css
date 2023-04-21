@@ -192,3 +192,7 @@ svg * {
 .svg-trans-color * {
   transition: fill 0.5s, stroke 0.5s, stroke-width 0.5s;
 }
+.svg-canvas {
+  width: 100%;
+  max-height: "90vh";
+}

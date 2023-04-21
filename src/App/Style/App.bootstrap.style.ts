@@ -56,7 +56,8 @@ export const PERSO = {
 
   XXXLFLEX : "d-xxxl-flex",
 
-  VISUALDISABLED : "visual-disabled"
+  VISUALDISABLED : "visual-disabled",
+  SVGCANVAS : "svg-canvas"
 };
 
 /** 
@@ -163,6 +164,14 @@ export const APP_STYLE = {
       DROWN: PERSO.FILL("dark"),
     },
     GRAPH : {
+      BASE : {
+        CADRE : `${BS.FLEX.CONTAINER.flex({behavior : {breakPoint : "xl"} })} w-100`,
+        BIGBOX : BS_COMBO.INNER_SHAD_POS,
+        SMALLBOX : BS_COMBO.INNER_SHAD_NEG,
+        SVGBOX : `w-100`,
+        SVG : `${PERSO.SVGCANVAS} ${PERSO.SVG_TRANS_COLOR} w-100`,
+        PATH : PERSO.FILL("dark")
+      },
       BG : {
         EXTENDVIEWBOX : PERSO.FILL("primary"),
         VIEWBOX : PERSO.FILL("light"),
