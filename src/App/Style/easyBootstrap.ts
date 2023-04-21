@@ -513,4 +513,13 @@ export const BS = {
     return `btn${addBackGroung}${addOutline}${addSize}${addState}`
   },
 
+  dropdown : (target : "" | "toggle" | "menu" | "item") => {
+    if (target === "") {
+      return "dropdown" ;
+    }
+    else
+    {
+      return `dropdown-${target}`
+    }
+  }
 };

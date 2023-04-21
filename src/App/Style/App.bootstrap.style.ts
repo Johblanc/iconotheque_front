@@ -41,12 +41,22 @@ export const PERSO = {
   /** Gros Bouton */
   BTN_BIG : "btn-big",
 
+  PATH_GROUP_BOX : "path-group-box",
+  PATH_GROUP_LIMITER : "path-group-limiter",
+  SVG_TRANS_COLOR : "svg-trans-color",
+
   /** Bootstrap pour svg fill*/
   FILL : (color : TBsColor | "none") => `fill-${color}`,
   STROKE : (color : TBsColor | "none") => `stroke-${color}`,
 
   /** rotation on hover */
   ICON_ITEM : "icon-item" ,
+
+  CUSOR : "cursered",
+
+  XXXLFLEX : "d-xxxl-flex",
+
+  VISUALDISABLED : "visual-disabled"
 };
 
 /** 
@@ -81,6 +91,8 @@ export const APP_STYLE = {
     BTN_LARGE: `${BS_COMBO.BTN_LARGE}`,
     BTN_GOOD: `${BS_COMBO.BTN_LARGE} ${BS.spacing("both", 2, "y")}`,
     BTN_BAD: `${BS_COMBO.BTN_LARGE} ${BS.spacing("both", 2, "y")} ${PERSO.BTN_BAD}`,
+    XXXLFLEX : PERSO.XXXLFLEX,
+    VISUALDISABLED : PERSO.VISUALDISABLED,
     ENTRY: {
       CADRE: BS.spacing("both", 2, "y"),
       BOX: `input-group ${BS.round()}`,
@@ -88,6 +100,11 @@ export const APP_STYLE = {
       LABEL: `w-100 ${BS.spacing( "p", 2 )} ${BS.background( "secondary" )} ${BS.color( "dark" )} ${PERSO.SHAD_IN_P} ${BS.round(1,"top")}`,
       INPUT: `w-100 ${BS.spacing( "p", 2 )} ${BS.background( "light" )} ${BS.color( "dark" )} ${BS.round(1,"bottom")} ${PERSO.ALT_FONT}`,
       TA: `w-100 ${BS.spacing( "p", 2 )}  ${BS.background( "light" )} ${BS.color( "dark" )} ${BS.round(1,"bottom")} ${PERSO.H_MIN} ${PERSO.ALT_FONT}`,
+      DOUBLE : {
+        BOX : BS.FLEX.CONTAINER.flex(),
+        LEFT : `${BS.spacing("p", 2 , ["y","s"])}`,
+        RIGHT : `${BS.spacing("p", 2 , ["y","e"])}`
+      },
     },
     NAV: {
       CADRE: `${BS_COMBO.NAV_CADRE} ${BS.background( "secondary" )} ${PERSO.SHAD_NAV}`,
@@ -98,6 +115,12 @@ export const APP_STYLE = {
       BOX_B: `${BS_COMBO.NAV_BOX_B}`,
       ITEM: `${BS.spacing("both", 2)} ${BS.button()} ${PERSO.SHAD_ACTIVE}`,
     },
+    DROPDOWN : {
+      BASE    : BS.dropdown(""),
+      BUTTON  : `${BS.dropdown("toggle")} ${BS.button()} ${PERSO.SHAD_ACTIVE} ${BS.spacing("m", 2)}`,
+      MENU    : BS.dropdown("menu"),
+      ITEM    : `${BS.dropdown("item")} ${PERSO.CUSOR}`,
+    }
   },
   USER: {
     LOGIN: {
@@ -161,6 +184,20 @@ export const APP_STYLE = {
         POINTINCLUDE : `${PERSO.STROKE("warning")} ${PERSO.FILL("warning")}` ,
         POINTSELECTED : `${PERSO.STROKE("success")} ${PERSO.FILL("success")}`
       },
+      GROUPHAND : {
+        CADRE : `${BS.FLEX.CONTAINER.flex({ behavior: {}, wrap: {} })}`,
+        BOX :   `${PERSO.PATH_GROUP_BOX} ${BS_COMBO.INNER_SHAD_POS}`,
+        LIMITED : PERSO.PATH_GROUP_LIMITER,
+        GROUPVIEW : PERSO.SVG_TRANS_COLOR,
+        GROUPSELECTED : `${PERSO.STROKE("success")} ${PERSO.FILL("none")}`,
+        GROUPNOTSELECTED : `${PERSO.STROKE("warning")} ${PERSO.FILL("none")}`,
+        POINTSELECTED : `${PERSO.STROKE("success")} ${PERSO.FILL("secondary")}`,
+        POINTNOTSELECTED : `${PERSO.STROKE("warning")} ${PERSO.FILL("primary")}`,
+        GROUPBOX : BS_COMBO.INNER_SHAD_NEG ,
+        CHECKLABEL : `${ BS.color("dark")} ${BS.spacing("p",2)}`,
+        BUTTONBOX :  `${BS.FLEX.CONTAINER.flex({behavior:{},wrap:{}, justify : {name:"center"} })}`,
+        BUTTON :  `${BS.button()} ${PERSO.SHAD_ACTIVE} ${BS.spacing("m",2)}`
+      }
     }
   },
   TRANSITION : {

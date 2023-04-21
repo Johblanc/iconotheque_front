@@ -190,5 +190,5 @@ svg * {
 }
 
 .svg-trans-color * {
-  transition: fill 0.5s, stroke 0.5s;
+  transition: fill 0.5s, stroke 0.5s, stroke-width 0.5s;
 }

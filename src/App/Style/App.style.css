@@ -86,4 +86,7 @@ input:disabled {
   opacity: 0.3 !important; 
 }
 
+.cursered {
+  cursor: pointer;
+}
 
