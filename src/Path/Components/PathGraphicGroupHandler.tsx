@@ -70,7 +70,7 @@ export function PathGraphicGroupHandler(props: {
   } ;
   
   /** Déplacer un groupe vers l'amont */
-  const formPosUp = ( e : React.MouseEvent ) => {
+  const groupPosUp = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints = [...graphyPoints].map(item => item.copy) ;
     const temp = newPoints[inModif.groupe].copy ;
@@ -81,7 +81,7 @@ export function PathGraphicGroupHandler(props: {
   } ;
   
   /** Déplacer un groupe vers l'aval */
-  const formPosDown = ( e : React.MouseEvent ) => {
+  const groupPosDown = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints = [...graphyPoints].map(item => item.copy) ;
     const temp = newPoints[inModif.groupe].copy ;
@@ -92,7 +92,7 @@ export function PathGraphicGroupHandler(props: {
   } ;
 
   /** Copier un groupe */
-  const formCopy = ( e : React.MouseEvent ) => {
+  const groupCopy = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints : GraphiGroup[] = [] ;
     graphyPoints.forEach( ( item, i ) => {
@@ -106,7 +106,7 @@ export function PathGraphicGroupHandler(props: {
   } ;
   
   /** Supprimer un groupe */
-  const formRemove = ( e : React.MouseEvent ) => {
+  const groupRemove = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints : GraphiGroup[] = [] ;
     graphyPoints.forEach( ( item, i ) => {
@@ -119,7 +119,7 @@ export function PathGraphicGroupHandler(props: {
   } ;
   
   /** Raccoder au groupe précédent */
-  const formLinkUp = ( e : React.MouseEvent ) => {
+  const groupLinkUp = ( e : React.MouseEvent ) => {
     e.preventDefault() 
     const newPoints = [...graphyPoints].map(item => item.copy) ;
     const temp = newPoints[inModif.groupe].copy ;
@@ -132,7 +132,8 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe-1 , item : inModif.item })
   } ;
   
-  const formLinkDown =  ( e : React.MouseEvent ) => {
+  /** Raccoder au groupe suivant */
+  const groupLinkDown = ( e : React.MouseEvent ) => {
     e.preventDefault() 
     const newPoints = [...graphyPoints].map(item => item.copy) ;
     const temp = newPoints[inModif.groupe].copy ;
@@ -266,42 +267,42 @@ export function PathGraphicGroupHandler(props: {
         </label>
         <div className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTONBOX}>
           <button 
-            onClick={formPosUp}
+            onClick={groupPosUp}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
             disabled={inModif.groupe === -1 || inModif.groupe === 0 }
           >
             Déplacer vers l'amont
           </button>
           <button 
-            onClick={formPosDown}
+            onClick={groupPosDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
             disabled={inModif.groupe === -1 || inModif.groupe === graphyPoints.length - 1 }
           >
             Déplacer vers l'aval
           </button>
           <button 
-            onClick={formCopy}
+            onClick={groupCopy}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
             disabled={inModif.groupe === -1}
           >
             Copier
           </button>
           <button 
-            onClick={formRemove}
+            onClick={groupRemove}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
             disabled={inModif.groupe === -1 || graphyPoints.length <= 1 }
           >
             Supprimer
           </button>
           <button 
-            onClick={formLinkUp}
+            onClick={groupLinkUp}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
             disabled={inModif.groupe === -1 || inModif.groupe === 0 }
           >
             Raccoder au groupe précédent
           </button>
           <button 
-            onClick={formLinkDown}
+            onClick={groupLinkDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
             disabled={inModif.groupe === -1 || inModif.groupe === graphyPoints.length - 1 }
           >
