@@ -104,8 +104,16 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe + 1 , item : inModif.item})
   } ;
   
-  const formRemove = () => {
-
+  const formRemove = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newPoints : GraphiGroup[] = [] ;
+    graphyPoints.forEach( ( item, i ) => {
+      if ( i !== inModif.groupe ){
+        newPoints.push(item.copy)
+      }
+    })
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : - 1 , item : - 1 })
   } ;
   
   const formLinkUp = () => {
@@ -261,7 +269,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={formRemove}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.groupe === -1 || graphyPoints.length <= 1 }
           >
             Supprimer
           </button>
