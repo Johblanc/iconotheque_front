@@ -69,6 +69,7 @@ export function PathGraphicGroupHandler(props: {
     setGraphyPoints(newPoints);
   } ;
   
+  /** Déplacer la forme vers l'amont */
   const formPosUp = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints = [...graphyPoints].map(item => item.copy) ;
@@ -79,6 +80,7 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe - 1 , item : inModif.item})
   } ;
   
+  /** Déplacer la forme vers l'aval */
   const formPosDown = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints = [...graphyPoints].map(item => item.copy) ;
@@ -89,8 +91,17 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe + 1 , item : inModif.item})
   } ;
   
-  const formCopy = () => {
-
+  const formCopy = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newPoints : GraphiGroup[] = [] ;
+    graphyPoints.forEach( ( item, i ) => {
+      if ( i === inModif.groupe ){
+        newPoints.push(item.copy)
+      }
+      newPoints.push(item.copy)
+    })
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : inModif.groupe + 1 , item : inModif.item})
   } ;
   
   const formRemove = () => {
