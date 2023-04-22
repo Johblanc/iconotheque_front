@@ -69,8 +69,14 @@ export function PathGraphicGroupHandler(props: {
     setGraphyPoints(newPoints);
   } ;
   
-  const formPosUp = () => {
-
+  const formPosUp = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newPoints = [...graphyPoints].map(item => item.copy) ;
+    const temp = newPoints[inModif.groupe].copy ;
+    newPoints[inModif.groupe] = newPoints[inModif.groupe - 1].copy ;
+    newPoints[inModif.groupe - 1] = temp ;
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : inModif.groupe - 1 , item : inModif.item})
   } ;
   
   const formPosDown = () => {
@@ -217,36 +223,42 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={formPosUp}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1 || inModif.groupe === 0 }
           >
             Déplacer vers l'amont
           </button>
           <button 
             onClick={formPosDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Déplacer vers l'aval
           </button>
           <button 
             onClick={formCopy}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Copier
           </button>
           <button 
             onClick={formRemove}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Supprimer
           </button>
           <button 
             onClick={formLinkUp}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Raccoder au groupe précédent
           </button>
           <button 
             onClick={formLinkDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Raccoder au groupe suivant
           </button>
@@ -260,42 +272,49 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={pointPosUp}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Déplacer vers l'amont
           </button>
           <button 
             onClick={pointPosDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Déplacer vers l'aval
           </button>
           <button 
             onClick={pointCopy}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Copier
           </button>
           <button 
             onClick={pointRemove}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Supprimer
           </button>
           <button 
             onClick={pointToGroupOrigin}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Définir comme Origine du Groupe
           </button>
           <button 
             onClick={pointToFormOrigin}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Définir comme Origine de la Forme
           </button>
           <button 
             onClick={pointUnlick}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+            disabled={inModif.groupe === -1}
           >
             Séparer du groupe
           </button>
