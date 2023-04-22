@@ -1,4 +1,3 @@
-
 import { useContext, useState } from "react";
 import { Form } from "react-router-dom";
 import { AppHeader } from "../../App/Components/AppHeader";
@@ -14,6 +13,9 @@ import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 import { EntriesViewBox } from "../../Utilities/Components/EntriesViewBox";
+import { PathGraphic } from "../Components/PathGraphic";
+import { SvgPathServices } from "../class/SvgPathServices";
+//import { parsePath, serializeInstructions } from "@remotion/paths";
 
 /**
  * Page de mise à jour d'une Forme
@@ -29,6 +31,9 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
 
   const { pathPublic, setPathPublic } = useContext(PathPublicContext);
   const { pathPrivate, setPathPrivate } = useContext(PathPrivateContext);
+  const [inAdvance, setInAdvance] = useState(false);
+
+  const [actif, setActif] = useState<"" | "x" | "y" | "width" | "height">("");
 
   const { setTransition } = useContext(TransitionContext);
 
@@ -67,8 +72,24 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
     valid?: boolean
   ) => {
     const newLogBody = { ...updateBody };
-    if (value !== undefined) newLogBody[key] = value;
+    if (value !== undefined) {
+
+      if (key === "d") {
+
+        const newMessage = SvgPathServices.findErrors(value)
+        if (newMessage === "") {
+          newLogBody[key] = value;
+        }
+        else {
+          newLogBody[key] = "";
+        }
+        setMessage(newMessage)
+      } else {
+        newLogBody[key] = value;
+      }
+    }
     setUpdateBody(newLogBody);
+
     const newLogValid = { ...updateValid };
     if (valid !== undefined) newLogValid[key] = valid;
     setUpdateValid(newLogValid);
@@ -79,111 +100,175 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
   const handleRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (path.id !== -1){ // Update
+    if (path.id !== -1) {
+      // Update
 
-      const response = await Requester.path.update(path.id,updateBody,user.token) ;
-  
-      if (response.data){
-        setPathPublic(pathPublic.map(item => {
-          if (item.id === response.data.id){
-            return response.data
-          }
-          return item
-        }))
-        setPathPrivate(pathPrivate.map(item => {
-          if (item.id === response.data.id){
-            return response.data
-          }
-          return item
-        }))
-        setMessage("")
-  
-        setTransition({to : `/paths/view/${path.id}`, message : "Enregistrement réussi"})
-      }
-      else {
-        if (typeof response.message === "string"){
-          setMessage(response.message)
-        }
-        else
-        {
-          setMessage(response.message.join("\n"))
-        }
-      }
-    }
-    else { // New
+      const response = await Requester.path.update(
+        path.id,
+        updateBody,
+        user.token
+      );
 
-      const response = await Requester.path.new(updateBody,user.token) ;
-  
-      if (response.data){
-        setPathPrivate([response.data, ...pathPrivate])
-        setMessage("")
-  
-        setTransition({to : `/paths/view/${response.data.id}`, message : "Enregistrement réussi"})
-      }
-      else {
-        if (typeof response.message === "string"){
-          setMessage(response.message)
+      if (response.data) {
+        setPathPublic(
+          pathPublic.map((item) => {
+            if (item.id === response.data.id) {
+              return response.data;
+            }
+            return item;
+          })
+        );
+        setPathPrivate(
+          pathPrivate.map((item) => {
+            if (item.id === response.data.id) {
+              return response.data;
+            }
+            return item;
+          })
+        );
+        setMessage("");
+
+        setTransition({
+          to: `/paths/view/${path.id}`,
+          message: "Enregistrement réussi",
+        });
+      } else {
+        if (typeof response.message === "string") {
+          setMessage(response.message);
+        } else {
+          setMessage(response.message.join("\n"));
         }
-        else
-        {
-          setMessage(response.message.join("\n"))
+      }
+    } else {
+      // New
+
+      const response = await Requester.path.new(updateBody, user.token);
+
+      if (response.data) {
+        setPathPrivate([response.data, ...pathPrivate]);
+        setMessage("");
+
+        setTransition({
+          to: `/paths/view/${response.data.id}`,
+          message: "Enregistrement réussi",
+        });
+      } else {
+        if (typeof response.message === "string") {
+          setMessage(response.message);
+        } else {
+          setMessage(response.message.join("\n"));
         }
       }
     }
   };
-  const isValid = updateValid.name && updateValid.viewbox && updateValid.d;
+  const isValid = updateValid.name && updateValid.viewbox && updateValid.d && message === "";
 
   return (
     <>
       <AppHeader />
-      <Form method="post" onSubmit={handleRequest} className={APP_STYLE.PATH.VIEW.CADRE}>
+      <Form
+        method="post"
+        onSubmit={handleRequest}
+        className={APP_STYLE.PATH.VIEW.CADRE}
+      >
         <span className={APP_STYLE.PATH.VIEW.COLO}>
           <div className={APP_STYLE.PATH.VIEW.BOX_A}>
             <div className={APP_STYLE.PATH.VIEW.ICON_CENTER}>
-              <div className={`${APP_STYLE.PATH.VIEW.ICON_BG} ${path.status === "public" ?  "bg-primary icon-large" : "bg-warning icon-large-bad"}`}>
+              <div
+                className={`${APP_STYLE.PATH.VIEW.ICON_BG} ${
+                  path.status === "public"
+                    ? "bg-primary icon-large"
+                    : "bg-warning icon-large-bad"
+                }`}
+              >
                 <svg
                   width="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
                   height="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
-                  viewBox={updateBody.viewbox}
+                  viewBox={path.viewbox}
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <title>Path : {updateBody.name}</title>
-                  <path className={APP_STYLE.PATH.VIEW.DROWN} d={updateBody.d} />
+                  <title>Path : {path.name}</title>
+                  <path className={APP_STYLE.PATH.VIEW.DROWN} d={path.d} />
                 </svg>
               </div>
             </div>
             <em>Créée par {path.user.name}</em>
           </div>
           <div className={APP_STYLE.PATH.VIEW.NO_CADRE}>
-        
-            <button type="submit" disabled={!isValid} className={APP_STYLE.APP.BTN_GOOD}>
-              {(path.id !== -1) ? "Enregistrer les modification" : "Enregistrer le path"}
+
+          <EntryString
+                name={"Nom"}
+                defaultValue={updateBody.name}
+                setValue={(value, valid) =>
+                  handleUpdateBody("name", value, valid)
+                }
+                validators={[EntryValidators.minLenght(4)]}
+              />
+            <EntriesViewBox
+              defaultValue={updateBody.viewbox}
+              setValue={(value, valid) =>
+                handleUpdateBody("viewbox", value, valid)
+              }
+              setActive={setActif}
+            />
+            <button
+              type="submit"
+              disabled={!isValid}
+              className={APP_STYLE.APP.BTN_GOOD}
+            >
+              {path.id !== -1
+                ? "Enregistrer les modification"
+                : "Enregistrer le path"}
             </button>
 
-            <LinkCustom  className={APP_STYLE.APP.BTN_BAD} name={(path.id !== -1) ? "Annuler les modification" : "Annuler le création"} to={(path.id !== -1) ? `/paths/view/${path.id}` : `/paths/publics`} />
+            <LinkCustom
+              className={APP_STYLE.APP.BTN_BAD}
+              name={
+                path.id !== -1
+                  ? "Annuler les modification"
+                  : "Annuler le création"
+              }
+              to={path.id !== -1 ? `/paths/view/${path.id}` : `/paths/publics`}
+            />
           </div>
         </span>
         <div className={APP_STYLE.PATH.VIEW.BOX_B}>
-          
-        <h2>{(path.id !== -1) ? "Modication d'un path" : "Création d'un path"}</h2>
-        <EntryString
-          name={"Nom"}
-          defaultValue={updateBody.name}
-          setValue={(value, valid) => handleUpdateBody("name", value, valid)}
-          validators={[EntryValidators.minLenght(4)]}
-        />
-        <EntriesViewBox 
-          defaultValue={updateBody.viewbox}
-          setValue={(value, valid) => handleUpdateBody("viewbox", value, valid)}
-        />
-        <TextArea
-          name={"Drown"}
-          defaultValue={updateBody.d}
-          setValue={(value, valid) => handleUpdateBody("d", value, valid)}
-          validators={[EntryValidators.minLenght(4)]}
-        />
-        <pre className={APP_STYLE.APP.MESSAGE_BAD} >{message}</pre>
+          <h2>
+            {path.id !== -1 ? "Modication d'un path" : "Création d'un path"}
+          </h2>
+
+          {inAdvance ? (
+            <div>
+              <h4>Tracé Source</h4>
+              <p className="alt-font">{updateBody.d}</p>
+            </div>
+          ) : (
+            <div>
+              <TextArea
+                name={"Tracé"}
+                defaultValue={updateBody.d}
+                setValue={(value, valid) => handleUpdateBody("d", value, valid)}
+              />
+              <p className={APP_STYLE.APP.MESSAGE_BAD}>{message}</p>
+            </div>
+          )}
+
+          <button
+            className={
+              inAdvance ? APP_STYLE.APP.BTN_BAD : APP_STYLE.APP.BTN_GOOD
+            }
+            onClick={(e) => {
+              e.preventDefault();
+              setInAdvance(!inAdvance);
+            }}
+            disabled={message !== ""}
+          >
+            {inAdvance
+              ? "Basculer en modification de base (et annuler les changements)"
+              : "Basculer en modification avancée"}
+          </button>
+          {inAdvance && <PathGraphic path={updateBody} actif={actif} />}
         </div>
       </Form>
     </>
