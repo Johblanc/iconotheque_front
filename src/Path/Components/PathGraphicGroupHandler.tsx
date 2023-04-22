@@ -132,8 +132,16 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe-1 , item : inModif.item })
   } ;
   
-  const formLinkDown = () => {
-
+  const formLinkDown =  ( e : React.MouseEvent ) => {
+    e.preventDefault() 
+    const newPoints = [...graphyPoints].map(item => item.copy) ;
+    const temp = newPoints[inModif.groupe].copy ;
+    newPoints.splice(inModif.groupe,1) ;
+    newPoints[inModif.groupe].points = [
+      ...newPoints[inModif.groupe].points,
+      ...temp.points
+    ]
+    setGraphyPoints(newPoints) ;
   } ;
   
 
@@ -232,7 +240,7 @@ export function PathGraphicGroupHandler(props: {
       </div>
       <div className={APP_STYLE.PATH.GRAPH.GROUPHAND.GROUPBOX}>
         <h4 className={`${inModif.groupe === -1 ? APP_STYLE.APP.VISUALDISABLED : "" }`} > 
-          {inModif.item === -1 ? `Pas de Groupe sélectionné` : `Modification du Groupe ${inModif.groupe + 1}` }
+          {inModif.groupe === -1 ? `Pas de Groupe sélectionné` : `Modification du Groupe ${inModif.groupe + 1}` }
         </h4>
         <input
           type="checkbox"
@@ -295,7 +303,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={formLinkDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.groupe === -1 || inModif.groupe === graphyPoints.length - 1 }
           >
             Raccoder au groupe suivant
           </button>
