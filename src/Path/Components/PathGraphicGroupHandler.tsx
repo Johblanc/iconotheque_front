@@ -79,8 +79,14 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe - 1 , item : inModif.item})
   } ;
   
-  const formPosDown = () => {
-
+  const formPosDown = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newPoints = [...graphyPoints].map(item => item.copy) ;
+    const temp = newPoints[inModif.groupe].copy ;
+    newPoints[inModif.groupe] = newPoints[inModif.groupe + 1].copy ;
+    newPoints[inModif.groupe + 1] = temp ;
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : inModif.groupe + 1 , item : inModif.item})
   } ;
   
   const formCopy = () => {
@@ -230,7 +236,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={formPosDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.groupe === -1 || inModif.groupe === graphyPoints.length - 1 }
           >
             Déplacer vers l'aval
           </button>
