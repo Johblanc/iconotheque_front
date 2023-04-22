@@ -40,7 +40,7 @@ export function PathGraphicGroupHandler(props: {
     {
       setCurrent( new GraphiPoint({x:0,y:0,ax:0,ay:0,bx:0,by:0}))
     }
-  },[inModif,graphyPoints,formOptions])
+  },[inModif,graphyPoints,formOptions]) ;
 
   /** Modification des coordonnées du point en cours de modification */
   const handleCurrent = (key : "x" | "y" | "dax" | "day" | "dbx" | "dby" , value : number) => {
@@ -51,10 +51,10 @@ export function PathGraphicGroupHandler(props: {
 
     setCurrent(newCurrent)
     
-    const newPoints = [...graphyPoints];
+    const newPoints = [...graphyPoints].map(item => item.copy);
     newPoints[inModif.groupe].points[inModif.item] = formOptions.untranslateGraphiPoint( newCurrent)
     setGraphyPoints(newPoints);
-  }
+  } ;
 
   /** Modification du status du point en cours de modification */
   const handleStatus = (value : "dur" | "symétrique" | "doux" ) => {
@@ -64,12 +64,64 @@ export function PathGraphicGroupHandler(props: {
     newCurrent.status = value ;
 
     setCurrent(newCurrent)
-    
-    const newPoints = [...graphyPoints];
+    const newPoints = [...graphyPoints].map(item => item.copy);
     newPoints[inModif.groupe].points[inModif.item] = formOptions.untranslateGraphiPoint( newCurrent)
     setGraphyPoints(newPoints);
-  }
+  } ;
   
+  const formPosUp = () => {
+
+  } ;
+  
+  const formPosDown = () => {
+
+  } ;
+  
+  const formCopy = () => {
+
+  } ;
+  
+  const formRemove = () => {
+
+  } ;
+  
+  const formLinkUp = () => {
+
+  } ;
+  
+  const formLinkDown = () => {
+
+  } ;
+  
+
+  const pointPosUp = () => {
+
+  } ;
+  
+  const pointPosDown = () => {
+
+  } ;
+  
+  const pointCopy = () => {
+
+  } ;
+  
+  const pointRemove = () => {
+
+  } ;
+  
+  const pointToGroupOrigin = () => {
+
+  } ;
+  
+  const pointToFormOrigin = () => {
+
+  } ;
+  
+  const pointUnlick = () => {
+
+  } ;
+
   return (
     <div>
       <div className={APP_STYLE.PATH.GRAPH.GROUPHAND.CADRE}>
@@ -136,7 +188,9 @@ export function PathGraphicGroupHandler(props: {
         ))}
       </div>
       <div className={APP_STYLE.PATH.GRAPH.GROUPHAND.GROUPBOX}>
-        <h4>Sur le Groupe {inModif.groupe + 1}</h4>
+        <h4 className={`${inModif.groupe === -1 ? APP_STYLE.APP.VISUALDISABLED : "" }`} > 
+          {inModif.item === -1 ? `Pas de Groupe sélectionné` : `Modification du Groupe ${inModif.groupe + 1}` }
+        </h4>
         <input
           type="checkbox"
           id="closeGroupe"
@@ -146,7 +200,7 @@ export function PathGraphicGroupHandler(props: {
           }
           onClick={() => {
             if (inModif.groupe !== -1) {
-              const newPoints = [...graphyPoints];
+              const newPoints = [...graphyPoints].map(item => item.copy);
               newPoints[inModif.groupe].isClose =
                 !newPoints[inModif.groupe].isClose;
               setGraphyPoints(newPoints);
@@ -155,16 +209,47 @@ export function PathGraphicGroupHandler(props: {
           disabled={inModif.groupe === -1}
           readOnly
         />
-        <label htmlFor="closeGroupe" className={APP_STYLE.PATH.GRAPH.GROUPHAND.CHECKLABEL}>
+        <label htmlFor="closeGroupe" 
+          className={`${inModif.groupe === -1 ? APP_STYLE.APP.VISUALDISABLED : "" } ${APP_STYLE.PATH.GRAPH.GROUPHAND.CHECKLABEL}`}>
           Fermer ce groupe
         </label>
         <div className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTONBOX}>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Déplacer vers l'amont</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Déplacer vers l'aval</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Copier</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Supprimer</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Raccoder au groupe précédent</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Raccoder au groupe suivant</button>
+          <button 
+            onClick={formPosUp}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Déplacer vers l'amont
+          </button>
+          <button 
+            onClick={formPosDown}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Déplacer vers l'aval
+          </button>
+          <button 
+            onClick={formCopy}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Copier
+          </button>
+          <button 
+            onClick={formRemove}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Supprimer
+          </button>
+          <button 
+            onClick={formLinkUp}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Raccoder au groupe précédent
+          </button>
+          <button 
+            onClick={formLinkDown}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Raccoder au groupe suivant
+          </button>
         </div>
       </div>
       <div className={APP_STYLE.PATH.GRAPH.GROUPHAND.GROUPBOX}>
@@ -172,13 +257,48 @@ export function PathGraphicGroupHandler(props: {
           {inModif.item === -1 ? `Pas de Point sélectionné` : `Modification du Point ${inModif.item + 1}` }
         </h4>
         <div className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTONBOX}>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Déplacer vers l'amont</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Déplacer vers l'aval</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Copier</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Supprimer</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Définir comme Origine du Groupe</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Définir comme Origine de la Forme</button>
-          <button className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}>Séparer du groupe</button>
+          <button 
+            onClick={pointPosUp}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Déplacer vers l'amont
+          </button>
+          <button 
+            onClick={pointPosDown}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Déplacer vers l'aval
+          </button>
+          <button 
+            onClick={pointCopy}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Copier
+          </button>
+          <button 
+            onClick={pointRemove}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Supprimer
+          </button>
+          <button 
+            onClick={pointToGroupOrigin}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Définir comme Origine du Groupe
+          </button>
+          <button 
+            onClick={pointToFormOrigin}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Définir comme Origine de la Forme
+          </button>
+          <button 
+            onClick={pointUnlick}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Séparer du groupe
+          </button>
         </div>
         <div className={APP_STYLE.APP.DROPDOWN.BASE}>
           <button
