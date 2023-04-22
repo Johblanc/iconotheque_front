@@ -69,7 +69,7 @@ export function PathGraphicGroupHandler(props: {
     setGraphyPoints(newPoints);
   } ;
   
-  /** Déplacer la forme vers l'amont */
+  /** Déplacer un groupe vers l'amont */
   const formPosUp = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints = [...graphyPoints].map(item => item.copy) ;
@@ -80,7 +80,7 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe - 1 , item : inModif.item})
   } ;
   
-  /** Déplacer la forme vers l'aval */
+  /** Déplacer un groupe vers l'aval */
   const formPosDown = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints = [...graphyPoints].map(item => item.copy) ;
@@ -90,7 +90,8 @@ export function PathGraphicGroupHandler(props: {
     setGraphyPoints(newPoints) ;
     setInModif({groupe : inModif.groupe + 1 , item : inModif.item})
   } ;
-  
+
+  /** Copier un groupe */
   const formCopy = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints : GraphiGroup[] = [] ;
@@ -104,6 +105,7 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe + 1 , item : inModif.item})
   } ;
   
+  /** Supprimer un groupe */
   const formRemove = ( e : React.MouseEvent ) => {
     e.preventDefault()
     const newPoints : GraphiGroup[] = [] ;
@@ -116,8 +118,18 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : - 1 , item : - 1 })
   } ;
   
-  const formLinkUp = () => {
-
+  /** Raccoder au groupe précédent */
+  const formLinkUp = ( e : React.MouseEvent ) => {
+    e.preventDefault() 
+    const newPoints = [...graphyPoints].map(item => item.copy) ;
+    const temp = newPoints[inModif.groupe].copy ;
+    newPoints.splice(inModif.groupe,1) ;
+    newPoints[inModif.groupe-1].points = [
+      ...newPoints[inModif.groupe-1].points,
+      ...temp.points
+    ]
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : inModif.groupe-1 , item : inModif.item })
   } ;
   
   const formLinkDown = () => {
@@ -276,7 +288,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={formLinkUp}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.groupe === -1 || inModif.groupe === 0 }
           >
             Raccoder au groupe précédent
           </button>
