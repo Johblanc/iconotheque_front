@@ -204,8 +204,23 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe , item : -1 })
   } ;
   
-  const pointToGroupOrigin = () => {
-
+  /** Déplacer un point au début du groupe */
+  const pointToGroupOrigin = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newForm = [...graphyPoints].map(item => item.copy) ;
+    const newPoints = newForm[inModif.groupe].points.map(item => item.copy) ;
+    newForm[inModif.groupe].points.forEach( ( item, i ) => {
+      if ( i < inModif.item ){
+        newPoints[ i - inModif.item + newPoints.length ] = item.copy ;
+      }
+      else
+      {
+        newPoints[ i - inModif.item ] = item.copy ;
+      }
+    })
+    newForm[inModif.groupe].points = newPoints
+    setGraphyPoints(newForm) ;
+    setInModif({groupe : inModif.groupe , item : 0 })
   } ;
   
   const pointToFormOrigin = () => {
@@ -388,7 +403,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={pointToGroupOrigin}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.item === -1}
+            disabled={inModif.item <= 0}
           >
             Définir comme Origine du Groupe
           </button>
