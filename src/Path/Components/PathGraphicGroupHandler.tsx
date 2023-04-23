@@ -146,9 +146,19 @@ export function PathGraphicGroupHandler(props: {
   } ;
   
 
-  const pointPosUp = () => {
+  /** Déplacement d'un point vers l'amont */
+  const pointPosUp = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newPoints = [...graphyPoints].map(item => item.copy) ;
+    const temp = newPoints[inModif.groupe].points[inModif.item].copy
+    
+    newPoints[inModif.groupe].points[inModif.item] = newPoints[inModif.groupe].points[inModif.item-1]
+    newPoints[inModif.groupe].points[inModif.item-1] = temp
 
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : inModif.groupe , item : inModif.item - 1})
   } ;
+  
   
   const pointPosDown = () => {
 
@@ -318,49 +328,49 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={pointPosUp}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.item === -1  || inModif.item === 0 }
           >
             Déplacer vers l'amont
           </button>
           <button 
             onClick={pointPosDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.item === -1}
           >
             Déplacer vers l'aval
           </button>
           <button 
             onClick={pointCopy}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.item === -1}
           >
             Copier
           </button>
           <button 
             onClick={pointRemove}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.item === -1}
           >
             Supprimer
           </button>
           <button 
             onClick={pointToGroupOrigin}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.item === -1}
           >
             Définir comme Origine du Groupe
           </button>
           <button 
             onClick={pointToFormOrigin}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.item === -1}
           >
             Définir comme Origine de la Forme
           </button>
           <button 
             onClick={pointUnlick}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.groupe === -1}
+            disabled={inModif.item === -1}
           >
             Séparer du groupe
           </button>
