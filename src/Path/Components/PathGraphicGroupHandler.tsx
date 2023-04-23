@@ -160,8 +160,17 @@ export function PathGraphicGroupHandler(props: {
   } ;
   
   
-  const pointPosDown = () => {
+  /** Déplacement d'un point vers l'aval */
+  const pointPosDown = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newPoints = [...graphyPoints].map(item => item.copy) ;
+    const temp = newPoints[inModif.groupe].points[inModif.item].copy
+    
+    newPoints[inModif.groupe].points[inModif.item] = newPoints[inModif.groupe].points[inModif.item+1]
+    newPoints[inModif.groupe].points[inModif.item+1] = temp
 
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : inModif.groupe , item : inModif.item + 1})
   } ;
   
   const pointCopy = () => {
@@ -335,7 +344,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={pointPosDown}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.item === -1}
+            disabled={inModif.item === -1  || inModif.item === graphyPoints[inModif.groupe].points.length -1 }
           >
             Déplacer vers l'aval
           </button>
