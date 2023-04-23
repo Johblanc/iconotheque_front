@@ -149,13 +149,13 @@ export function PathGraphicGroupHandler(props: {
   /** Déplacement d'un point vers l'amont */
   const pointPosUp = ( e : React.MouseEvent ) => {
     e.preventDefault()
-    const newPoints = [...graphyPoints].map(item => item.copy) ;
-    const temp = newPoints[inModif.groupe].points[inModif.item].copy
+    const newForm = [...graphyPoints].map(item => item.copy) ;
+    const temp = newForm[inModif.groupe].points[inModif.item].copy
     
-    newPoints[inModif.groupe].points[inModif.item] = newPoints[inModif.groupe].points[inModif.item-1]
-    newPoints[inModif.groupe].points[inModif.item-1] = temp
+    newForm[inModif.groupe].points[inModif.item] = newForm[inModif.groupe].points[inModif.item-1]
+    newForm[inModif.groupe].points[inModif.item-1] = temp
 
-    setGraphyPoints(newPoints) ;
+    setGraphyPoints(newForm) ;
     setInModif({groupe : inModif.groupe , item : inModif.item - 1})
   } ;
   
@@ -163,18 +163,30 @@ export function PathGraphicGroupHandler(props: {
   /** Déplacement d'un point vers l'aval */
   const pointPosDown = ( e : React.MouseEvent ) => {
     e.preventDefault()
-    const newPoints = [...graphyPoints].map(item => item.copy) ;
-    const temp = newPoints[inModif.groupe].points[inModif.item].copy
+    const newForm = [...graphyPoints].map(item => item.copy) ;
+    const temp = newForm[inModif.groupe].points[inModif.item].copy
     
-    newPoints[inModif.groupe].points[inModif.item] = newPoints[inModif.groupe].points[inModif.item+1]
-    newPoints[inModif.groupe].points[inModif.item+1] = temp
+    newForm[inModif.groupe].points[inModif.item] = newForm[inModif.groupe].points[inModif.item+1]
+    newForm[inModif.groupe].points[inModif.item+1] = temp
 
-    setGraphyPoints(newPoints) ;
+    setGraphyPoints(newForm) ;
     setInModif({groupe : inModif.groupe , item : inModif.item + 1})
   } ;
   
-  const pointCopy = () => {
-
+  /** Copier un point */
+  const pointCopy = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newForm = [...graphyPoints].map(item => item.copy) ;
+    const newPoints : GraphiPoint[] = [] ;
+    newForm[inModif.groupe].points.forEach( ( item, i ) => {
+      if ( i === inModif.item ){
+        newPoints.push(item.copy)
+      }
+      newPoints.push(item.copy)
+    })
+    newForm[inModif.groupe].points = newPoints
+    setGraphyPoints(newForm) ;
+    setInModif({groupe : inModif.groupe , item : inModif.item + 1})
   } ;
   
   const pointRemove = () => {
