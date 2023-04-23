@@ -206,7 +206,7 @@ export function PathGraphicGroupHandler(props: {
   
   /** Déplacer un point au début du groupe */
   const pointToGroupOrigin = ( e : React.MouseEvent ) => {
-    e.preventDefault()
+    e.preventDefault() ;
     const newForm = [...graphyPoints].map(item => item.copy) ;
     const newPoints = newForm[inModif.groupe].points.map(item => item.copy) ;
     newForm[inModif.groupe].points.forEach( ( item, i ) => {
@@ -216,14 +216,42 @@ export function PathGraphicGroupHandler(props: {
       else
       {
         newPoints[ i - inModif.item ] = item.copy ;
-      }
-    })
-    newForm[inModif.groupe].points = newPoints
+      } ;
+    }) ;
+    newForm[inModif.groupe].points = newPoints ;
     setGraphyPoints(newForm) ;
-    setInModif({groupe : inModif.groupe , item : 0 })
+    setInModif({groupe : inModif.groupe , item : 0 }) ;
   } ;
   
-  const pointToFormOrigin = () => {
+  /** Déplacer un point au début de la forme */
+  const pointToFormOrigin = ( e : React.MouseEvent ) => {
+
+    e.preventDefault() ;
+    const newForm = [...graphyPoints].map(item => item.copy) ;
+    const newPoints = newForm[inModif.groupe].points.map(item => item.copy) ;
+    newForm[inModif.groupe].points.forEach( ( item, i ) => {
+      if ( i < inModif.item ){
+        newPoints[ i - inModif.item + newPoints.length ] = item.copy ;
+      }
+      else
+      {
+        newPoints[ i - inModif.item ] = item.copy ;
+      } ;
+    }) ;
+    newForm[inModif.groupe].points = newPoints ;
+
+    const result = newForm.map(item => item.copy)
+    newForm.forEach( ( item, i ) => {
+      if ( i < inModif.groupe ){
+        result[ i - inModif.groupe + newForm.length ] = item.copy ;
+      }
+      else
+      {
+        result[ i - inModif.groupe ] = item.copy ;
+      } ;
+    }) ;
+    setGraphyPoints(result) ;
+    setInModif({groupe : 0 , item : 0 }) ;
 
   } ;
   
@@ -410,7 +438,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={pointToFormOrigin}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.item === -1}
+            disabled={inModif.item === -1 || ( inModif.item === 0 && inModif.groupe === 0 )}
           >
             Définir comme Origine de la Forme
           </button>
