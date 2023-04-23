@@ -189,8 +189,19 @@ export function PathGraphicGroupHandler(props: {
     setInModif({groupe : inModif.groupe , item : inModif.item + 1})
   } ;
   
-  const pointRemove = () => {
-
+  /** Supprimer un point */
+  const pointRemove = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newForm = [...graphyPoints].map(item => item.copy) ;
+    const newPoints : GraphiPoint[] = [] ;
+    newForm[inModif.groupe].points.forEach( ( item, i ) => {
+      if ( i !== inModif.item ){
+        newPoints.push(item.copy)
+      }
+    })
+    newForm[inModif.groupe].points = newPoints
+    setGraphyPoints(newForm) ;
+    setInModif({groupe : inModif.groupe , item : -1 })
   } ;
   
   const pointToGroupOrigin = () => {
@@ -370,7 +381,7 @@ export function PathGraphicGroupHandler(props: {
           <button 
             onClick={pointRemove}
             className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
-            disabled={inModif.item === -1}
+            disabled={inModif.item === -1 || graphyPoints[inModif.groupe].points.length === 1}
           >
             Supprimer
           </button>
