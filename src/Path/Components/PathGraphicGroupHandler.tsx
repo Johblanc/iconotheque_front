@@ -255,9 +255,26 @@ export function PathGraphicGroupHandler(props: {
 
   } ;
   
-  const pointUnlick = () => {
-
-  } ;
+  /** Séparer un point de son groupe */
+  const pointUnlick = ( e : React.MouseEvent ) => {
+    e.preventDefault()
+    const newPoints : GraphiGroup[] = [] ;
+    graphyPoints.forEach( ( item, i ) => {
+      if ( i === inModif.groupe ){
+        newPoints.push(item.copy) ;
+        newPoints[newPoints.length-1].points.splice(inModif.item )
+        
+        newPoints.push(item.copy)
+        newPoints[newPoints.length-1].points.splice(0,  inModif.item  )
+      }
+      else
+      {
+        newPoints.push(item.copy)
+      }
+    })
+    setGraphyPoints(newPoints) ;
+    setInModif({groupe : inModif.groupe + 1 , item : 0})
+  }
 
   return (
     <div>
