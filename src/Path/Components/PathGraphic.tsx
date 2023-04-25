@@ -11,6 +11,9 @@ import { PathGraphicGroupHandler } from "./PathGraphicGroupHandler";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { GraphiGroup } from "../class/GraphiGroup";
 import { GraphiPoint } from "../class/GraphiPoint";
+import { log } from "console";
+import { WriteOptions } from "./WriteOptions";
+import { TWriteOptions } from "../Types/TWriteOptions";
 
 /**
  * Permet la Modification de l'ensemble d'un path de manière graphique ou numérique
@@ -24,16 +27,19 @@ export function PathGraphic(props: {
     name: string;
     viewbox: string;
     d: string;
-  };
-  actif?: "" | "x" | "y" | "width" | "height";
+  },
+  actif?: "" | "x" | "y" | "width" | "height",
+  setDValue : (value : string) => void,
 }) {
-  const { path, actif } = props;
+  const { path, actif, setDValue } = props;
   const { name, viewbox, d } = path;
 
   const [inModif, setInModif] = useState({ groupe: -1, item: -1 });
   const [vb, setVB] = useState(new ExtendVB(viewbox, actif));
 
   const [graphyPoints, setGraphyPoints] = useState(new SvgPath(d).asGraphi);
+
+  //const [finalValue, setFinalValue] = useState("");
 
   const [isClicking, setIsClicking] = useState<{
     valid: boolean;
@@ -278,6 +284,34 @@ export function PathGraphic(props: {
     setInModif({ groupe: newPoints.length - 1, item: 0 });
   };
 
+  const validateAdvance = () => {
+    setDValue(finalValue) ;
+  }
+
+
+  const [wOptions, setWOptions] = useState<TWriteOptions>({
+    withComma    : true,
+    withBreak    : false,
+    surNumFormat : false,
+    surNumSpace  : true,
+    surNumZero   : true,
+    toRelative   : false,
+    notReduce    : false,
+  })
+  console.log(wOptions.notReduce);
+  
+  const finalValue = new SvgPath(
+    GraphiGroup[wOptions.notReduce ? "fromGraphiToString" : "fromGraphiToStringReduce"](graphyPoints,formOptions),
+    {
+      withComma    : wOptions.withComma ,
+      withBreak    : wOptions.withBreak ,
+      surNumFormat : wOptions.surNumFormat ,
+      surNumSpace  : wOptions.surNumSpace ,
+      surNumZero   : wOptions.surNumZero ,
+      rounder      : formOptions.rounder
+    }
+  )[ wOptions.toRelative ? "asRelativeString" : "asString" ]
+
   return (
     <div className={APP_STYLE.PATH.GRAPH.BASE.CADRE}>
       <div className={APP_STYLE.PATH.GRAPH.BASE.BIGBOX}>
@@ -366,6 +400,20 @@ export function PathGraphic(props: {
           )}
           {actif && <PathGraphicVbActif viewbox={vb} actif={actif} />}
         </svg>
+        <WriteOptions wOptions={wOptions} setWOptions={setWOptions} />
+        <div className={APP_STYLE.PATH.GRAPH.BASE.SMALLBOX}>
+          <h4>Tracé final</h4>
+          
+          <div>
+            {finalValue.split("\n").map(item => <p className={APP_STYLE.APP.ALT_FONT}>{item}</p>)}
+          </div>
+          <button 
+            onClick={validateAdvance}
+            className={APP_STYLE.PATH.GRAPH.GROUPHAND.BUTTON}
+          >
+            Valider les modifications avancées
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -87,6 +87,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
       } else {
         newLogBody[key] = value;
       }
+      setInAdvance(false)
     }
     setUpdateBody(newLogBody);
 
@@ -189,7 +190,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <title>Path : {path.name}</title>
-                  <path className={APP_STYLE.PATH.VIEW.DROWN} d={path.d} />
+                  <path className={APP_STYLE.PATH.VIEW.DROWN} d={updateBody.d} />
                 </svg>
               </div>
             </div>
@@ -214,7 +215,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
             />
             <button
               type="submit"
-              disabled={!isValid}
+              disabled={!isValid || inAdvance}
               className={APP_STYLE.APP.BTN_GOOD}
             >
               {path.id !== -1
@@ -241,7 +242,9 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
           {inAdvance ? (
             <div>
               <h4>Tracé Source</h4>
-              <p className="alt-font">{updateBody.d}</p>
+              <div>
+                {updateBody.d.split("\n").map(item => <p className={APP_STYLE.APP.ALT_FONT}>{item}</p>)}
+              </div>
             </div>
           ) : (
             <div>
@@ -268,7 +271,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
               ? "Basculer en modification de base (et annuler les changements)"
               : "Basculer en modification avancée"}
           </button>
-          {inAdvance && <PathGraphic path={updateBody} actif={actif} />}
+          {inAdvance && <PathGraphic path={updateBody} actif={actif} setDValue={(value) => handleUpdateBody("d", value)} />}
         </div>
       </Form>
     </>

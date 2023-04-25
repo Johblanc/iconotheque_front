@@ -73,6 +73,15 @@ export class SvgPath {
   }
 
   /**
+   * Convertion du Path en string
+   * 
+   * @version v2
+   */
+  get asRelativeString() {
+    return this.points.map((item) =>{ item.toRelative() ; return item.asString}).join("");
+  }
+
+  /**
    * Convertion du Path en GraphiGroup contenant des GraphiPoints.
    * Objet facilitant la modification graphique
    * 

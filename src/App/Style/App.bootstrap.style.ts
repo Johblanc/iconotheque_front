@@ -94,6 +94,7 @@ export const APP_STYLE = {
     BTN_BAD: `${BS_COMBO.BTN_LARGE} ${BS.spacing("both", 2, "y")} ${PERSO.BTN_BAD}`,
     XXXLFLEX : PERSO.XXXLFLEX,
     VISUALDISABLED : PERSO.VISUALDISABLED,
+    ALT_FONT : PERSO.ALT_FONT,
     ENTRY: {
       CADRE: BS.spacing("both", 2, "y"),
       BOX: `input-group ${BS.round()}`,

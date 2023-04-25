@@ -589,4 +589,8 @@ export class PathPoint {
       return result;
     }
   }
+
+  toRelative () {
+    this.__format.value = FormatServices.convert(this.__format.value.toLowerCase())!
+  }
 }
