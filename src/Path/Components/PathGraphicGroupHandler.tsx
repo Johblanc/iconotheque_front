@@ -263,9 +263,13 @@ export function PathGraphicGroupHandler(props: {
       if ( i === inModif.groupe ){
         newPoints.push(item.copy) ;
         newPoints[newPoints.length-1].points.splice(inModif.item )
+        console.log(newPoints[newPoints.length-1].points);
         
+        /* Supprimer debut de liste */
         newPoints.push(item.copy)
         newPoints[newPoints.length-1].points.splice(0,  inModif.item  )
+        console.log(newPoints[newPoints.length-1].points);
+        /* Supprimer fin de liste */
       }
       else
       {
