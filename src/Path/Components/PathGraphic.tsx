@@ -11,7 +11,6 @@ import { PathGraphicGroupHandler } from "./PathGraphicGroupHandler";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { GraphiGroup } from "../class/GraphiGroup";
 import { GraphiPoint } from "../class/GraphiPoint";
-import { log } from "console";
 import { WriteOptions } from "./WriteOptions";
 import { TWriteOptions } from "../Types/TWriteOptions";
 
@@ -235,7 +234,7 @@ export function PathGraphic(props: {
   };
 
   /** Ajout des event listeners */
-  const addEvents = async () => {
+  const addEvents = () => {
     verifyLastMousePos() ;
     if (imageBox.current) {
       if (isClicking.event instanceof MouseEvent) {
