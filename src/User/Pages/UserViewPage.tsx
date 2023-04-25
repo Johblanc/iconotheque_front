@@ -11,6 +11,7 @@ import { ThemeHandler } from "../Components/ThemeHandler";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { ThemeContext } from "../../Utilities/Contexts/Theme.context";
 import { rgbToHex } from "../Modules/HexColo";
+import { DEFAULT_USER } from "../../Utilities/Constants/User.defaut";
 
 /**
  * Page de Consultation de profil
@@ -18,7 +19,7 @@ import { rgbToHex } from "../Modules/HexColo";
  * @version v2
  */
 export function UserViewPage(): JSX.Element {
-  const { user } = useContext(UserContext);
+  const { user,setUser } = useContext(UserContext);
   const { pathPrivate } = useContext(PathPrivateContext);
   const { pathPublic } = useContext(PathPublicContext);
   const { theme } = useContext(ThemeContext);
@@ -93,11 +94,12 @@ export function UserViewPage(): JSX.Element {
             <LinkCustom
               name={"Déconnection"}
               to={{
-                to: "/user/login",
+                to: "/paths/publics",
                 message: `GoodBye ${user.name}`,
                 isBad: true,
               }}
               className={APP_STYLE.USER.VIEW.BOX_BUTTON_BAD}
+              onClick={()=> setTimeout(()=> setUser(DEFAULT_USER),1000)}
             />
           </div>
         </span>
