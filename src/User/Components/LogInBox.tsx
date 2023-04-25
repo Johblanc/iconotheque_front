@@ -62,7 +62,6 @@ export function LogInBox(): JSX.Element {
 
     if (response.statusCode === 201) 
     {
-      console.log(response.data);
       
       setMessage('');
       setUser(response.data)

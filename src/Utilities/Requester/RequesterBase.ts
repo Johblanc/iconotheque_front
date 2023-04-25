@@ -45,7 +45,6 @@ export class RequesterBase {
       }
     );
     const result: TResponse<Data,Message> = await data.json();
-    console.log(result.message);
 
     return result;
   }

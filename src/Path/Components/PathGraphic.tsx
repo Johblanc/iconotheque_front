@@ -298,7 +298,6 @@ export function PathGraphic(props: {
     toRelative   : false,
     notReduce    : false,
   })
-  console.log(wOptions.notReduce);
   
   const finalValue = new SvgPath(
     GraphiGroup[wOptions.notReduce ? "fromGraphiToString" : "fromGraphiToStringReduce"](graphyPoints,formOptions),

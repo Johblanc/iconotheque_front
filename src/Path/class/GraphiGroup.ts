@@ -83,10 +83,7 @@ export class GraphiGroup {
     formOptions : GraphiFormOptions
   )
   {
-
-    console.log("+++++");
     return data.map(forme => {
-      console.log(forme);
       let result = "M" ;
 
       const newPoints = forme.points.map(item => formOptions.allOptionsGraphiPoint( item ))
@@ -95,7 +92,6 @@ export class GraphiGroup {
       {
         result += ` ${newPoints[newPoints.length-1].x} ${newPoints[newPoints.length-1].y}` ;
         result += `${newPoints.map((point, i, arr) => {
-          console.log(point.status);
           
           if (point.status === "dur"){
             return `L ${point.x} ${point.y}`

@@ -22,7 +22,6 @@ export function PathGraphicFormHandler(props: {
     key: "rounder" | "translateX" | "translateY",
     value: number
   ) => {
-    console.log(value);
 
     const newOptions = formOptions.copy;
     newOptions[key] = value;
