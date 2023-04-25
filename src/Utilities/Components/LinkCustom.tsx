@@ -15,14 +15,18 @@ import { TTransition } from "../Types/TTransition";
  * 
  * @version v1
  */
-export function LinkCustom(props : {name :string, to : string | TTransition, className? : string }){
-  const {name,to,className} = props
+export function LinkCustom(props : {name :string, to : string | TTransition, className? : string, onClick? : ()=> void }){
+  const {name,to,className,onClick} = props
 
   const {setTransition} = useContext(TransitionContext)
 
   const handleNavigation = (event:React.MouseEvent)=> {
 
       event.preventDefault();
+      
+      if (onClick) {
+        onClick()
+      } 
       if (typeof to === "string")
       { 
         setTransition({ to: to })
