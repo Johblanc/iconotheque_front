@@ -44,7 +44,7 @@ export function WriteOptions(props : {
           readOnly
         />
         <label htmlFor="pathWithBreak" >
-          Ajouter un retour à la ligne apres chaque point
+          Ajouter un retour à la ligne après chaque point
         </label>
       </div>
       <div className="d-flex p-1" >
@@ -58,7 +58,7 @@ export function WriteOptions(props : {
           readOnly
         />
         <label htmlFor="pathSurNumFormat" >
-          Supprimer les formats de point excedentaires
+        Conserver les formats de point excedentaires
         </label>
       </div>
       <div className="d-flex p-1" >
@@ -72,7 +72,7 @@ export function WriteOptions(props : {
           readOnly
         />
         <label htmlFor="pathSurNumSpace" >
-          Supprimer les espaces excedentaires
+        Conserver les espaces excedentaires
         </label>
       </div>
       <div className="d-flex p-1" >
@@ -86,7 +86,7 @@ export function WriteOptions(props : {
           readOnly
         />
         <label htmlFor="pathSurNumZero" >
-          Supprimer les zeros excedentaires
+        Conserver les zeros excedentaires
         </label>
       </div>
       <div className="d-flex p-1" >
