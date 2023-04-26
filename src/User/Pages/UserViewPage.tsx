@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
-import { AppNav } from "../../App/Components/AppNav";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { PathItem } from "../../Path/Components/PathItem";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
@@ -53,8 +52,7 @@ export function UserViewPage(): JSX.Element {
   const isAdmin = user.access > 1;
   return (
     <>
-      <AppHeader />
-      <AppNav actif={"profil"} />
+      <AppHeader  actif={"profil"} />
       <div className={APP_STYLE.USER.VIEW.CADRE}>
         <span className={APP_STYLE.USER.VIEW.COLO}>
           <div className={APP_STYLE.USER.VIEW.BOX}>

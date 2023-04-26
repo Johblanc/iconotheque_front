@@ -71,7 +71,7 @@ export function UserPassUpdatePage(): JSX.Element {
 
   return (
     <div className={APP_STYLE.APP.PAGE}>
-      <AppHeader />
+      <AppHeader actif={""} />
       <Form
         method="post"
         onSubmit={handleRequest}

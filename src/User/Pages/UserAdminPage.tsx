@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
-import { AppNav } from "../../App/Components/AppNav";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { UserContext } from "../../Utilities/Contexts/User.context";
@@ -27,8 +26,7 @@ export function UserAdminPage(): JSX.Element {
 
   return (
     <div className={APP_STYLE.APP.PAGE}>
-      <AppHeader />
-      <AppNav actif={""} />
+      <AppHeader actif={""} />
       <div className={APP_STYLE.USER.LOGIN.CADRE_A}>
         <div className={APP_STYLE.USER.LOGIN.CADRE_B}>
           <div>

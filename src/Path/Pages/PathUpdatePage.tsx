@@ -166,7 +166,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
 
   return (
     <>
-      <AppHeader />
+      <AppHeader actif=""/>
       <Form
         method="post"
         onSubmit={handleRequest}

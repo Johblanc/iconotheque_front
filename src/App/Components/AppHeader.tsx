@@ -1,15 +1,15 @@
-import { TitreStatic } from "./TitreStatic";
+import { AppNav } from "./AppNav";
 
 /**
  * Le Titre du site
  * 
- * @version v1
+ * @version v2
  */
-export function AppHeader() : JSX.Element
+export function AppHeader(props : {actif : "" | "profil" | "new" | "public" | "private" | "logIn" }) : JSX.Element
 {
   return (
-    <div>
-      <TitreStatic/>
-    </div>
+    <header>
+      <AppNav actif={props.actif}/>
+    </header>
   )
 }

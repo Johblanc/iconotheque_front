@@ -1,7 +1,6 @@
 
 import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
-import { AppNav } from "../../App/Components/AppNav";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { DEFAULT_PATH } from "../../Utilities/Constants/Path.defaut";
@@ -71,8 +70,7 @@ export function PathViewPage(props: { pathId: number }): JSX.Element {
 
   return (
     <>
-      <AppHeader />
-      <AppNav actif={""} />
+      <AppHeader actif={""} />
       <div className={APP_STYLE.PATH.VIEW.CADRE}>
         <span className={APP_STYLE.PATH.VIEW.COLO}>
           <div className={APP_STYLE.PATH.VIEW.BOX_A}>

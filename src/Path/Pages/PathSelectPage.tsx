@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
-import { AppNav } from "../../App/Components/AppNav";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
@@ -41,8 +40,7 @@ export function PathSelectPage(props: {
 
   return (
     <>
-      <AppHeader />
-      <AppNav actif={actif} />
+      <AppHeader actif={actif} />
       <div className={`${APP_STYLE.PATH.SELECT.CADRE}`}>
         <h2 className={`${APP_STYLE.PATH.SELECT.TITLE}`}>
           {actif === "public" ? "Formes publiques" : "Mes Formes"}
