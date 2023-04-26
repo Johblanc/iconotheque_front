@@ -77,12 +77,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
       if (key === "d") {
 
         const newMessage = SvgPathServices.findErrors(value)
-        if (newMessage === "") {
-          newLogBody[key] = value;
-        }
-        else {
-          newLogBody[key] = "";
-        }
+        newLogBody[key] = value;
         setMessage(newMessage)
       } else {
         newLogBody[key] = value;
@@ -166,7 +161,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
 
   return (
     <>
-      <AppHeader actif=""/>
+      <AppHeader actif={pathId === -1 ? "pathNew" : ""}/>
       <Form
         method="post"
         onSubmit={handleRequest}
