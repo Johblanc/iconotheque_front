@@ -1,7 +1,7 @@
 import { AppHeader } from "../../App/Components/AppHeader";
 
 
-export function IconsViewPage(){
+export function IconsViewPage(props : {iconId : number}){
 
   return (
     <>

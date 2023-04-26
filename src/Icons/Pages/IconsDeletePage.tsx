@@ -1,7 +1,7 @@
 import { AppHeader } from "../../App/Components/AppHeader";
 
 
-export function IconsDeletePage(){
+export function IconsDeletePage(props : {iconId : number}){
 
   return (
     <>

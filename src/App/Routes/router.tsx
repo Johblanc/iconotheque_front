@@ -14,6 +14,14 @@ import { PathDeletePage } from "../../Path/Pages/PathDeletePage";
 import { UserAdminPage } from "../../User/Pages/UserAdminPage";
 import { UserPromotePage } from "../../User/Pages/UserPromotePage";
 import { AccueilPage } from "../Pages/AccueilPage";
+import { IconsSelectPage } from "../../Icons/Pages/IconsSelectPage";
+import { IconsDeletePage } from "../../Icons/Pages/IconsDeletePage";
+import { IconsViewPage } from "../../Icons/Pages/IconsViewPage";
+import { IconsUpdatePage } from "../../Icons/Pages/IconsUpdatePage";
+import { AspectsSelectPage } from "../../Aspects/Pages/AspectsSelectPage";
+import { AspectsUpdatePage } from "../../Aspects/Pages/AspectsUpdatePage";
+import { AspectsDeletePage } from "../../Aspects/Pages/AspectsDeletePage";
+import { AspectsViewPage } from "../../Aspects/Pages/AspectsViewPage";
 
 
 /**
@@ -110,6 +118,96 @@ export const PAGES_CONFIG : TPAGE_CONFIG[] = [
       if (args.params.id)
       {
         return <PathDeletePage pathId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+
+  
+  {
+    path: "/icons/publics",
+    element: <IconsSelectPage actif={"public"} />,
+  },
+  {
+    path: "/icons/privates",
+    element: <IconsSelectPage actif={"private"} />,
+  },
+  {
+    path: "/icons/new",
+    element: <IconsUpdatePage iconId={-1} />,
+  },
+  {
+    path: "/icons/update/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <IconsUpdatePage iconId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+  {
+    path: "/icons/view/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <IconsViewPage iconId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+  {
+    path: "/icons/delete/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <IconsDeletePage iconId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+
+  
+  {
+    path: "/aspects/privates",
+    element: <AspectsSelectPage actif={"private"} />,
+  },
+  {
+    path: "/aspects/new",
+    element: <AspectsUpdatePage aspectId={-1} />,
+  },
+  {
+    path: "/aspects/update/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <AspectsUpdatePage aspectId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+  {
+    path: "/aspects/view/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <AspectsViewPage aspectId={Number(args.params.id)}/>
+      }
+      return <></>
+    }
+  },
+  {
+    path: "/aspects/delete/:id",
+    element: <IdPage />,
+    loader : (args : LoaderFunctionArgs | {params : {id : string}})=>{ 
+      if (args.params.id)
+      {
+        return <AspectsDeletePage aspectId={Number(args.params.id)}/>
       }
       return <></>
     }

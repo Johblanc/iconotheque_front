@@ -1,7 +1,7 @@
 import { AppHeader } from "../../App/Components/AppHeader";
 
 
-export function AspectsUpdatePage(){
+export function AspectsUpdatePage(props : {aspectId : number}){
 
   return (
     <>

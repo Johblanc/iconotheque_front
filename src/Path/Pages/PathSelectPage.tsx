@@ -40,7 +40,7 @@ export function PathSelectPage(props: {
 
   return (
     <>
-      <AppHeader actif={actif} />
+      <AppHeader actif={actif === "public" ? "pathPublic" : "pathPrivate"} />
       <div className={`${APP_STYLE.PATH.SELECT.CADRE}`}>
         <h2 className={`${APP_STYLE.PATH.SELECT.TITLE}`}>
           {actif === "public" ? "Formes publiques" : "Mes Formes"}

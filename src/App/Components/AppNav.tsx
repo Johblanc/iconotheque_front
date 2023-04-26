@@ -17,7 +17,7 @@ import { TitreStatic } from "./TitreStatic";
  * @version v2
  */
 export function AppNav(props: {
-  actif: "profil" | "new" | "public" | "private" | "logIn" | "";
+  actif: "" | "logIn" | "profil" | "pathNew" | "pathPublic" | "pathPrivate" | "iconsNew" | "iconsPublic" | "iconsPrivate" | "aspectsNew" | "aspectsPrivate" ;
 }): JSX.Element {
   const { actif } = props;
 
@@ -80,7 +80,7 @@ export function AppNav(props: {
           {user.access === 0 && (
             <li
               className={`${APP_STYLE.APP.NAV.ITEM}${
-                actif === "public" ? " active" : ""
+                actif === "iconsPublic" ? " active" : ""
               }`}
             >
               <LinkCustom
@@ -94,7 +94,7 @@ export function AppNav(props: {
           {user.access === 0 && (
             <li
               className={`${APP_STYLE.APP.NAV.ITEM}${
-                actif === "public" ? " active" : ""
+                actif === "pathPublic" ? " active" : ""
               }`}
             >
               <LinkCustom
@@ -109,7 +109,7 @@ export function AppNav(props: {
               <button
                 className={`${BS.spacing("p", 2)} ${BS.button()} ${
                   PERSO.SHAD_ACTIVE
-                }${actif === "new" ? " active" : ""} nav-link dropdown-toggle w-100`}
+                } nav-link dropdown-toggle w-100`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -125,7 +125,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "new" ? " active" : ""} dropdown-item`}
+                  }${actif === "iconsNew" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
@@ -136,7 +136,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "public" ? " active" : ""} dropdown-item`}
+                  }${actif === "iconsPublic" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
@@ -147,7 +147,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "private" ? " active" : ""} dropdown-item`}
+                  }${actif === "iconsPrivate" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
@@ -163,7 +163,7 @@ export function AppNav(props: {
               <button
                 className={`${BS.spacing("p", 2)} ${BS.button()} ${
                   PERSO.SHAD_ACTIVE
-                }${actif === "new" ? " active" : ""} nav-link dropdown-toggle w-100`}
+                } nav-link dropdown-toggle w-100`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -179,7 +179,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "new" ? " active" : ""} dropdown-item`}
+                  }${actif === "pathNew" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
@@ -190,7 +190,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "public" ? " active" : ""} dropdown-item`}
+                  }${actif === "pathPublic" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
@@ -201,7 +201,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "private" ? " active" : ""} dropdown-item`}
+                  }${actif === "pathPrivate" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
@@ -217,7 +217,7 @@ export function AppNav(props: {
               <button
                 className={`${BS.spacing("p", 2)} ${BS.button()} ${
                   PERSO.SHAD_ACTIVE
-                }${actif === "new" ? " active" : ""} nav-link dropdown-toggle w-100`}
+                } nav-link dropdown-toggle w-100`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -233,7 +233,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "new" ? " active" : ""} dropdown-item`}
+                  }${actif === "aspectsNew" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
@@ -244,7 +244,7 @@ export function AppNav(props: {
                 <li
                   className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "private" ? " active" : ""} dropdown-item`}
+                  }${actif === "aspectsPrivate" ? " active" : ""} dropdown-item`}
                 >
                   <LinkCustom
                     className={`${BS.color("dark")}`}
