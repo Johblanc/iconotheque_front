@@ -57,7 +57,7 @@ export function AppNav(props: {
               }`}
             >
               <LinkCustom
-                className={`${BS.color("dark")}`}
+                className={`${BS.color("dark")} w-100`}
                 to={"/user/login"}
                 name="Connection"
               />
@@ -70,7 +70,7 @@ export function AppNav(props: {
               }`}
             >
               <LinkCustom
-                className={`${BS.color("dark")}`}
+                className={`${BS.color("dark")} w-100`}
                 to={"/user/view"}
                 name="Profile"
               />
@@ -84,7 +84,7 @@ export function AppNav(props: {
               }`}
             >
               <LinkCustom
-                className={`${BS.color("dark")}`}
+                className={`${BS.color("dark")} w-100`}
                 to={"/icons/publics"}
                 name="Icônes publiques"
               />
@@ -98,7 +98,7 @@ export function AppNav(props: {
               }`}
             >
               <LinkCustom
-                className={`${BS.color("dark")}`}
+                className={`${BS.color("dark")} w-100`}
                 to={"/paths/publics"}
                 name="Formes publiques"
               />
@@ -123,34 +123,34 @@ export function AppNav(props: {
                 )} ${BS.background("secondary")}`}
               >
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "iconsNew" ? " active" : ""} dropdown-item`}
+                  }${actif === "iconsNew" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/icons/new"}
                     name="Nouvelle Icône"
                   />
                 </li>
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "iconsPublic" ? " active" : ""} dropdown-item`}
+                  }${actif === "iconsPublic" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/icons/publics"}
                     name="Icônes publiques"
                   />
                 </li>
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "iconsPrivate" ? " active" : ""} dropdown-item`}
+                  }${actif === "iconsPrivate" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/icons/privates"}
                     name="Mes Icônes"
                   />
@@ -177,34 +177,34 @@ export function AppNav(props: {
                 )} ${BS.background("secondary")}`}
               >
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "pathNew" ? " active" : ""} dropdown-item`}
+                  }${actif === "pathNew" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/paths/new"}
                     name="Nouvelle Forme"
                   />
                 </li>
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "pathPublic" ? " active" : ""} dropdown-item`}
+                  }${actif === "pathPublic" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/paths/publics"}
                     name="Formes publiques"
                   />
                 </li>
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "pathPrivate" ? " active" : ""} dropdown-item`}
+                  }${actif === "pathPrivate" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/paths/privates"}
                     name="Mes Formes"
                   />
@@ -231,23 +231,23 @@ export function AppNav(props: {
                 )} ${BS.background("secondary")}`}
               >
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "aspectsNew" ? " active" : ""} dropdown-item`}
+                  }${actif === "aspectsNew" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/aspects/new"}
                     name="Nouvel Aspect"
                   />
                 </li>
                 <li
-                  className={`${BS.spacing("both", 2, "y")} ${BS.button()} ${
+                  className={`${BS.spacing("m", 2, "y")} ${BS.button()} ${
                     PERSO.SHAD_ACTIVE
-                  }${actif === "aspectsPrivate" ? " active" : ""} dropdown-item`}
+                  }${actif === "aspectsPrivate" ? " active" : ""} dropdown-item p-0`}
                 >
                   <LinkCustom
-                    className={`${BS.color("dark")}`}
+                    className={`${BS.color("dark")} w-100 d-block p-2 text-center`}
                     to={"/aspects/privates"}
                     name="Mes Aspects"
                   />
