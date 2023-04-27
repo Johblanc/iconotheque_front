@@ -15,6 +15,7 @@ import { AspectContext } from "../../Utilities/Contexts/Aspect.context";
 import { Aspect } from "../../Aspects/Class/Aspect.class";
 import { Icon } from "../../Icons/Classes/Icon.class";
 import { IconPublicContext } from "../../Utilities/Contexts/IconPublic.context";
+import { IconPrivateContext } from "../../Utilities/Contexts/IconPrivate.context";
 
 /**
  * Un conteneur avec tous les contextes
@@ -42,8 +43,11 @@ export function Contextualizer(props: {
   /** liste des aspects */
   const [aspects, setAspects] = useState<Aspect[]>([]);
 
-  /** liste des icône publiques */
+  /** liste des icônes publiques */
   const [iconPublic, setIconPublic] = useState<Icon[]>([]);
+
+  /** liste des icônes privates */
+  const [iconPrivate, setIconPrivate] = useState<Icon[]>([]);
 
   /** La transition en cours */
   const [transition, setTransition] = useState<TTransition>({ to: "" });
@@ -107,11 +111,13 @@ export function Contextualizer(props: {
           <PathPrivateContext.Provider value={{ pathPrivate, setPathPrivate }}>
             <AspectContext.Provider value={{ aspects, setAspects }}>
               <IconPublicContext.Provider value={{ iconPublic, setIconPublic }}>
-                <TransitionContext.Provider value={{ transition, setTransition }}>
-                  <ThemeContext.Provider value={{ theme, setTheme }}>
-                    {props.children}
-                  </ThemeContext.Provider>
-                </TransitionContext.Provider>
+                <IconPrivateContext.Provider value={{ iconPrivate, setIconPrivate }}>
+                  <TransitionContext.Provider value={{ transition, setTransition }}>
+                    <ThemeContext.Provider value={{ theme, setTheme }}>
+                      {props.children}
+                    </ThemeContext.Provider>
+                  </TransitionContext.Provider>
+                </IconPrivateContext.Provider>
               </IconPublicContext.Provider>
             </AspectContext.Provider>
           </PathPrivateContext.Provider>
