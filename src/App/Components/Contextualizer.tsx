@@ -73,6 +73,17 @@ export function Contextualizer(props: {
     }
   }, [user]);
 
+  /** Récupération des aspects */
+  useEffect(() => {
+    const fetchAll = async () => {
+      const response = await Requester.aspect.getAll();
+      if (response.data) {
+        setAspects(response.data);
+      }
+    };
+    fetchAll();
+  }, []);
+
   return (
     <div
       className={`app ${
