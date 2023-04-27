@@ -11,6 +11,8 @@ import { TPath } from "../../Utilities/Types/Path.type";
 import { TTheme } from "../../Utilities/Types/Theme.type";
 import { TTransition } from "../../Utilities/Types/TTransition";
 import "../Style/App.style.css";
+import { AspectContext } from "../../Utilities/Contexts/Aspect.context";
+import { TAspect } from "../../Utilities/Types/Aspect.type";
 
 /**
  * Un conteneur avec tous les contextes
@@ -34,6 +36,9 @@ export function Contextualizer(props: {
 
   /** liste des paths privés */
   const [pathPrivate, setPathPrivate] = useState<TPath[]>([]);
+
+  /** liste des aspects */
+  const [aspects, setAspects] = useState<TAspect[]>([]);
 
   /** La transition en cours */
   const [transition, setTransition] = useState<TTransition>({ to: "" });
@@ -85,11 +90,13 @@ export function Contextualizer(props: {
       <UserContext.Provider value={{ user, setUser }}>
         <PathPublicContext.Provider value={{ pathPublic, setPathPublic }}>
           <PathPrivateContext.Provider value={{ pathPrivate, setPathPrivate }}>
-            <TransitionContext.Provider value={{ transition, setTransition }}>
-              <ThemeContext.Provider value={{ theme, setTheme }}>
-                {props.children}
-              </ThemeContext.Provider>
-            </TransitionContext.Provider>
+            <AspectContext.Provider value={{aspects, setAspects}}>
+              <TransitionContext.Provider value={{ transition, setTransition }}>
+                <ThemeContext.Provider value={{ theme, setTheme }}>
+                  {props.children}
+                </ThemeContext.Provider>
+              </TransitionContext.Provider>
+            </AspectContext.Provider>
           </PathPrivateContext.Provider>
         </PathPublicContext.Provider>
       </UserContext.Provider>
