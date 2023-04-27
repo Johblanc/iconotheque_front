@@ -37,4 +37,25 @@ export class IconRequester extends RequesterBase {
     return response
   }
 
+  /**
+   * Requête de récupération de icones privés
+   * 
+   * @param token le token de l'utilisateur
+   * 
+   * @returns Liste des icones privés
+   * 
+   * @version v2
+   */
+  static async getPrivates(token : string) : Promise<TResponse<TIcon[],string>>
+  {
+    const response = await IconRequester.base<TIcon[],string>(
+      "icons/privates",
+      RequestMethods.GET ,
+      [],
+      undefined,
+      token
+      )
+    return response
+  }
+
 }
