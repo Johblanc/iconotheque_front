@@ -29,12 +29,15 @@ export class AspectRequester extends RequesterBase {
       undefined
       )
     return response
-  }
+  } ;
 
   /**
-   * Requête de récupération des aspects
+   * Création d'un nouvel aspect
    * 
-   * @returns Liste des aspects
+   * @param body Les infos de création d'un aspect
+   * @param token Le token d'identification de l'auteur
+   * 
+   * @returns Le nouvel aspect
    * 
    * @version v2
    */
@@ -48,6 +51,29 @@ export class AspectRequester extends RequesterBase {
       token
       )
     return response.data
-  }
+  } ;
+
+  /**
+   * Mise à jour d'un aspect
+   * 
+   * @param body  Les infos de création d'un aspect
+   * @param token Le token d'identification de l'auteur
+   * @param id    L'identification de l'aspect
+   * 
+   * @returns Le nouvel aspect
+   * 
+   * @version v2
+   */
+  static async update(body : TAspect, token : string, id :number) : Promise<TAspect>
+  {
+    const response = await AspectRequester.base<TAspect,string>(
+      "aspects",
+      RequestMethods.PATCH ,
+      [id],
+      body,
+      token
+      )
+    return response.data
+  } ;
 
 }

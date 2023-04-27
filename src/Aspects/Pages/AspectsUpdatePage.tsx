@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { EntryNumber } from "../../Utilities/Components/EntryNumber";
@@ -9,17 +9,26 @@ import { Form } from "react-router-dom";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { UserContext } from "../../Utilities/Contexts/User.context";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 
 export function AspectsUpdatePage(props: { aspectId: number }) {
   const { aspectId } = props;
   const { aspects, setAspects } = useContext(AspectContext);
   const { user } = useContext(UserContext);
+  
+  const { setTransition } = useContext(TransitionContext);
 
   const [aspect, setAspect] = useState(
     aspects.filter((item) => item.id === aspectId).length > 0
       ? aspects.filter((item) => item.id === aspectId)[0]
       : DEFAULT_ASPECT
   );
+
+  useEffect(()=>{setAspect(
+    aspects.filter((item) => item.id === aspectId).length > 0
+      ? aspects.filter((item) => item.id === aspectId)[0]
+      : DEFAULT_ASPECT
+    )},[aspectId])
 
   const handleAspect = (
     key:
@@ -60,15 +69,29 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
 
   const handleRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (aspect.id === -1) {
       const newAspect = await Requester.aspect.new(aspect,user.token) ;
       const newAspects = [newAspect, ...aspects] ;
-      setAspects(newAspects)
+      setAspects(newAspects) ;
     }
     else
     {
+      const newAspect = await Requester.aspect.update(aspect,user.token,aspect.id) ;
+      const newAspects = aspects.map(item => {
+        if (item.id === newAspect.id){
+          return newAspect
+        }
+        return item
+      }) ;
+      setAspects(newAspects) ;
 
     }
+
+    setTransition({
+      to: `/aspects/view/${aspect.id}`,
+      message: "Enregistrement réussi",
+    });
   };
 
   return (
