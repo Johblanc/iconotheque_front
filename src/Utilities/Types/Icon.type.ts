@@ -1,3 +1,4 @@
+import { Figure } from "../../Icons/Classes/Figure.class"
 import { TFigure } from "./Figure.type"
 import { TUser } from "./User.type"
 
@@ -7,10 +8,10 @@ import { TUser } from "./User.type"
  * @version v2
  */
 export type TIcon = {
-  id : number
+  id : number ,
   name : string ,
   status : "private" | "public" ,
   viewbox : string ,
-  user : TUser,
-  figures : TFigure[]
+  user : TUser ,
+  figures : TFigure[] | Figure[] 
 }

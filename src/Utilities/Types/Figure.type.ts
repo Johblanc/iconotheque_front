@@ -8,7 +8,7 @@ import { TPath } from "./Path.type"
  * @version v2
  */
 export type TFigure = {
-  id : number
+  id : number,
   order : number ,
   path : TPath,
   aspect : TAspect | Aspect
