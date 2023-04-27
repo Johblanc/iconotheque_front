@@ -31,4 +31,23 @@ export class AspectRequester extends RequesterBase {
     return response
   }
 
+  /**
+   * Requête de récupération des aspects
+   * 
+   * @returns Liste des aspects
+   * 
+   * @version v2
+   */
+  static async new(body : TAspect, token : string) : Promise<TAspect>
+  {
+    const response = await AspectRequester.base<TAspect,string>(
+      "aspects",
+      RequestMethods.POST ,
+      [],
+      body,
+      token
+      )
+    return response.data
+  }
+
 }
