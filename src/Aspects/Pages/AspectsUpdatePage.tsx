@@ -10,6 +10,7 @@ import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
+import { Aspect } from "../Class/Aspect.class";
 
 export function AspectsUpdatePage(props: { aspectId: number }) {
   const { aspectId } = props;
@@ -40,7 +41,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
       | "name",
     value: string | number
   ) => {
-    const newAspect = { ...aspect };
+    const newAspect = new Aspect(aspect);
     if (
       (key === "fill_color" || key === "stroke_color") &&
       typeof value === "string"
@@ -72,7 +73,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
 
     if (aspect.id === -1) {
       const newAspect = await Requester.aspect.new(aspect,user.token) ;
-      const newAspects = [newAspect, ...aspects] ;
+      const newAspects = [new Aspect(newAspect), ...aspects] ;
       setAspects(newAspects) ;
     }
     else
@@ -80,7 +81,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
       const newAspect = await Requester.aspect.update(aspect,user.token,aspect.id) ;
       const newAspects = aspects.map(item => {
         if (item.id === newAspect.id){
-          return newAspect
+          return new Aspect(newAspect)
         }
         return item
       }) ;
@@ -108,13 +109,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
           cx="50"
           cy="50"
           r="20"
-          style={{
-            fill: aspect.fill_color,
-            fillOpacity: aspect.fill_opacity,
-            stroke: aspect.stroke_color,
-            strokeOpacity: aspect.stroke_opacity,
-            strokeWidth: aspect.stroke_width,
-          }}
+          style={aspect.style }
         />
       </svg>
       <Form

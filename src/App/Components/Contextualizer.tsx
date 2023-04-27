@@ -12,7 +12,7 @@ import { TTheme } from "../../Utilities/Types/Theme.type";
 import { TTransition } from "../../Utilities/Types/TTransition";
 import "../Style/App.style.css";
 import { AspectContext } from "../../Utilities/Contexts/Aspect.context";
-import { TAspect } from "../../Utilities/Types/Aspect.type";
+import { Aspect } from "../../Aspects/Class/Aspect.class";
 
 /**
  * Un conteneur avec tous les contextes
@@ -38,7 +38,7 @@ export function Contextualizer(props: {
   const [pathPrivate, setPathPrivate] = useState<TPath[]>([]);
 
   /** liste des aspects */
-  const [aspects, setAspects] = useState<TAspect[]>([]);
+  const [aspects, setAspects] = useState<Aspect[]>([]);
 
   /** La transition en cours */
   const [transition, setTransition] = useState<TTransition>({ to: "" });
@@ -78,7 +78,7 @@ export function Contextualizer(props: {
     const fetchAll = async () => {
       const response = await Requester.aspect.getAll();
       if (response.data) {
-        setAspects(response.data);
+        setAspects(response.data.map(item => new Aspect(item)));
       }
     };
     fetchAll();

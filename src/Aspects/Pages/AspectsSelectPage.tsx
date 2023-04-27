@@ -2,16 +2,19 @@ import { useContext } from "react";
 import { AppHeader } from "../../App/Components/AppHeader";
 import { AspectContext } from "../../Utilities/Contexts/Aspect.context";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
+import { UserContext } from "../../Utilities/Contexts/User.context";
 
 export function AspectsSelectPage(props: { actif: "private" | "public" }) {
   const { aspects } = useContext(AspectContext);
+  const { user } = useContext(UserContext);
   const { setTransition } = useContext(TransitionContext);
+  const myAspects = aspects.filter(item => item.user.id === user.id)
 
   return (
     <>
       <AppHeader actif={"aspectsPrivate"} />
       <div className="d-flex flex-wrap">
-        {aspects.map((item, i) => {
+        {myAspects.map((item, i) => {
           return (
             <div
               key={i}
@@ -34,13 +37,7 @@ export function AspectsSelectPage(props: { actif: "private" | "public" }) {
                   cx="50"
                   cy="50"
                   r="20"
-                  style={{
-                    fill: item.fill_color,
-                    fillOpacity: item.fill_opacity,
-                    stroke: item.stroke_color,
-                    strokeOpacity: item.stroke_opacity,
-                    strokeWidth: item.stroke_width,
-                  }}
+                  style={item.style}
                 />
               </svg>
             </div>

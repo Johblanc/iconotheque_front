@@ -1,5 +1,5 @@
 import React from "react";
-import { TAspect } from "../Types/Aspect.type";
+import { Aspect } from "../../Aspects/Class/Aspect.class";
 
 
 /**
@@ -8,6 +8,6 @@ import { TAspect } from "../Types/Aspect.type";
  * @version v2
  */
 export const AspectContext = React.createContext({
-  aspects : [] as TAspect[],
-  setAspects: (value: TAspect[]) => {},
+  aspects : [] as Aspect[],
+  setAspects: (value: Aspect[]) => {},
 });
