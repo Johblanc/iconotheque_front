@@ -13,6 +13,8 @@ import { TTransition } from "../../Utilities/Types/TTransition";
 import "../Style/App.style.css";
 import { AspectContext } from "../../Utilities/Contexts/Aspect.context";
 import { Aspect } from "../../Aspects/Class/Aspect.class";
+import { Icon } from "../../Icons/Classes/Icon.class";
+import { IconPublicContext } from "../../Utilities/Contexts/IconPublic.context";
 
 /**
  * Un conteneur avec tous les contextes
@@ -40,6 +42,9 @@ export function Contextualizer(props: {
   /** liste des aspects */
   const [aspects, setAspects] = useState<Aspect[]>([]);
 
+  /** liste des icône publiques */
+  const [iconPublic, setIconPublic] = useState<Icon[]>([]);
+
   /** La transition en cours */
   const [transition, setTransition] = useState<TTransition>({ to: "" });
 
@@ -59,7 +64,6 @@ export function Contextualizer(props: {
 
   /** Récupération des paths privés*/
   useEffect(() => {
-
     const fetchPrivates = async () => {
       const response = await Requester.path.getPrivates(user.token);
       if (response.data) {
@@ -78,7 +82,7 @@ export function Contextualizer(props: {
     const fetchAll = async () => {
       const response = await Requester.aspect.getAll();
       if (response.data) {
-        setAspects(response.data.map(item => new Aspect(item)));
+        setAspects(response.data.map((item) => new Aspect(item)));
       }
     };
     fetchAll();
@@ -101,12 +105,14 @@ export function Contextualizer(props: {
       <UserContext.Provider value={{ user, setUser }}>
         <PathPublicContext.Provider value={{ pathPublic, setPathPublic }}>
           <PathPrivateContext.Provider value={{ pathPrivate, setPathPrivate }}>
-            <AspectContext.Provider value={{aspects, setAspects}}>
-              <TransitionContext.Provider value={{ transition, setTransition }}>
-                <ThemeContext.Provider value={{ theme, setTheme }}>
-                  {props.children}
-                </ThemeContext.Provider>
-              </TransitionContext.Provider>
+            <AspectContext.Provider value={{ aspects, setAspects }}>
+              <IconPublicContext.Provider value={{ iconPublic, setIconPublic }}>
+                <TransitionContext.Provider value={{ transition, setTransition }}>
+                  <ThemeContext.Provider value={{ theme, setTheme }}>
+                    {props.children}
+                  </ThemeContext.Provider>
+                </TransitionContext.Provider>
+              </IconPublicContext.Provider>
             </AspectContext.Provider>
           </PathPrivateContext.Provider>
         </PathPublicContext.Provider>
