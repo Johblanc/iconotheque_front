@@ -1,3 +1,4 @@
+import { AspectRequester } from "./Requester.Aspect"
 import { PathRequester } from "./Requester.Path"
 import { UserRequester } from "./Requester.User"
 
@@ -8,7 +9,8 @@ import { UserRequester } from "./Requester.User"
  */
 export class Requester {
 
-  static user = UserRequester
-  static path = PathRequester
+  static user = UserRequester ;
+  static path = PathRequester ;
+  static aspect = AspectRequester ;
 
 }
