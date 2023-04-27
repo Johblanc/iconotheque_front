@@ -76,4 +76,27 @@ export class AspectRequester extends RequesterBase {
     return response.data
   } ;
 
+  /**
+   * Mise à jour d'un aspect
+   * 
+   * @param body  Les infos de création d'un aspect
+   * @param token Le token d'identification de l'auteur
+   * @param id    L'identification de l'aspect
+   * 
+   * @returns Le nouvel aspect
+   * 
+   * @version v2
+   */
+  static async delete(id :number, token : string, ) : Promise<TResponse<TAspect,string>>
+  {
+    const response = await AspectRequester.base<TAspect,string>(
+      "aspects",
+      RequestMethods.DELETE ,
+      [id],
+      undefined,
+      token
+      )
+    return response
+  } ;
+
 }
