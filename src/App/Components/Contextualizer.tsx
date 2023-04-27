@@ -81,6 +81,19 @@ export function Contextualizer(props: {
     }
   }, [user]);
 
+  /** Récupération des icônes publiques */
+  useEffect(() => {
+    const fetchPublics = async () => {
+      const response = await Requester.icon.getPublics();
+      if (response.data) {
+        console.log(response.data);
+        
+        setIconPublic( response.data.map( item => new Icon( item ) ) );
+      }
+    };
+    fetchPublics();
+  }, []);
+
   /** Récupération des aspects */
   useEffect(() => {
     const fetchAll = async () => {
