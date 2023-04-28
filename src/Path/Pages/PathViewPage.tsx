@@ -38,12 +38,7 @@ export function PathViewPage(props: { pathId: number }): JSX.Element {
     if (response.data) {
       setPathPublic([response.data, ...pathPublic]);
       setPathPrivate(
-        pathPrivate.map((item) => {
-          if (item.id === response.data.id) {
-            return response.data;
-          }
-          return item;
-        })
+        pathPrivate.filter((item) => item.id !== path.id)
       );
 
       setTransition({
