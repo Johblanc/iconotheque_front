@@ -37,23 +37,23 @@ export class Aspect {
 
   get asCss () {
     let result = `.${this.name} {` ;
-    result += `\n\tfill : ${this.fill_color} ;`
-    result += `\n\tfill-opacity : ${this.fill_opacity} ;`
-    result += `\n\tstroke : ${this.stroke_color} ;`
-    result += `\n\tstroke-opacity : ${this.stroke_opacity} ;`
-    result += `\n\tstroke-width : ${this.stroke_width} ;`
-    result += `\n}`
-    return result
+    result += `\n\tfill : ${this.fill_color} ;` ;
+    result += `\n\tfill-opacity : ${this.fill_opacity} ;` ;
+    result += `\n\tstroke : ${this.stroke_color} ;` ;
+    result += `\n\tstroke-opacity : ${this.stroke_opacity} ;` ;
+    result += `\n\tstroke-width : ${this.stroke_width} ;` ;
+    result += `\n}` ;
+    return result ;
   }
 
   get asReactStyleString () {
-    let result = `style = {` ;
-    result += `\n\tfill : ${this.fill_color} ;`
-    result += `\n\tfillOpacity : ${this.fill_opacity} ;`
-    result += `\n\tstroke : ${this.stroke_color} ;`
-    result += `\n\tstrokeOpacity : ${this.stroke_opacity} ;`
-    result += `\n\tstrokeWidth : ${this.stroke_width} ;`
-    result += `\n}`
-    return result
+    let result = `style = {{` ;
+    result += `\n\tfill : "${this.fill_color}" ,` ;
+    result += `\n\tfillOpacity : ${this.fill_opacity} ,` ;
+    result += `\n\tstroke : "${this.stroke_color}" ,` ;
+    result += `\n\tstrokeOpacity : ${this.stroke_opacity} ,` ;
+    result += `\n\tstrokeWidth : ${this.stroke_width} ,` ;
+    result += `\n}}` ;
+    return result ;
   }
 }
