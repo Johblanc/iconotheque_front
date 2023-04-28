@@ -8,15 +8,29 @@ import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { Requester } from "../../Utilities/Requester/Requester";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
+import { AspectContext } from "../../Utilities/Contexts/Aspect.context";
+import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
+import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
+import { IconPublicContext } from "../../Utilities/Contexts/IconPublic.context";
+import { IconPrivateContext } from "../../Utilities/Contexts/IconPrivate.context";
+import { Icon } from "../../Icons/Classes/Icon.class";
+import { Aspect } from "../../Aspects/Class/Aspect.class";
 
 /**
  * Page de mise à jour des données utilisateur
  *
- * @version v1
+ * @version v2
  */
 export function UserUpdatePage(): JSX.Element {
   /** Récupération du réglage de l'utilisateur dans le context */
   const { user, setUser } = useContext(UserContext);
+
+  /** Récupération des différents contexts pour répercution des modifications */
+  const { aspects     , setAspects      } = useContext(AspectContext);
+  const { pathPublic  , setPathPublic   } = useContext(PathPublicContext);
+  const { pathPrivate , setPathPrivate  } = useContext(PathPrivateContext);
+  const { iconPublic  , setIconPublic   } = useContext(IconPublicContext);
+  const { iconPrivate , setIconPrivate  } = useContext(IconPrivateContext);
 
   const { setTransition } = useContext(TransitionContext);
 
@@ -61,6 +75,46 @@ export function UserUpdatePage(): JSX.Element {
     if (responseUpdate.data) {
       setMessage("");
       setUser(responseUpdate.data);
+      setAspects    (aspects.map(item => {
+        if (item.user.id === user.id){
+          const newItem = new Aspect(item) ;
+          newItem.user = responseUpdate.data ;
+          return newItem ;
+        } ;
+        return item
+      }))
+      setPathPublic (pathPublic.map(item => {
+        if (item.user.id === user.id){
+          const newItem = {...item} ;
+          newItem.user = responseUpdate.data ;
+          return newItem ;
+        } ;
+        return item
+      }))
+      setPathPrivate(pathPrivate.map(item => {
+        if (item.user.id === user.id){
+          const newItem = {...item} ;
+          newItem.user = responseUpdate.data ;
+          return newItem ;
+        } ;
+        return item
+      }))
+      setIconPublic (iconPublic.map(item => {
+        if (item.user.id === user.id){
+          const newItem = new Icon(item) ;
+          newItem.user = responseUpdate.data ;
+          return newItem ;
+        } ;
+        return item
+      }))
+      setIconPrivate(iconPrivate.map(item => {
+        if (item.user.id === user.id){
+          const newItem = new Icon(item) ;
+          newItem.user = responseUpdate.data ;
+          return newItem ;
+        } ;
+        return item
+      }))
       setTransition({ to: "/user/view", message: `Enregistrement Réussi` });
     } else {
       setMessage(responseUpdate.message);
