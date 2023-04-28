@@ -1,4 +1,5 @@
 
+import { TFigure } from "../../Utilities/Types/Figure.type";
 import { TIcon } from "../../Utilities/Types/Icon.type";
 import { TUser } from "../../Utilities/Types/User.type";
 import { Figure } from "./Figure.class";
@@ -11,7 +12,7 @@ export class Icon  {
   status  : "private" | "public"  ;
   viewbox : string                ;
   user    : TUser                 ;
-  figures : Figure[]              ;
+  private __figures : Figure[]              ;
 
   constructor(src : TIcon | Icon){
     this.id      = src.id      ;
@@ -19,6 +20,14 @@ export class Icon  {
     this.status  = src.status  ;
     this.viewbox = src.viewbox ;
     this.user    = src.user    ;
-    this.figures = src.figures.map(item => new Figure(item)) ;
+    this.__figures = src.figures.map(item => new Figure(item)) ;
+  }
+
+  get figures () : Figure[] {
+    return this.__figures.sort((a, b) => a.order - b.order) ;
+  }
+
+  set figures (value : TFigure[] | Figure[]){
+    this.__figures = value.map(item => new Figure(item)) ;
   }
 }
