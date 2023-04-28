@@ -32,6 +32,7 @@ export function IconItem(props: { icon: Icon }) {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
+      <title>Icône : {icon.name}</title>
         {figures}
       </svg>
     </button>
