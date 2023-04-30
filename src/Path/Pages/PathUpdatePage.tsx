@@ -238,7 +238,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
             <div>
               <h4>Tracé Source</h4>
               <div>
-                {updateBody.d.split("\n").map(item => <p className={APP_STYLE.APP.ALT_FONT}>{item}</p>)}
+                {updateBody.d.split("\n").map((item,i) => <p key={i} className={APP_STYLE.APP.ALT_FONT}>{item}</p>)}
               </div>
             </div>
           ) : (
