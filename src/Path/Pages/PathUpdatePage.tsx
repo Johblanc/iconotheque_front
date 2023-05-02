@@ -15,6 +15,8 @@ import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 import { EntriesViewBox } from "../../Utilities/Components/EntriesViewBox";
 import { PathGraphic } from "../Components/PathGraphic";
 import { SvgPathServices } from "../class/SvgPathServices";
+import { IconPublicContext } from "../../Utilities/Contexts/IconPublic.context";
+import { IconPrivateContext } from "../../Utilities/Contexts/IconPrivate.context";
 //import { parsePath, serializeInstructions } from "@remotion/paths";
 
 /**
@@ -31,6 +33,8 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
 
   const { pathPublic, setPathPublic } = useContext(PathPublicContext);
   const { pathPrivate, setPathPrivate } = useContext(PathPrivateContext);
+  const { iconPublic, setIconPublic } = useContext(IconPublicContext);
+  const { iconPrivate, setIconPrivate } = useContext(IconPrivateContext);
   const [inAdvance, setInAdvance] = useState(false);
 
   const [actif, setActif] = useState<"" | "x" | "y" | "width" | "height">("");
@@ -73,16 +77,14 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
   ) => {
     const newLogBody = { ...updateBody };
     if (value !== undefined) {
-
       if (key === "d") {
-
-        const newMessage = SvgPathServices.findErrors(value)
+        const newMessage = SvgPathServices.findErrors(value);
         newLogBody[key] = value;
-        setMessage(newMessage)
+        setMessage(newMessage);
       } else {
         newLogBody[key] = value;
       }
-      setInAdvance(false)
+      setInAdvance(false);
     }
     setUpdateBody(newLogBody);
 
@@ -122,6 +124,28 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
             return item;
           })
         );
+        setIconPublic(
+          iconPublic.map((item) => {
+            item.figures = item.figures.map((jtem) => {
+              if (jtem.path.id === response.data.id) {
+                jtem.path = response.data;
+              }
+              return jtem;
+            });
+            return item;
+          })
+        );
+        setIconPrivate(
+          iconPrivate.map((item) => {
+            item.figures = item.figures.map((jtem) => {
+              if (jtem.path.id === response.data.id) {
+                jtem.path = response.data;
+              }
+              return jtem;
+            });
+            return item;
+          })
+        );
         setMessage("");
 
         setTransition({
@@ -157,11 +181,12 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
       }
     }
   };
-  const isValid = updateValid.name && updateValid.viewbox && updateValid.d && message === "";
+  const isValid =
+    updateValid.name && updateValid.viewbox && updateValid.d && message === "";
 
   return (
     <>
-      <AppHeader actif={pathId === -1 ? "pathNew" : ""}/>
+      <AppHeader actif={pathId === -1 ? "pathNew" : ""} />
       <Form
         method="post"
         onSubmit={handleRequest}
@@ -185,22 +210,24 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <title>Path : {path.name}</title>
-                  <path className={APP_STYLE.PATH.VIEW.DROWN} d={updateBody.d} />
+                  <path
+                    className={APP_STYLE.PATH.VIEW.DROWN}
+                    d={updateBody.d}
+                  />
                 </svg>
               </div>
             </div>
             <em>Créée par {path.user.name}</em>
           </div>
           <div className={APP_STYLE.PATH.VIEW.NO_CADRE}>
-
-          <EntryString
-                name={"Nom"}
-                defaultValue={updateBody.name}
-                setValue={(value, valid) =>
-                  handleUpdateBody("name", value, valid)
-                }
-                validators={[EntryValidators.minLenght(4)]}
-              />
+            <EntryString
+              name={"Nom"}
+              defaultValue={updateBody.name}
+              setValue={(value, valid) =>
+                handleUpdateBody("name", value, valid)
+              }
+              validators={[EntryValidators.minLenght(4)]}
+            />
             <EntriesViewBox
               defaultValue={updateBody.viewbox}
               setValue={(value, valid) =>
@@ -238,7 +265,11 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
             <div>
               <h4>Tracé Source</h4>
               <div>
-                {updateBody.d.split("\n").map((item,i) => <p key={i} className={APP_STYLE.APP.ALT_FONT}>{item}</p>)}
+                {updateBody.d.split("\n").map((item, i) => (
+                  <p key={i} className={APP_STYLE.APP.ALT_FONT}>
+                    {item}
+                  </p>
+                ))}
               </div>
             </div>
           ) : (
@@ -266,7 +297,13 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
               ? "Basculer en modification de base (et annuler les changements)"
               : "Basculer en modification avancée"}
           </button>
-          {inAdvance && <PathGraphic path={updateBody} actif={actif} setDValue={(value) => handleUpdateBody("d", value)} />}
+          {inAdvance && (
+            <PathGraphic
+              path={updateBody}
+              actif={actif}
+              setDValue={(value) => handleUpdateBody("d", value)}
+            />
+          )}
         </div>
       </Form>
     </>
