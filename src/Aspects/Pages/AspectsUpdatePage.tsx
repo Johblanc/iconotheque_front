@@ -11,11 +11,15 @@ import { Requester } from "../../Utilities/Requester/Requester";
 import { UserContext } from "../../Utilities/Contexts/User.context";
 import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { Aspect } from "../Class/Aspect.class";
+import { IconPublicContext } from "../../Utilities/Contexts/IconPublic.context";
+import { IconPrivateContext } from "../../Utilities/Contexts/IconPrivate.context";
 
 export function AspectsUpdatePage(props: { aspectId: number }) {
   const { aspectId } = props;
   const { aspects, setAspects } = useContext(AspectContext);
   const { user } = useContext(UserContext);
+  const { iconPublic, setIconPublic } = useContext(IconPublicContext);
+  const { iconPrivate, setIconPrivate } = useContext(IconPrivateContext);
   
   const { setTransition } = useContext(TransitionContext);
 
@@ -86,6 +90,29 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
         return item
       }) ;
       setAspects(newAspects) ;
+
+      setIconPublic(
+        iconPublic.map((item) => {
+          item.figures = item.figures.map((jtem) => {
+            if (jtem.aspect.id === newAspect.id) {
+              jtem.aspect = new Aspect(newAspect);
+            }
+            return jtem;
+          });
+          return item;
+        })
+      );
+      setIconPrivate(
+        iconPrivate.map((item) => {
+          item.figures = item.figures.map((jtem) => {
+            if (jtem.aspect.id === newAspect.id) {
+              jtem.aspect = new Aspect(newAspect);
+            }
+            return jtem;
+          });
+          return item;
+        })
+      );
 
     }
 
@@ -184,6 +211,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
         <EntryNumber
           name="Epaisseur de la bordure"
           min={0}
+          step={0.1}
           value={aspect.stroke_width}
           setValue={(value?: number) => {
             handleAspect("stroke_width", value!);
