@@ -11,29 +11,33 @@ import { EntriesViewBox } from "../../Utilities/Components/EntriesViewBox";
 import { EntryValidators } from "../../Utilities/Validators/Entry.Validators";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { Figure } from "../Classes/Figure.class";
-import { Aspect } from "../../Aspects/Class/Aspect.class";
 import { PathPublicContext } from "../../Utilities/Contexts/PathPublic.context";
 import { PathPrivateContext } from "../../Utilities/Contexts/PathPrivate.context";
 import { AspectContext } from "../../Utilities/Contexts/Aspect.context";
+import { Requester } from "../../Utilities/Requester/Requester";
+import { Icon } from "../Classes/Icon.class";
+import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 
 export function IconsUpdatePage(props: { iconId: number }) {
   const { iconId } = props;
 
   /** Récupération des contexts */
   const { user } = useContext(UserContext);
-  const { pathPublic, setPathPublic } = useContext(PathPublicContext);
-  const { pathPrivate, setPathPrivate } = useContext(PathPrivateContext);
-  const { aspects , setAspects } = useContext(AspectContext);
+  const { pathPublic } = useContext(PathPublicContext);
+  const { pathPrivate } = useContext(PathPrivateContext);
+  const { aspects } = useContext(AspectContext);
   const { iconPublic, setIconPublic } = useContext(IconPublicContext);
   const { iconPrivate, setIconPrivate } = useContext(IconPrivateContext);
-  
+  const { setTransition } = useContext(TransitionContext);
+
   const userPath = [
     ...pathPublic.filter((item) => item.user.id === user.id),
     ...pathPrivate,
   ];
+  const userAspect = aspects.filter(item => item.user.id === user.id);
 
-  const defautPath = userPath[0]
-  const defautAspect = aspects[0]
+  const defautPath = userPath[0];
+  const defautAspect = userAspect[0];
 
   const [currentFigure, setCurrentFigure] = useState<Figure>();
 
@@ -42,7 +46,20 @@ export function IconsUpdatePage(props: { iconId: number }) {
     [...iconPublic, ...iconPrivate].filter((item) => item.id === iconId)[0] ||
     DEFAULT_ICON;
 
-  const handleRequest = () => {};
+  const handleRequest = async () => {
+    if(icon.id === -1){
+      const newIcon = new Icon( await Requester.icon.new(updateBody,user.token)) ;
+      setIconPrivate([newIcon, ...iconPrivate]) ;
+      setTransition({to : `/icons/view/${newIcon.id}`}) ;
+    }
+    else
+    {
+      const newIcon = new Icon( await Requester.icon.update(icon.id,updateBody,user.token)) ;
+      setIconPrivate(iconPrivate.map(item => item.id === newIcon.id ? newIcon : item)) ;
+      setIconPublic(iconPublic.map(item => item.id === newIcon.id ? newIcon : item)) ;
+      setTransition({to : `/icons/view/${newIcon.id}`}) ;
+    }
+  };
 
   /** Prépartion du message d'alerte */
 
@@ -50,7 +67,7 @@ export function IconsUpdatePage(props: { iconId: number }) {
   const [updateBody, setUpdateBody] = useState({
     name: icon.name,
     viewbox: icon.viewbox,
-    figures : [...icon.figures].sort((a,b)=> a.order - b.order)
+    figures: [...icon.figures].sort((a, b) => a.order - b.order),
   });
   const [updateValid, setUpdateValid] = useState({
     name: icon.id !== -1,
@@ -80,94 +97,116 @@ export function IconsUpdatePage(props: { iconId: number }) {
 
   const isValid = updateValid.name && updateValid.viewbox;
 
+  /** Ajouter une figure à l'icône */
   const addFigure = () => {
-    const newBody  = {...updateBody} ;
-    const newFigures = newBody.figures.map(item => new Figure(item)) ;
-    newFigures.push(new Figure({
-      id : -1,
-      order : newFigures.length + 1,
-      aspect : defautAspect,
-      path : defautPath
-    }))
+    const newBody = { ...updateBody };
+    const newFigures = newBody.figures.map((item) => new Figure(item));
+    newFigures.push(
+      new Figure({
+        id: -1,
+        order: newFigures.length + 1,
+        aspect: defautAspect,
+        path: defautPath,
+      })
+    );
 
-    newBody.figures = newFigures ;
-    setUpdateBody(newBody)
-    setCurrentFigure(newFigures[newFigures.length-1])
+    newBody.figures = newFigures;
+    setUpdateBody(newBody);
+    setCurrentFigure(newFigures[newFigures.length - 1]);
   };
 
+  /** Modification de la forme dans la figure */
+  const changeForme = (newIndex : number) => {
+    const newBody = { ...updateBody };
+    const newFigure = new Figure(newBody.figures[currentFigure!.order -1]);
+    const newForme = userPath.filter(item => item.id === newIndex)[0] ;
+    newFigure.path = newForme ;
+    newBody.figures[currentFigure!.order -1] = newFigure ;
+    
+    setCurrentFigure(newFigure)
+    setUpdateBody(newBody)
+  };
 
+  /** Modification de l'aspect dans la figure */
+  const changeAspect = (newIndex : number) => {
+    const newBody = { ...updateBody };
+    const newFigure = new Figure(newBody.figures[currentFigure!.order -1]);
+    const newAspect = userAspect.filter(item => item.id === newIndex)[0] ;
+    newFigure.aspect = newAspect ;
+    newBody.figures[currentFigure!.order -1] = newFigure ;
+    
+    setCurrentFigure(newFigure)
+    setUpdateBody(newBody)
+  };
+  
   /** Déplacer vers l'Amont */
   const moveUp = () => {
-    const newBody  = {...updateBody} ;
-    const newFigures = newBody.figures.map(item => new Figure(item)) ;
-    const temp = new Figure(currentFigure!)
-    newFigures[temp.order-1] = new Figure(newFigures[temp.order-2])
-    newFigures[temp.order-1].order += 1
-    newFigures[temp.order-2] = temp
-    newFigures[temp.order-2].order -= 1
+    const newBody = { ...updateBody };
+    const newFigures = newBody.figures.map((item) => new Figure(item));
+    const temp = new Figure(currentFigure!);
+    newFigures[temp.order - 1] = new Figure(newFigures[temp.order - 2]);
+    newFigures[temp.order - 1].order += 1;
+    newFigures[temp.order - 2] = temp;
+    newFigures[temp.order - 2].order -= 1;
 
-    newBody.figures = newFigures ;
-    setUpdateBody(newBody)
-    setCurrentFigure(newFigures[currentFigure!.order-2])
+    newBody.figures = newFigures;
+    setUpdateBody(newBody);
+    setCurrentFigure(newFigures[currentFigure!.order - 2]);
   };
 
   /** Déplacer vers l'Aval */
   const moveDown = () => {
-    const newBody  = {...updateBody} ;
-    const newFigures = newBody.figures.map(item => new Figure(item)) ;
-    const temp = new Figure(currentFigure!)
-    newFigures[temp.order-1] = new Figure(newFigures[temp.order])
-    newFigures[temp.order-1].order -= 1
-    newFigures[temp.order] = temp
-    newFigures[temp.order].order += 1
+    const newBody = { ...updateBody };
+    const newFigures = newBody.figures.map((item) => new Figure(item));
+    const temp = new Figure(currentFigure!);
+    newFigures[temp.order - 1] = new Figure(newFigures[temp.order]);
+    newFigures[temp.order - 1].order -= 1;
+    newFigures[temp.order] = temp;
+    newFigures[temp.order].order += 1;
 
-    newBody.figures = newFigures ;
-    setUpdateBody(newBody)
-    setCurrentFigure(newFigures[currentFigure!.order])
+    newBody.figures = newFigures;
+    setUpdateBody(newBody);
+    setCurrentFigure(newFigures[currentFigure!.order]);
   };
-
 
   /** Copie d'une figure */
   const copyFigure = () => {
-    const newBody  = {...updateBody} ;
-    const newFigures : Figure[] = [] ;
-    updateBody.figures.forEach(elm => {
-      if (elm.order < currentFigure!.order ){
-        newFigures.push( new Figure(elm)) ;
+    const newBody = { ...updateBody };
+    const newFigures: Figure[] = [];
+    updateBody.figures.forEach((elm) => {
+      if (elm.order < currentFigure!.order) {
+        newFigures.push(new Figure(elm));
+      } else if (elm.order > currentFigure!.order) {
+        newFigures.push(new Figure(elm));
+        newFigures[newFigures.length - 1].order += 1;
+      } else {
+        newFigures.push(new Figure(elm));
+        newFigures.push(new Figure(elm));
+        newFigures[newFigures.length - 1].order += 1;
+        setCurrentFigure(newFigures[newFigures.length - 1]);
       }
-      else if (elm.order > currentFigure!.order) {
-        newFigures.push( new Figure(elm)) ;
-        newFigures[newFigures.length-1].order += 1 ;
-      }
-      else {
-        newFigures.push( new Figure(elm)) ;
-        newFigures.push( new Figure(elm)) ;
-        newFigures[newFigures.length-1].order += 1 ;
-        setCurrentFigure(newFigures[newFigures.length-1])
-      }
-    })
-    newBody.figures = newFigures ;
-    
-    setUpdateBody(newBody)
+    });
+    newBody.figures = newFigures;
+
+    setUpdateBody(newBody);
   };
 
   /** Supprimer une Figure */
   const deleteFigure = () => {
-    const newBody  = {...updateBody} ;
-    const newFigures : Figure[] = [] ;
-    updateBody.figures.forEach(elm => {
-      if (elm.order < currentFigure!.order ){
-        newFigures.push( new Figure(elm)) ;
+    const newBody = { ...updateBody };
+    const newFigures: Figure[] = [];
+    updateBody.figures.forEach((elm) => {
+      if (elm.order < currentFigure!.order) {
+        newFigures.push(new Figure(elm));
+      } else if (elm.order > currentFigure!.order) {
+        newFigures.push(new Figure(elm));
+        newFigures[newFigures.length - 1].order -= 1;
       }
-      else if (elm.order > currentFigure!.order) {
-        newFigures.push( new Figure(elm)) ;
-        newFigures[newFigures.length-1].order -= 1 ;
-      }
-    })
-    newBody.figures = newFigures ;
-    setUpdateBody(newBody)
-    
-    setCurrentFigure(undefined)
+    });
+    newBody.figures = newFigures;
+    setUpdateBody(newBody);
+
+    setCurrentFigure(undefined);
   };
 
   const figuresDetail = updateBody.figures.map((figure, i) => (
@@ -247,13 +286,13 @@ export function IconsUpdatePage(props: { iconId: number }) {
       </svg>
     </div>
   ));
-
+      
   return (
     <>
       <AppHeader actif={iconId === -1 ? "iconsNew" : ""} />
       <Form
         method="post"
-        onSubmit={handleRequest}
+        onSubmit={(e)=> {e.preventDefault(); handleRequest()}}
         className={APP_STYLE.PATH.VIEW.CADRE}
       >
         <span className={APP_STYLE.PATH.VIEW.COLO}>
@@ -269,7 +308,7 @@ export function IconsUpdatePage(props: { iconId: number }) {
                 <svg
                   width="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
                   height="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
-                  viewBox={icon.viewbox}
+                  viewBox={updateBody.viewbox}
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -323,57 +362,112 @@ export function IconsUpdatePage(props: { iconId: number }) {
           <button
             className={APP_STYLE.APP.BTN_GOOD}
             onClick={(e) => {
-              e.preventDefault()
+              e.preventDefault();
               addFigure();
             }}
           >
             Ajouter une Figure
           </button>
           <div>{figuresDetail}</div>
+          <div>
+            <h4>
+              {currentFigure
+                ? `Modification de la Figure ${currentFigure.order}`
+                : "Pas de Figure sélectionnée"}
+            </h4>
             <div>
-              <h4>{currentFigure ? `Modification de la Figure ${currentFigure.order}` : "Pas de Figure sélectionnée"}</h4>
-              
-              <button
-                className={APP_STYLE.APP.BTN_GOOD}
-                onClick={(e) => {
-                  e.preventDefault()
-                  moveUp();
-                }}
-                disabled={!currentFigure || currentFigure.order === 1}
-              >
-                Déplacer vers l'Amont
-              </button>
-              <button
-                className={APP_STYLE.APP.BTN_GOOD}
-                onClick={(e) => {
-                  e.preventDefault()
-                  moveDown();
-                }}
-                disabled={!currentFigure || currentFigure.order === updateBody.figures.length}
-              >
-                Déplacer vers l'Aval
-              </button>
-              <button
-                className={APP_STYLE.APP.BTN_GOOD}
-                onClick={(e) => {
-                  e.preventDefault()
-                  copyFigure();
-                }}
+              <label htmlFor="forme-select">Changer de Forme :</label>
+
+              <select
                 disabled={!currentFigure}
-              >
-                Copier
-              </button>
-              <button
-                className={APP_STYLE.APP.BTN_GOOD}
-                onClick={(e) => {
+                value={currentFigure?.path.id}
+                className={APP_STYLE.APP.BTN_GOOD} id="forme-select"
+                onChange={(e) => {
                   e.preventDefault()
-                  deleteFigure();
+                  changeForme(Number(e.target.value));
                 }}
-                disabled={!currentFigure}
               >
-                Supprimer
-              </button>
+              {userPath.map((item,i) => (
+                <option 
+                className={APP_STYLE.APP.BTN_GOOD}
+                  key={i} 
+                  value={item.id}
+                >
+                  {item.name}
+                </option>
+              ))}
+              </select>
             </div>
+
+            
+            <div>
+              <label htmlFor="aspect-select">Changer d'Aspect :</label>
+
+              <select
+                disabled={!currentFigure}
+                value={currentFigure?.aspect.id}
+                className={APP_STYLE.APP.BTN_GOOD} id="aspect-select"
+                onChange={(e) => {
+                  e.preventDefault()
+                  changeAspect(Number(e.target.value));
+                }}
+              >
+              {userAspect.map((item,i) => (
+                <option 
+                className={APP_STYLE.APP.BTN_GOOD}
+                  key={i} 
+                  value={item.id}
+                >
+                  {item.name}
+                </option>
+              ))}
+              </select>
+            </div>
+
+            <button
+              className={APP_STYLE.APP.BTN_GOOD}
+              onClick={(e) => {
+                e.preventDefault();
+                moveUp();
+              }}
+              disabled={!currentFigure || currentFigure.order === 1}
+            >
+              Déplacer vers l'Amont
+            </button>
+            <button
+              className={APP_STYLE.APP.BTN_GOOD}
+              onClick={(e) => {
+                e.preventDefault();
+                moveDown();
+              }}
+              disabled={
+                !currentFigure ||
+                currentFigure.order === updateBody.figures.length
+              }
+            >
+              Déplacer vers l'Aval
+            </button>
+            <button
+              className={APP_STYLE.APP.BTN_GOOD}
+              onClick={(e) => {
+                e.preventDefault();
+                copyFigure();
+              }}
+              disabled={!currentFigure}
+            >
+              Copier
+            </button>
+            <button
+              className={APP_STYLE.APP.BTN_GOOD}
+              onClick={(e) => {
+                e.preventDefault();
+                deleteFigure();
+              }}
+              disabled={!currentFigure}
+            >
+              Supprimer
+            </button>
+          </div>
         </div>
       </Form>
     </>

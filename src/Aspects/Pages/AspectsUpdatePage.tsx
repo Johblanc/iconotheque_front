@@ -33,7 +33,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
     aspects.filter((item) => item.id === aspectId).length > 0
       ? aspects.filter((item) => item.id === aspectId)[0]
       : DEFAULT_ASPECT
-    )},[aspectId])
+    )},[aspectId,aspects])
 
   const handleAspect = (
     key:

@@ -17,6 +17,7 @@ import { Contextualizer } from "../Components/Contextualizer";
  * @version v1
  */
 export function App(): JSX.Element {
+  
   return (
     <Contextualizer>
       <RouterProvider router={ROUTER} />
