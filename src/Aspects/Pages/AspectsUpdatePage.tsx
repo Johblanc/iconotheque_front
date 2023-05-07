@@ -13,6 +13,8 @@ import { TransitionContext } from "../../Utilities/Contexts/Transition.context";
 import { Aspect } from "../Class/Aspect.class";
 import { IconPublicContext } from "../../Utilities/Contexts/IconPublic.context";
 import { IconPrivateContext } from "../../Utilities/Contexts/IconPrivate.context";
+import { EntryColor } from "../../Utilities/Components/EntryColor";
+import { EntryRange } from "../../Utilities/Components/EntryRange";
 
 export function AspectsUpdatePage(props: { aspectId: number }) {
   const { aspectId } = props;
@@ -20,7 +22,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
   const { user } = useContext(UserContext);
   const { iconPublic, setIconPublic } = useContext(IconPublicContext);
   const { iconPrivate, setIconPrivate } = useContext(IconPrivateContext);
-  
+
   const { setTransition } = useContext(TransitionContext);
 
   const [aspect, setAspect] = useState(
@@ -29,11 +31,13 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
       : DEFAULT_ASPECT
   );
 
-  useEffect(()=>{setAspect(
-    aspects.filter((item) => item.id === aspectId).length > 0
-      ? aspects.filter((item) => item.id === aspectId)[0]
-      : DEFAULT_ASPECT
-    )},[aspectId,aspects])
+  useEffect(() => {
+    setAspect(
+      aspects.filter((item) => item.id === aspectId).length > 0
+        ? aspects.filter((item) => item.id === aspectId)[0]
+        : DEFAULT_ASPECT
+    );
+  }, [aspectId, aspects]);
 
   const handleAspect = (
     key:
@@ -50,11 +54,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
       (key === "fill_color" || key === "stroke_color") &&
       typeof value === "string"
     ) {
-      newAspect[key] = [
-        "#",
-        ...Array(7 - value.length).map((_) => "0"),
-        ...value.split("").filter((_, i) => i !== 0),
-      ].join("");
+      newAspect[key] = value;
     }
     if (key === "name" && typeof value === "string") {
       newAspect[key] = value;
@@ -76,20 +76,22 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
     event.preventDefault();
 
     if (aspect.id === -1) {
-      const newAspect = await Requester.aspect.new(aspect,user.token) ;
-      const newAspects = [new Aspect(newAspect), ...aspects] ;
-      setAspects(newAspects) ;
-    }
-    else
-    {
-      const newAspect = await Requester.aspect.update(aspect,user.token,aspect.id) ;
-      const newAspects = aspects.map(item => {
-        if (item.id === newAspect.id){
-          return new Aspect(newAspect)
+      const newAspect = await Requester.aspect.new(aspect, user.token);
+      const newAspects = [new Aspect(newAspect), ...aspects];
+      setAspects(newAspects);
+    } else {
+      const newAspect = await Requester.aspect.update(
+        aspect,
+        user.token,
+        aspect.id
+      );
+      const newAspects = aspects.map((item) => {
+        if (item.id === newAspect.id) {
+          return new Aspect(newAspect);
         }
-        return item
-      }) ;
-      setAspects(newAspects) ;
+        return item;
+      });
+      setAspects(newAspects);
 
       setIconPublic(
         iconPublic.map((item) => {
@@ -113,7 +115,6 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
           return item;
         })
       );
-
     }
 
     setTransition({
@@ -124,7 +125,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
 
   return (
     <>
-      <AppHeader actif={ aspect.id === -1 ? "aspectsNew" : ""} />
+      <AppHeader actif={aspect.id === -1 ? "aspectsNew" : ""} />
       <svg
         width="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
         height="min(calc((1.375rem + 1.5vw)*6),10em,40vw)"
@@ -132,12 +133,7 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle
-          cx="50"
-          cy="50"
-          r="20"
-          style={aspect.style }
-        />
+        <circle cx="50" cy="50" r="20" style={aspect.style} />
       </svg>
       <Form
         method="post"
@@ -145,99 +141,80 @@ export function AspectsUpdatePage(props: { aspectId: number }) {
         className={APP_STYLE.PATH.VIEW.CADRE}
       >
         <EntryString
+          accecibilityId={"aspect-update-nom"}
           name="Nom"
           defaultValue={aspect.name}
           setValue={(value?: string) => {
             handleAspect("name", value!);
           }}
         />
-        <div>
-          <label className={APP_STYLE.APP.ENTRY.LABEL}>Couleur du fond</label>
-          <input
-            style={{ height: "3em" }}
-            className={APP_STYLE.APP.ENTRY.INPUT}
-            type="color"
-            onChange={(e) => {
-              handleAspect("fill_color", e.target.value);
-            }}
-            defaultValue={aspect.fill_color}
-          />
-        </div>
-        <div>
-        <label className={APP_STYLE.APP.ENTRY.LABEL}>
-          Transparence du fond
-        </label>
-        <input
-          className={APP_STYLE.APP.ENTRY.INPUT}
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          defaultValue={aspect.fill_opacity}
-          onChange={(e) => {
-            handleAspect("fill_opacity", Number(e.target.value));
+        <EntryColor
+          accecibilityId={"aspect-update-fill-color"}
+          name="Couleur du fond"
+          defaultValue={aspect.fill_color}
+          setValue={(value) => {
+            handleAspect("fill_color", value!);
           }}
         />
-        </div>
-        <div>
-        <label className={APP_STYLE.APP.ENTRY.LABEL}>
-          Couleur de la bordure
-        </label>
-        <input
-          style={{ height: "3em" }}
-          className={APP_STYLE.APP.ENTRY.INPUT}
-          type="color"
-          defaultValue={aspect.stroke_color}
-          onChange={(e) => {
-            handleAspect("stroke_color", e.target.value);
-          }}
-        />
-        </div>
-        <div>
-        <label className={APP_STYLE.APP.ENTRY.LABEL}>
-          Transparence de la bordure
-        </label>
-        <input
-          className={APP_STYLE.APP.ENTRY.INPUT}
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          defaultValue={aspect.stroke_opacity}
-          onChange={(e) => {
-            handleAspect("stroke_opacity", Number(e.target.value));
-          }}
-        />
-        <EntryNumber
-          name="Epaisseur de la bordure"
+        <EntryRange
+          accecibilityId={"aspect-update-fill-opacity"}
+          name="Transparence du fond"
           min={0}
-          step={0.1}
-          value={aspect.stroke_width}
-          setValue={(value?: number) => {
-            handleAspect("stroke_width", value!);
+          max={1}
+          step={0.01}
+          value={aspect.fill_opacity}
+          setValue={(value) => handleAspect("fill_opacity",value!)}
+        />
+        <EntryColor
+          accecibilityId={"aspect-update-stroke-color"}
+          name="Couleur de la bordure"
+          defaultValue={aspect.stroke_color}
+          setValue={(value) => {
+            handleAspect("stroke_color", value!);
           }}
         />
-        </div>
-        <div>
-        <button
-          type="submit"
-          //disabled={!isValid || inAdvance}
-          className={APP_STYLE.APP.BTN_GOOD}
-        >
-          {aspectId !== -1
-            ? "Enregistrer les modification"
-            : "Enregistrer le path"}
-        </button>
-
-        <LinkCustom
-          className={APP_STYLE.APP.BTN_BAD}
-          name={
-            aspectId !== -1 ? "Annuler les modification" : "Annuler le création"
-          }
-          to={
-            aspectId !== -1 ? `/aspects/view/${aspectId}` : `/aspects/privates`
-          }
+        <EntryRange
+          accecibilityId={"aspect-update-stroke-opacity"}
+          name="Transparence de la bordure"
+          min={0}
+          max={1}
+          step={0.01}
+          value={aspect.stroke_opacity}
+          setValue={(value) => handleAspect("stroke_opacity",value!)}
         />
+          <EntryNumber
+            accecibilityId={"aspect-update-stroke-width"}
+            name="Epaisseur de la bordure"
+            min={0}
+            step={0.1}
+            value={aspect.stroke_width}
+            setValue={(value?: number) => {
+              handleAspect("stroke_width", value!);
+            }}
+          />
+        <div>
+          <button
+            type="submit"
+            className={APP_STYLE.APP.BTN_GOOD}
+          >
+            {aspectId !== -1
+              ? "Enregistrer les modification"
+              : "Enregistrer le path"}
+          </button>
+
+          <LinkCustom
+            className={APP_STYLE.APP.BTN_BAD}
+            name={
+              aspectId !== -1
+                ? "Annuler les modification"
+                : "Annuler le création"
+            }
+            to={
+              aspectId !== -1
+                ? `/aspects/view/${aspectId}`
+                : `/aspects/privates`
+            }
+          />
         </div>
       </Form>
     </>

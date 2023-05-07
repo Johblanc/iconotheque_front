@@ -221,6 +221,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
           </div>
           <div className={APP_STYLE.PATH.VIEW.NO_CADRE}>
             <EntryString
+              accecibilityId={"path-update-nom"}
               name={"Nom"}
               defaultValue={updateBody.name}
               setValue={(value, valid) =>
@@ -229,6 +230,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
               validators={[EntryValidators.minLenght(4)]}
             />
             <EntriesViewBox
+              accecibilityId={"path-update-viewbox"}
               defaultValue={updateBody.viewbox}
               setValue={(value, valid) =>
                 handleUpdateBody("viewbox", value, valid)
@@ -275,6 +277,7 @@ export function PathUpdatePage(props: { pathId: number }): JSX.Element {
           ) : (
             <div>
               <TextArea
+                accecibilityId={"path-update-d"}
                 name={"Tracé"}
                 defaultValue={updateBody.d}
                 setValue={(value, valid) => handleUpdateBody("d", value, valid)}

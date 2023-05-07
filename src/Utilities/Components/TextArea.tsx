@@ -7,6 +7,10 @@ import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
  * @version v1
  */
 export function TextArea(props: {
+
+  /** L'identifiant unique permetant de lier le label et l'input */
+  accecibilityId : string ;
+
   /** Nom de l'entry */
   name?: string;
 
@@ -19,7 +23,7 @@ export function TextArea(props: {
   /** Conditions de validations */
   validators?: { validator: (value: string) => boolean; message?: string }[]
 }): JSX.Element {
-  const { name, defaultValue, setValue, validators } = props;
+  const { accecibilityId, name, defaultValue, setValue, validators } = props;
 
   /**
    * Contrôle de l'Entry avec les validateurs
@@ -68,9 +72,10 @@ export function TextArea(props: {
   return (
     <div className={APP_STYLE.APP.ENTRY.CADRE}>
       <div className={APP_STYLE.APP.ENTRY.TA_BOX}>
-        <label className={APP_STYLE.APP.ENTRY.LABEL}>{name}</label>
+        <label htmlFor={accecibilityId} className={APP_STYLE.APP.ENTRY.LABEL}>{name}</label>
 
         <textarea
+          id={accecibilityId}
           className={APP_STYLE.APP.ENTRY.TA}
           onChange={(e) => handleVerificator(e.target.value)}
           defaultValue={defaultValue}

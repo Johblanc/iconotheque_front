@@ -26,11 +26,11 @@ export function UserUpdatePage(): JSX.Element {
   const { user, setUser } = useContext(UserContext);
 
   /** Récupération des différents contexts pour répercution des modifications */
-  const { aspects     , setAspects      } = useContext(AspectContext);
-  const { pathPublic  , setPathPublic   } = useContext(PathPublicContext);
-  const { pathPrivate , setPathPrivate  } = useContext(PathPrivateContext);
-  const { iconPublic  , setIconPublic   } = useContext(IconPublicContext);
-  const { iconPrivate , setIconPrivate  } = useContext(IconPrivateContext);
+  const { aspects, setAspects } = useContext(AspectContext);
+  const { pathPublic, setPathPublic } = useContext(PathPublicContext);
+  const { pathPrivate, setPathPrivate } = useContext(PathPrivateContext);
+  const { iconPublic, setIconPublic } = useContext(IconPublicContext);
+  const { iconPrivate, setIconPrivate } = useContext(IconPrivateContext);
 
   const { setTransition } = useContext(TransitionContext);
 
@@ -75,46 +75,56 @@ export function UserUpdatePage(): JSX.Element {
     if (responseUpdate.data) {
       setMessage("");
       setUser(responseUpdate.data);
-      setAspects    (aspects.map(item => {
-        if (item.user.id === user.id){
-          const newItem = new Aspect(item) ;
-          newItem.user = responseUpdate.data ;
-          return newItem ;
-        } ;
-        return item
-      }))
-      setPathPublic (pathPublic.map(item => {
-        if (item.user.id === user.id){
-          const newItem = {...item} ;
-          newItem.user = responseUpdate.data ;
-          return newItem ;
-        } ;
-        return item
-      }))
-      setPathPrivate(pathPrivate.map(item => {
-        if (item.user.id === user.id){
-          const newItem = {...item} ;
-          newItem.user = responseUpdate.data ;
-          return newItem ;
-        } ;
-        return item
-      }))
-      setIconPublic (iconPublic.map(item => {
-        if (item.user.id === user.id){
-          const newItem = new Icon(item) ;
-          newItem.user = responseUpdate.data ;
-          return newItem ;
-        } ;
-        return item
-      }))
-      setIconPrivate(iconPrivate.map(item => {
-        if (item.user.id === user.id){
-          const newItem = new Icon(item) ;
-          newItem.user = responseUpdate.data ;
-          return newItem ;
-        } ;
-        return item
-      }))
+      setAspects(
+        aspects.map((item) => {
+          if (item.user.id === user.id) {
+            const newItem = new Aspect(item);
+            newItem.user = responseUpdate.data;
+            return newItem;
+          }
+          return item;
+        })
+      );
+      setPathPublic(
+        pathPublic.map((item) => {
+          if (item.user.id === user.id) {
+            const newItem = { ...item };
+            newItem.user = responseUpdate.data;
+            return newItem;
+          }
+          return item;
+        })
+      );
+      setPathPrivate(
+        pathPrivate.map((item) => {
+          if (item.user.id === user.id) {
+            const newItem = { ...item };
+            newItem.user = responseUpdate.data;
+            return newItem;
+          }
+          return item;
+        })
+      );
+      setIconPublic(
+        iconPublic.map((item) => {
+          if (item.user.id === user.id) {
+            const newItem = new Icon(item);
+            newItem.user = responseUpdate.data;
+            return newItem;
+          }
+          return item;
+        })
+      );
+      setIconPrivate(
+        iconPrivate.map((item) => {
+          if (item.user.id === user.id) {
+            const newItem = new Icon(item);
+            newItem.user = responseUpdate.data;
+            return newItem;
+          }
+          return item;
+        })
+      );
       setTransition({ to: "/user/view", message: `Enregistrement Réussi` });
     } else {
       setMessage(responseUpdate.message);
@@ -135,6 +145,7 @@ export function UserUpdatePage(): JSX.Element {
           <div className={APP_STYLE.USER.LOGIN.BOX}>
             <h2>Modification du Profile</h2>
             <EntryString
+              accecibilityId={"user-update-pseudo"}
               name={"Pseudo"}
               defaultValue={updateBody.name}
               setValue={(value, valid) =>
@@ -143,6 +154,7 @@ export function UserUpdatePage(): JSX.Element {
               validators={[EntryValidators.minLenght(4)]}
             />
             <EntryString
+              accecibilityId={"user-update-mail"}
               name={"Mail"}
               defaultValue={updateBody.mail}
               setValue={(value, valid) =>

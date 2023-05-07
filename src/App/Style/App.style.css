@@ -3,12 +3,14 @@
 
 @font-face {
   font-family: "lt_leap";
-  src: url("../../../public/fonts/lt_leap/LT\ Leap\ Medium.ttf") format("opentype")
+  src: url("../../../public/fonts/lt_leap/LT\ Leap\ Medium.ttf") format("opentype");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "pointfree";
-  src: url("../../../public/fonts/point/pointfree.ttf") format("opentype")
+  src: url("../../../public/fonts/point/pointfree.ttf") format("opentype") ;
+  font-display: swap;
 }
 
 * {
@@ -22,6 +24,37 @@
 input:disabled {
   background-color: var(--primary) !important;
   color: var(--lighter) !important;
+  cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  background-color: var(--bs-danger);
+  height: 2em;
+  width: 2em;
+  transform: scale(0.7) rotate(0deg);
+  transition: all 500ms ease-in-out;
+  clip-path: polygon( 0 0, 50% 40%, 100% 0, 60% 50%, 100% 100%, 50% 60%, 0 100%, 40% 50%);
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(0.7) rotate(360deg);
+  background-color: var(--bs-primary);
+  clip-path: polygon(0 50%, 40% 70%, 100% 0, 80% 30%,  60% 60%,  40% 90%, 30% 80%,  20% 70%);
 }
 
 .alt-font {
@@ -84,6 +117,7 @@ input:disabled {
 
 .visual-disabled {
   opacity: 0.3 !important; 
+  cursor: not-allowed;
 }
 
 .cursered {

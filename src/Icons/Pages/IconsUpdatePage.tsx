@@ -321,6 +321,7 @@ export function IconsUpdatePage(props: { iconId: number }) {
           </div>
           <div className={APP_STYLE.PATH.VIEW.NO_CADRE}>
             <EntryString
+              accecibilityId={"icons-update-nom"}
               name={"Nom"}
               defaultValue={updateBody.name}
               setValue={(value, valid) =>
@@ -329,6 +330,7 @@ export function IconsUpdatePage(props: { iconId: number }) {
               validators={[EntryValidators.minLenght(4)]}
             />
             <EntriesViewBox
+              accecibilityId={"icons-update-viewbox"}
               defaultValue={updateBody.viewbox}
               setValue={(value, valid) =>
                 handleUpdateBody("viewbox", value, valid)

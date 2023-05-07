@@ -92,18 +92,21 @@ export function SignInBox(): JSX.Element {
     <Form method="post" onSubmit={handleRequest} className={APP_STYLE.USER.LOGIN.BOX}>
     <h2>... ou Enregistrez-vous !</h2>
       <EntryString
+        accecibilityId={"user-sign-pseudo"}
         name={"Pseudo"}
         defaultValue={signBody.name}
         setValue={(value, valid) => handleLogBody("name", value, valid)}
         validators={[EntryValidators.minLenght(4)]}
       />
       <EntryString
+        accecibilityId={"user-sign-mail"}
         name={"Mail"}
         defaultValue={signBody.mail}
         setValue={(value, valid) => handleLogBody("mail", value, valid)}
         validators={[EntryValidators.isMail()]}
       />
       <EntryString
+        accecibilityId={"user-sign-pass"}
         name={"Mot de passe"}
         defaultValue={signBody.password}
         setValue={(value, valid) => handleLogBody("password", value, valid)}
@@ -113,6 +116,7 @@ export function SignInBox(): JSX.Element {
         isPass
       />
       <EntryString
+        accecibilityId={"user-sign-pass-verif"}
         name={"Vérification du mdp"}
         defaultValue={signBody.verifpass}
         setValue={(value, valid) => handleLogBody("verifpass", value, valid)}

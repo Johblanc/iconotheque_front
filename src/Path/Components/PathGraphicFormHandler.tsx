@@ -34,6 +34,7 @@ export function PathGraphicFormHandler(props: {
         <h6>Arrondi</h6>
         <div className={APP_STYLE.APP.ENTRY.DOUBLE.BOX}>
           <EntryNumber
+            accecibilityId={"path-update-form-round"}
             name={"valeur"}
             value={formOptions.rounder}
             setValue={(value) => handleFormOptions("rounder", value!)}
@@ -47,6 +48,7 @@ export function PathGraphicFormHandler(props: {
         <h6>Translation</h6>
         <div className={APP_STYLE.APP.ENTRY.DOUBLE.BOX}>
           <EntryNumber
+            accecibilityId={"path-update-form-translate-x"}
             name={"x"}
             value={formOptions.translateX}
             setValue={(value) => handleFormOptions("translateX", value!)}
@@ -54,6 +56,7 @@ export function PathGraphicFormHandler(props: {
             className={APP_STYLE.APP.ENTRY.DOUBLE.LEFT}
           />
           <EntryNumber
+            accecibilityId={"path-update-form-translate-y"}
             name={"y"}
             value={formOptions.translateY}
             setValue={(value) => handleFormOptions("translateY", value!)}

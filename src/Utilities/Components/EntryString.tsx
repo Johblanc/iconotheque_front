@@ -13,6 +13,10 @@ import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
  * @version v1
  */
 export function EntryString(props: {
+
+  /** L'identifiant unique permetant de lier le label et l'input */
+  accecibilityId : string ;
+
   /** Nom de l'entry */
   name?: string;
 
@@ -28,7 +32,7 @@ export function EntryString(props: {
   /** L'entry contient-elle un mot de passe */
   isPass?: boolean;
 }): JSX.Element {
-  const { name, defaultValue, setValue, validators, isPass } = props;
+  const { accecibilityId, name, defaultValue, setValue, validators, isPass } = props;
 
   /**
    * Contrôle de l'Entry avec les validateurs
@@ -77,9 +81,10 @@ export function EntryString(props: {
   return (
     <div className={APP_STYLE.APP.ENTRY.CADRE}>
       <div className={APP_STYLE.APP.ENTRY.BOX}>
-        <label className={APP_STYLE.APP.ENTRY.LABEL}>{name}</label>
+        <label htmlFor={accecibilityId} className={APP_STYLE.APP.ENTRY.LABEL}>{name}</label>
 
         <input
+          id={accecibilityId}
           type={isPass ? "password" : "text"}
           className={APP_STYLE.APP.ENTRY.INPUT}
           onChange={(e) => handleVerificator(e.target.value)}

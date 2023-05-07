@@ -15,6 +15,10 @@ import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
  * @version v1
  */
 export function EntryNumber(props: {
+
+  /** L'identifiant unique permetant de lier le label et l'input */
+  accecibilityId : string ;
+
   /** Nom de l'entry */
   name?: string;
 
@@ -43,7 +47,7 @@ export function EntryNumber(props: {
   disabled? : boolean
 
 }): JSX.Element {
-  const { name, value, setValue, validators,min,max,step,disabled,className } = props;
+  const { accecibilityId, name, value, setValue, validators,min,max,step,disabled,className } = props;
 
   /**
    * Contrôle de l'Entry avec les validateurs
@@ -92,9 +96,10 @@ export function EntryNumber(props: {
   return (
     <div className={`${APP_STYLE.APP.ENTRY.CADRE} ${className}`}>
       <div className={APP_STYLE.APP.ENTRY.BOX}>
-        <label className={`${APP_STYLE.APP.ENTRY.LABEL} ${disabled ? "visual-disabled" : "" }`} >{name}</label>
+        <label htmlFor={accecibilityId} className={`${APP_STYLE.APP.ENTRY.LABEL} ${disabled ? "visual-disabled" : "" }`} >{name}</label>
 
         <input
+          id={accecibilityId}
           type="number"
           className={APP_STYLE.APP.ENTRY.INPUT}
           onChange={(e) => handleVerificator(Number(e.target.value))}

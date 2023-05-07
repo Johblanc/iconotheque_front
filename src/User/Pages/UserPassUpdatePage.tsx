@@ -81,6 +81,7 @@ export function UserPassUpdatePage(): JSX.Element {
           <div className={APP_STYLE.USER.LOGIN.BOX}>
             <h2>Modification du mot de passe</h2>
             <EntryString
+              accecibilityId={"user-update-pass"}
               name={"Mot de passe"}
               defaultValue={updateBody.password}
               setValue={(value, valid) =>
@@ -90,6 +91,7 @@ export function UserPassUpdatePage(): JSX.Element {
               isPass
             />
             <EntryString
+              accecibilityId={"user-update-pass-verif"}
               name={"Vérification du mot de passe"}
               defaultValue={updateBody.verifpass}
               setValue={(value, valid) =>

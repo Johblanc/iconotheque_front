@@ -88,12 +88,14 @@ export function LogInBox(): JSX.Element {
     <Form method="post"  onSubmit={handleRequest} className={APP_STYLE.USER.LOGIN.BOX}>
       <h2>Connectez-vous ...</h2>
       <EntryString
+        accecibilityId={"user-log-pseudo"}
         name={"Pseudo"}
         defaultValue={logBody.name}
         setValue={(value, valid) => handleLogBody("name", value, valid)}
         validators={[EntryValidators.minLenght(4)]}
       />
       <EntryString
+        accecibilityId={"user-log-pass"}
         name={"Mot de passe"}
         defaultValue={logBody.password}
         setValue={(value, valid) => handleLogBody("password", value, valid)}
