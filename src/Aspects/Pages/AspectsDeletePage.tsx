@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { AppHeader } from "../../App/Components/AppHeader";
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 import { LinkCustom } from "../../Utilities/Components/LinkCustom";
 import { UserContext } from "../../Utilities/Contexts/User.context";
@@ -60,7 +59,7 @@ export function AspectsDeletePage(props : {aspectId : number}){
 
         <div>
           <h2>Supprimer ?</h2>
-
+          {/* Dans React */}
           <svg
             width="min(calc((1.375rem + 1.5vw)*6),15rem)"
             height="min(calc((1.375rem + 1.5vw)*6),15rem)"

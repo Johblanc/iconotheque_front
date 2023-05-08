@@ -16,7 +16,7 @@ export function EntriesCheck( props : {
   
   const [check,setCheck] =useState(defaultValue)
 
-  useEffect(()=>{setValue && setValue(check)},[check])
+  useEffect(()=>{setValue && setValue(check)},[check,setValue])
 
   return (
     

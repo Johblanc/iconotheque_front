@@ -1,5 +1,4 @@
-import { ChangeEvent, useContext } from "react";
-import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
+import { useContext } from "react";
 import { ThemeContext } from "../../Utilities/Contexts/Theme.context";
 import { hexToRgb, rgbToHex } from "../Modules/HexColo";
 import { EntryColor } from "../../Utilities/Components/EntryColor";

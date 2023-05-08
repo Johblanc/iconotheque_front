@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+
 import { APP_STYLE } from "../../App/Style/App.bootstrap.style";
 
 /**
