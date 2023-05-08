@@ -57,7 +57,7 @@ export class EntryValidators {
     }
   }
 
-  /** Les deux champs mot de passe doivent être identiques */
+  /** Vérification du Mot de Passe */
   static isPasswords()
   {
     return {
