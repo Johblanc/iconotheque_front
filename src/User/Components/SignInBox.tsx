@@ -110,9 +110,7 @@ export function SignInBox(): JSX.Element {
         name={"Mot de passe"}
         defaultValue={signBody.password}
         setValue={(value, valid) => handleLogBody("password", value, valid)}
-        validators={[
-          EntryValidators.minLenght(4)
-        ]}
+        validators={[EntryValidators.isPasswords()]}
         isPass
       />
       <EntryString
@@ -121,7 +119,7 @@ export function SignInBox(): JSX.Element {
         defaultValue={signBody.verifpass}
         setValue={(value, valid) => handleLogBody("verifpass", value, valid)}
         validators={[
-          EntryValidators.minLenght(4),
+          EntryValidators.isPasswords(),
           EntryValidators.samePasswords(signBody.password)
         ]}
         isPass

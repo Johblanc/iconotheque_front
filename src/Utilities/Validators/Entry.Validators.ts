@@ -56,4 +56,13 @@ export class EntryValidators {
       message : `Les deux Mots des passe de sont pas concordants`
     }
   }
+
+  /** Vérification du Mot de passe */
+  static isPasswords()
+  {
+    return {
+      validator : (value : string ) => Boolean(value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) ),
+      message : `Le Mot de passe doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un symbole parmi : @ $ ! % * ? &.`
+    }
+  }
 }
