@@ -1,0 +1,16 @@
+{
+  "lang": "fr",
+  "short_name": "Iconothèque",
+  "name": "Iconothèque",
+  "icons": [
+    {
+      "src": "logo_fav.svg",
+      "sizes": "100x100",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
