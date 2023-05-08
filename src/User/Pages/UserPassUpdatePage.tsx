@@ -87,7 +87,7 @@ export function UserPassUpdatePage(): JSX.Element {
               setValue={(value, valid) =>
                 handleUpdateBody("password", value, valid)
               }
-              validators={[EntryValidators.minLenght(4)]}
+              validators={[EntryValidators.isPasswords()]}
               isPass
             />
             <EntryString
@@ -98,7 +98,7 @@ export function UserPassUpdatePage(): JSX.Element {
                 handleUpdateBody("verifpass", value, valid)
               }
               validators={[
-                EntryValidators.minLenght(4),
+                EntryValidators.isPasswords(),
                 EntryValidators.samePasswords(updateBody.password),
               ]}
               isPass

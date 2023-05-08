@@ -99,7 +99,7 @@ export function LogInBox(): JSX.Element {
         name={"Mot de passe"}
         defaultValue={logBody.password}
         setValue={(value, valid) => handleLogBody("password", value, valid)}
-        validators={[EntryValidators.minLenght(4)]}
+        validators={[EntryValidators.isPasswords()]}
         isPass
       />
       <em className={APP_STYLE.APP.MESSAGE_BAD}>{message}</em>
